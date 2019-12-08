@@ -17,10 +17,9 @@ import {
 import { AppComponent } from './app.component';
 import { ContentLayoutComponent } from "./layouts/content/content-layout.component";
 import { FullLayoutComponent } from "./layouts/full/full-layout.component";
+import { AuthService } from './@core/services/auth.service';
+import { AuthGuard } from './@core/guards/auth.guard';
 
-import { AuthService } from './shared/auth/auth.service';
-import { AuthGuard } from './shared/auth/auth-guard.service';
-import { TestComponent } from './test/test.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -33,7 +32,7 @@ export function createTranslateLoader(http: HttpClient) {
 
 
 @NgModule({
-  declarations: [AppComponent, FullLayoutComponent, ContentLayoutComponent, TestComponent],
+  declarations: [AppComponent, FullLayoutComponent, ContentLayoutComponent],
   imports: [
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -50,7 +49,7 @@ export function createTranslateLoader(http: HttpClient) {
     PerfectScrollbarModule
   ],
   providers: [
-    AuthService,
+    // AuthService,
     AuthGuard,
     {
       provide: PERFECT_SCROLLBAR_CONFIG,

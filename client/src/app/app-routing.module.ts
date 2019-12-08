@@ -6,18 +6,17 @@ import { ContentLayoutComponent } from "./layouts/content/content-layout.compone
 
 import { Full_ROUTES } from "./shared/routes/full-layout.routes";
 import { CONTENT_ROUTES } from "./shared/routes/content-layout.routes";
+import { AuthGuard } from './@core/guards/auth.guard';
 
-import { AuthGuard } from './shared/auth/auth-guard.service';
-import { TestComponent } from './test/test.component';
 
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: 'full-layout',
+    redirectTo: 'dashboard',
     pathMatch: 'full',
   },
-  { path: '', component: FullLayoutComponent, data: { title: 'full Views' }, children: Full_ROUTES, canActivate: [AuthGuard] },
-  { path: '', component: ContentLayoutComponent, data: { title: 'content Views' }, children: CONTENT_ROUTES, canActivate: [AuthGuard] },
+  { path: '', component: FullLayoutComponent, children: Full_ROUTES, /* canActivate: [AuthGuard] */ },
+  { path: '', component: ContentLayoutComponent, children: CONTENT_ROUTES, },
 ];
 
 @NgModule({
