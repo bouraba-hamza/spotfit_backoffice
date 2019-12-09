@@ -44,9 +44,10 @@ class AdminController extends Controller
      * @param  \App\Admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function show(Admin $admin)
+    public function show($admin_id)
     {
-        //
+        $admin = Admin::findOrFail($admin_id);
+        return $admin;
     }
 
     /**
