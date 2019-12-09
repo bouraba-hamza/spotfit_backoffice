@@ -20,8 +20,6 @@ class CreateAccountsTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->smallInteger('disabled')->default(1);
-            $table->integer('owner_id');
-            $table->string('owner');
             $table->timestamps();
         });
     }

@@ -53,5 +53,5 @@ class Account extends Authenticatable implements JWTSubject
         if ( !empty($password) ) {
             $this->attributes['password'] = bcrypt($password);
         }
-    } 
+    }
 }
