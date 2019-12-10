@@ -10,6 +10,17 @@ class Admin extends Model
     use SoftDeletes;
     
     protected $with = ['account', 'address'];
+    protected $fillable = [
+        'firstName',
+        'lastName',
+        'gender',
+        'birthDay',
+        'phoneNumber',
+        'jobTitle',
+        'avatar',
+        'account_id',
+        'address_id'
+    ];
 
     public function address()
     {

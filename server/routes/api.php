@@ -27,8 +27,8 @@ Route::group(['middleware' => [/*'jwt'*/]], function() {
      */
     Route::get('/admins', 'AdminController@index');
     Route::post('/admins', 'AdminController@store');
+    Route::post('/admins/{admin_id}', 'AdminController@update')->where('admin_id', '\d');
     Route::get('/admins/{admin_id}', 'AdminController@show')->where('admin_id', '\d');
-    Route::put('/admins/{admin_id}', 'AdminController@update')->where('admin_id', '\d');
     Route::delete('/admins/{admin_id}', 'AdminController@destroy')->where('admin_id', '\d');
     
     
