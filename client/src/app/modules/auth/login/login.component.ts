@@ -1,15 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent  {
 
-  constructor() { }
+  @ViewChild('f', {static: false}) loginForm: NgForm;
 
-  ngOnInit() {
-  }
+    constructor(private router: Router,
+        private route: ActivatedRoute) { }
+
+    // On submit button click
+    onSubmit() {
+        this.loginForm.reset();
+    }
+    // On Forgot password link click
+    onForgotPassword() {
+        this.router.navigate(['forgotpassword'], { relativeTo: this.route.parent });
+    }
+    // On registration link click
+    onRegister() {
+        this.router.navigate(['register'], { relativeTo: this.route.parent });
+    }
 
 }

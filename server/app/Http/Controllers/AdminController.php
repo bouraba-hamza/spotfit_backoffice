@@ -7,58 +7,31 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return Admin::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $validator = \Validator::make($request->all(), [
+            'gender' => 'in:m,f',
+            'birthDay' => 'date_format:Y-m-d',
+            'avatar' => 'image',
+        ])->validate();
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors()->json());
+        }
+
+        return [1];
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Admin  $admin
-     * @return \Illuminate\Http\Response
-     */
     public function show($admin_id)
     {
         $admin = Admin::findOrFail($admin_id);
         return $admin;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Admin  $admin
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Admin $admin)
-    {
-        //
     }
 
     /**
@@ -73,14 +46,10 @@ class AdminController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Admin  $admin
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Admin $admin)
+    public function destroy($admin_id)
     {
-        //
+        $admin = Admin::findOrFail($admin_id);
+        $admin->delete();
+        return ['status' => 'success', 'deleted_resource_id' => $admin->id ];
     }
 }

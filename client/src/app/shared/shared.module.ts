@@ -19,6 +19,7 @@ import { SidebarLinkDirective } from './directives/sidebarlink.directive';
 import { SidebarListDirective } from './directives/sidebarlist.directive';
 import { SidebarAnchorToggleDirective } from './directives/sidebaranchortoggle.directive';
 import { SidebarToggleDirective } from './directives/sidebartoggle.directive';
+import { NotfoundComponent } from './components/notfound/notfound.component';
 
 @NgModule({
     exports: [
@@ -30,7 +31,8 @@ import { SidebarToggleDirective } from './directives/sidebartoggle.directive';
         ToggleFullscreenDirective,
         SidebarDirective,
         NgbModule,
-        TranslateModule
+        TranslateModule,
+        NotfoundComponent
     ],
     imports: [
         RouterModule,
@@ -49,7 +51,8 @@ import { SidebarToggleDirective } from './directives/sidebartoggle.directive';
         SidebarLinkDirective,
         SidebarListDirective,
         SidebarAnchorToggleDirective,
-        SidebarToggleDirective
+        SidebarToggleDirective,
+        NotfoundComponent
     ]
 })
 export class SharedModule { }
