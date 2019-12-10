@@ -11,6 +11,3 @@
 |
 */
 
-Route::get('/', function () {
-    echo 'The application up and running.';
-});

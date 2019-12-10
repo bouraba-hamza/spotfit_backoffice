@@ -25,15 +25,12 @@ Route::group(['middleware' => [/*'jwt'*/]], function() {
     /**
      * Administration
      */
-    Route::get('/{player_type}', 'UserController@index')->where('player_type', '(admins|partners|customers|trainers)');;
-
-
-
-
-    // Route::post('/admins', 'AdminController@store');
-    // Route::get('/admins/{admin_id}', 'AdminController@show')->where('admin_id', '\d');;
-    // Route::put('/admins', 'AdminController@update');
-    // Route::delete('/admins', 'AdminController@destroy');
+    Route::get('/admins', 'AdminController@index');
+    Route::post('/admins', 'AdminController@store');
+    Route::get('/admins/{admin_id}', 'AdminController@show')->where('admin_id', '\d');
+    Route::put('/admins/{admin_id}', 'AdminController@update')->where('admin_id', '\d');
+    Route::delete('/admins/{admin_id}', 'AdminController@destroy')->where('admin_id', '\d');
+    
     
 
 });

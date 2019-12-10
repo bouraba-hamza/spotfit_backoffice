@@ -25,6 +25,7 @@ class CreateAdminsTable extends Migration
             $table->string('jobTitle')->nullable();
             $table->string('avatar')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

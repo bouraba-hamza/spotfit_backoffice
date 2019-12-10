@@ -7,6 +7,7 @@ import { ContentLayoutComponent } from "./layouts/content/content-layout.compone
 import { Full_ROUTES } from "./shared/routes/full-layout.routes";
 import { CONTENT_ROUTES } from "./shared/routes/content-layout.routes";
 import { AuthGuard } from './@core/guards/auth.guard';
+import { NotfoundComponent } from './shared/components/notfound/notfound.component';
 
 
 const appRoutes: Routes = [
@@ -17,6 +18,7 @@ const appRoutes: Routes = [
   },
   { path: '', component: FullLayoutComponent, children: Full_ROUTES, /* canActivate: [AuthGuard] */ },
   { path: '', component: ContentLayoutComponent, children: CONTENT_ROUTES, },
+  { path: '**', component: NotfoundComponent}
 ];
 
 @NgModule({
