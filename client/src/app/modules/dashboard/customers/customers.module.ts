@@ -1,24 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AdminsRoutingModule } from './admins-routing.module';
-import { AdminListComponent } from './admin-list/admin-list.component';
+import { CustomersRoutingModule } from './customers-routing.module';
+import { CustomerListComponent } from './customer-list/customer-list.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatIconModule} from '@angular/material/icon';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatMenuModule} from '@angular/material/menu';
-import { AdminFormComponent } from './admin-form/admin-form.component';
+import { CustomerFormComponent } from './customer-form/customer-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { SharedModule } from '@app/shared/shared.module';
 
 @NgModule({
-  declarations: [AdminListComponent, AdminFormComponent],
+  declarations: [CustomerListComponent, CustomerFormComponent],
   imports: [
     CommonModule,
-    AdminsRoutingModule,
+    CustomersRoutingModule,
     FormsModule,
     ReactiveFormsModule,
 
@@ -40,4 +40,4 @@ import { SharedModule } from '@app/shared/shared.module';
     { provide: ToastrService } 
   ]
 })
-export class AdminsModule { }
+export class CustomersModule { }

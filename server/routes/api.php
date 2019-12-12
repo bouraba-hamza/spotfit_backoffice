@@ -34,6 +34,33 @@ Route::group(['middleware' => [/*'jwt'*/]], function() {
     // Route::delete('/admins/{admin_id}', 'AdminController@destroy');
 
     /**
+     * Partner
+     */
+    Route::get('/partners', 'PartnerController@index');
+    Route::post('/partners', 'PartnerController@store');
+    Route::post('/partners/{partner_id}', 'PartnerController@update');
+    Route::get('/partners/{partner_id}', 'PartnerController@show');
+    Route::delete('/partners/{partner_id}', 'PartnerController@destroy');
+
+    /**
+     * Customer
+     */
+    Route::get('/customers', 'CustomerController@index');
+    Route::post('/customers', 'CustomerController@store');
+    Route::post('/customers/{customer_id}', 'CustomerController@update');
+    Route::get('/customers/{customer_id}', 'CustomerController@show');
+    Route::delete('/customers/{customer_id}', 'CustomerController@destroy');
+
+    /**
+     * Trainer
+     */
+    Route::get('/trainers', 'TrainerController@index');
+    Route::post('/trainers', 'TrainerController@store');
+    Route::post('/trainers/{trainer_id}', 'TrainerController@update');
+    Route::get('/trainers/{trainer_id}', 'TrainerController@show');
+    Route::delete('/trainers/{trainer_id}', 'TrainerController@destroy');
+
+    /**
      * Account
      */
     Route::post('/account/disable', 'AccountController@disable');    

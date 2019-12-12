@@ -1,6 +1,6 @@
 <div class="row text-left">
   <div class="col-12 d-flex align-items-center justify-content-between">
-    <content-heading [icon]="'icon-users'" [heading]="'Administrateurs'" [subHeading]="'La list des administrateurs.'"></content-heading>
+    <content-heading [icon]="'icon-flag'" [heading]="'Entraîneurs'" [subHeading]="'La list des entraîneurs.'"></content-heading>
     <div>
       <a
         class="btn btn-raised btn-primary m-0 mr-1"
@@ -120,7 +120,7 @@
           </table>
 
           <mat-paginator
-            [length]="admins.length"
+            [length]="trainers.length"
             [pageSize]="10"
             [pageSizeOptions]="[5, 10, 25, 100]"
           >
