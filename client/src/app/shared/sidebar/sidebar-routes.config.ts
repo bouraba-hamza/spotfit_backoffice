@@ -2,8 +2,16 @@ import { RouteInfo } from './sidebar.metadata';
 
 export const ROUTES: RouteInfo[] = [
 
+    
     {
-        path: '/dashboard/admins', title: 'Administrateurs', icon: 'ft-users', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+        path: '/dashboard/admins', title: 'Administrateurs', icon: 'icon-users', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+    },
+    {
+        path: '/dashboard/partners', title: 'Partenaires', icon: 'icon-notebook', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+    },
+    
+    {
+        path: '/dashboard/customers', title: 'Clients', icon: 'icon-star', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
     },
     {
         path: '/home', title: 'Spotfit', icon: 'ft-square', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []

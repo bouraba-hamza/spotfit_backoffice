@@ -20,6 +20,7 @@ import { SidebarListDirective } from './directives/sidebarlist.directive';
 import { SidebarAnchorToggleDirective } from './directives/sidebaranchortoggle.directive';
 import { SidebarToggleDirective } from './directives/sidebartoggle.directive';
 import { NotfoundComponent } from './components/notfound/notfound.component';
+import { ContentHeadingComponent } from './components/content-heading/content-heading.component';
 
 @NgModule({
     exports: [
@@ -32,7 +33,8 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
         SidebarDirective,
         NgbModule,
         TranslateModule,
-        NotfoundComponent
+        NotfoundComponent,
+        ContentHeadingComponent
     ],
     imports: [
         RouterModule,
@@ -52,7 +54,8 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
         SidebarListDirective,
         SidebarAnchorToggleDirective,
         SidebarToggleDirective,
-        NotfoundComponent
+        NotfoundComponent,
+        ContentHeadingComponent
     ]
 })
 export class SharedModule { }

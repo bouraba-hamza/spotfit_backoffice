@@ -12,6 +12,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import { AdminFormComponent } from './admin-form/admin-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { SharedModule } from '@app/shared/shared.module';
 
 @NgModule({
   declarations: [AdminListComponent, AdminFormComponent],
@@ -30,7 +31,10 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
     MatMenuModule,
 
     // Toastr
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+
+    // Shared
+    SharedModule,
   ],
   providers: [
     { provide: ToastrService } 

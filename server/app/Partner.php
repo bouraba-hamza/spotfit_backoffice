@@ -21,13 +21,13 @@ class Partner extends Model
         'address_id'
     ];
     
-    public function account()
-    {
-        return $this->morphOne('App\Account', 'accountable');
-    }
-
     public function address()
     {
         return $this->hasOne('App\Address', 'id', 'address_id');
+    }
+
+    public function account()
+    {
+        return $this->hasOne('App\Account', 'id', 'account_id');
     }
 }
