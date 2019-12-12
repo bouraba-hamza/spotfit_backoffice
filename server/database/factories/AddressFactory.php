@@ -8,6 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(Address::class, function (Faker $faker) {
     return [
         'street' => $faker->streetAddress,
+        'formattedAddress' => $faker->streetAddress,
         'province' => $faker->state,
         'state' => $faker->stateAbbr,
         'region' => $faker->state,

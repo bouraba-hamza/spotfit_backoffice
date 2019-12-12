@@ -12,6 +12,7 @@ $factory->define(Partner::class, function (Faker $faker) {
         'gender' => $faker-> randomElement($array = array ('m', 'f')),
         'birthDay' => $faker->date('Y-m-d', 'now'),
         'phoneNumber' => $faker->phoneNumber,
+        'cin' => $faker->text,
         'jobTitle' => $faker->jobTitle,
         'avatar' => $faker->imageUrl($width = 640, $height = 480),
         'address_id' => factory(App\Address::class),

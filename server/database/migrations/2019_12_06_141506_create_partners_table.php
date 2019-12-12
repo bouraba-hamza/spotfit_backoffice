@@ -23,6 +23,7 @@ class CreatePartnersTable extends Migration
             $table->dateTime('birthDay')->nullable();
             $table->string('phoneNumber')->nullable();
             $table->string('jobTitle')->nullable();
+            $table->string('cin')->nullable();
             $table->string('avatar')->nullable();
             $table->timestamps();
         });

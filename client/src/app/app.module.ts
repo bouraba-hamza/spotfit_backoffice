@@ -19,6 +19,7 @@ import { ContentLayoutComponent } from "./layouts/content/content-layout.compone
 import { FullLayoutComponent } from "./layouts/full/full-layout.component";
 import { AuthService } from './@core/services/auth.service';
 import { AuthGuard } from './@core/guards/auth.guard';
+import { ToastrModule } from 'ngx-toastr';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -46,7 +47,8 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    PerfectScrollbarModule
+    PerfectScrollbarModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     // AuthService,

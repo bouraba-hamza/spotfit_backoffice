@@ -1,13 +1,21 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { GraphsComponent } from './pages/graphs/graphs.component';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { GraphsComponent } from "./pages/graphs/graphs.component";
 
 const routes: Routes = [
-  { path: '**', component: GraphsComponent }
+  {
+    path: "",
+    redirectTo: "admins",
+  },
+  {
+    path: "admins",
+    loadChildren: () =>
+      import("../dashboard/admins/admins.module").then(m => m.AdminsModule)
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DashboardRoutingModule { }
+export class DashboardRoutingModule {}
