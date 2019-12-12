@@ -24,6 +24,8 @@ Route::group(['middleware' => [/*'jwt'*/]], function() {
     Route::get('/me', 'AuthController@getAuthenticatedUser');
     Route::get('/token/refresh', 'AuthController@refresh');
 
+    Auth::routes(['verify' => true]);
+
     /**
      * Admin
      */

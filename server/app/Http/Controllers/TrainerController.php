@@ -21,8 +21,8 @@ class TrainerController extends Controller
         'account.username.unique' => "le nom d'utilisateur déjà pris",
         'account.password.required' => "le champ mote de passe est requis",
         'account.password.min' => "la longueur du mot de passe doit être d'au moins 6 caractères",
-        'weight.integer' => "Il faut respecter l'unité de poids",
-        'length.integer' => "Il faut respecter l'unité de longueur",
+        'weight.numeric' => "Il faut respecter l'unité de poids",
+        'length.numeric' => "Il faut respecter l'unité de longueur",
     ];
 
     public function index()
@@ -48,8 +48,8 @@ class TrainerController extends Controller
             'account.email' => 'required|email|unique:accounts,email',
             'account.username' => 'required|unique:accounts,username',
             'account.password' => 'required|min:6',
-            'weight' => 'integer',
-            'length' => 'integer',
+            'weight' => 'numeric',
+            'length' => 'numeric',
         ], self::VALIDATION_MESSAGES);
 
         // stop running function proccesses if the validation fails
@@ -96,8 +96,8 @@ class TrainerController extends Controller
             'account.email' => 'required|email|unique:accounts,email,' . $__o->account->id,
             'account.username' => 'required|unique:accounts,username,' . $__o->account->id,
             'account.password' => 'min:6',
-            'weight' => 'integer',
-            'length' => 'integer',
+            'weight' => 'numeric',
+            'length' => 'numeric',
         ], self::VALIDATION_MESSAGES);
 
         if ($validator->fails()) {
