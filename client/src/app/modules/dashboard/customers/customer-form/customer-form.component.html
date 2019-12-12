@@ -1,0 +1,99 @@
+<div class="card">
+    <div class="card-header pb-2">
+      <h4 class="card-title" id="hidden-label-colored-controls">{{ heading }}</h4>
+    </div>
+    <div class="card-content">
+      <div class="px-3">
+        <form class="form" [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+          <div class="form-body">
+            <h4 class="form-section"><i class="ft-info"></i> Information Personneles</h4>
+            <div class="row">
+              <div class="form-group col-md-6 mb-2">
+                <label class="sr-only" for="userinput1">Prénom</label>
+                <input type="text" id="userinput1" class="form-control border-secondary" placeholder="Prénom" name="name" formControlName="firstName">
+              </div>
+              <div class="form-group col-md-6 mb-2">
+                <label class="sr-only" for="userinput2">Nom</label>
+                <input type="text" id="userinput2" class="form-control border-secondary" placeholder="Nom"  formControlName="lastName">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6 mb-2">
+                  <label  for="issueinput3">Date de naissance</label>
+                  <input type="date" id="issueinput3" class="form-control" name="dateopened" data-toggle="tooltip"
+                    data-trigger="hover" data-placement="top" data-title="Date Opened" formControlName="birthDay">
+                </div>
+                <div class="form-group col-6 mb-2 d-flex align-items-end">
+                    <label class="sr-only" for="sex">Sexe</label>
+                    <select id="sex" name="priority" class="form-control" data-toggle="tooltip" data-trigger="hover"
+                      data-placement="top" data-title="Priority" formControlName="gender">
+                      <option value="m">Homme</option>
+                      <option value="f">Femme</option>
+                    </select>
+                  </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-12 mb-2">
+                  <label class="sr-only" for="phonenumber">Numéro de téléphone</label>
+                  <input type="text" id="phonenumber" class="form-control border-secondary" placeholder="+212..."  formControlName="phoneNumber">
+                </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-12 mb-2">
+                  <label class="sr-only" for="cin">CIN</label>
+                  <input type="text" id="cin" class="form-control border-secondary" placeholder="CIN"  formControlName="cin">
+                </div>
+            </div>
+            <div class="row" formGroupName="address">
+                <div class="form-group col-md-12 mb-2">
+                    <label class="sr-only" for="adresse">Adresse</label>
+                    <input type="text" id="adresse" class="form-control border-secondary" placeholder="Adresse"  formControlName="formattedAddress">
+                  </div>
+              </div>
+            <div class="row">
+              <div class="form-group col-md-12 mb-2">
+                  <label for="avatar">Photo</label>
+                  <input type="file" id="avatar" style="min-height: 2.8rem;" class="form-control border-secondary" placeholder="Photo de profile" (change)="setAvatar($event.target.files[0])">
+                </div>
+            </div>
+
+            <h4 class="form-section"><i class="ft-lock"></i> Identifiant de connexion</h4>
+            <div formGroupName="account">
+                <div class="row">
+                  <div class="form-group col-12 mb-2">
+                    <label class="sr-only" for="email">Email</label>
+                    <input class="form-control border-secondary" type="email" placeholder="example@spotfit.com" id="email" formControlName="email">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-12 mb-2">
+                    <label class="sr-only" for="login">Login</label>
+                    <input class="form-control border-secondary" type="text" placeholder="Nom d'utilisateur" id="login" formControlName="username">
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-12 mb-2">
+                      <label class="sr-only" for="password">Mot de passe</label>
+                      <input class="form-control border-secondary" type="password" placeholder="Mot de Passe" id="password" formControlName="password">
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="form-actions right">
+            <button type="button" class="btn btn-raised btn-warning mr-1" (click)="onCancel()">
+              <i class="ft-x"></i> Annuler
+            </button>
+            <button type="submit" class="btn btn-raised btn-primary" *ngIf="formType == 'add'; else edit">
+              <i class="fa fa-check-square-o"></i> Modifier
+            </button>
+            <ng-template #edit>
+                <button type="submit" class="btn btn-raised btn-primary" >
+                  <i class="fa fa-check-square-o"></i> Enregistrer
+                </button>
+            </ng-template>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
