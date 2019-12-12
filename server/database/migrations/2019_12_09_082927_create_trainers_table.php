@@ -24,6 +24,7 @@ class CreateTrainersTable extends Migration
             $table->enum('gender', ['m', 'f'])->nullable();
             $table->dateTime('birthDay')->nullable();
             $table->string('phoneNumber')->nullable();
+            $table->string('cin')->nullable();
             $table->string('jobTitle')->nullable();
             $table->string('avatar')->nullable();
             $table->timestamps();

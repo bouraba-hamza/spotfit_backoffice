@@ -17,20 +17,26 @@ Route::post('/login', 'AuthController@login');
 Route::post('/logout', 'AuthController@logout');
 
 Route::group(['middleware' => [/*'jwt'*/]], function() {
+
+    /**
+     * Auth
+     */
     Route::get('/me', 'AuthController@getAuthenticatedUser');
     Route::get('/token/refresh', 'AuthController@refresh');
 
-
-
     /**
-     * Administration
+     * Admin
      */
     Route::get('/admins', 'AdminController@index');
     Route::post('/admins', 'AdminController@store');
-    Route::post('/admins/{admin_id}', 'AdminController@update')->where('admin_id', '\d');
-    Route::get('/admins/{admin_id}', 'AdminController@show')->where('admin_id', '\d');
-    Route::delete('/admins/{admin_id}', 'AdminController@destroy')->where('admin_id', '\d');
-    
-    
+    Route::post('/admins/{admin_id}', 'AdminController@update');
+    Route::get('/admins/{admin_id}', 'AdminController@show');
+    // Route::delete('/admins/{admin_id}', 'AdminController@destroy');
+
+    /**
+     * Account
+     */
+    Route::post('/account/disable', 'AccountController@disable');    
+    Route::post('/account/activate', 'AccountController@activate');    
 
 });

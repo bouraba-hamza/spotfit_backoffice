@@ -8,6 +8,21 @@ class Trainer extends Model
 {
     protected $with = ['account', 'address'];
 
+    protected $fillable = [
+        'firstName',
+        'lastName',
+        'gender',
+        'birthDay',
+        'phoneNumber',
+        'cin',
+        'jobTitle',
+        'avatar',
+        'weight',
+        'length',
+        'account_id',
+        'address_id'
+    ];
+
     public function address()
     {
         return $this->hasOne('App\Address', 'id', 'address_id');
