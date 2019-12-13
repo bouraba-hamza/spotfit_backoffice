@@ -5,6 +5,7 @@ import { Observable, BehaviorSubject, ReplaySubject } from "rxjs";
 import { ApiService } from "./api.service";
 import { JwtService } from "./jwt.service";
 import { map, distinctUntilChanged } from "rxjs/operators";
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: "root" 
@@ -21,7 +22,8 @@ export class AuthService {
   constructor(
     private apiService: ApiService,
     private http: HttpClient,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private router: Router,
   ) {}
 
   // Verify JWT in localstorage with server & load user's info.
@@ -30,7 +32,7 @@ export class AuthService {
     // If JWT detected, attempt to get & store user's info
     if (this.jwtService.getToken()) {
       this.apiService.get("/me").subscribe(
-        data => this.setAuth(data.user),
+        data => this.setAuth(data),
         err => this.purgeAuth()
       );
     } else {
@@ -46,11 +48,13 @@ export class AuthService {
 
   setAuth(user: any) {
     // Save JWT sent from server in localstorage
-    this.jwtService.saveToken(user.token);
+    this.jwtService.saveToken(user.jwtToken.access_token);
     // Set current user data into observable
     this.currentUserSubject.next(user);
     // Set isAuthenticated to true
     this.isAuthenticatedSubject.next(true);
+    // navigate the protected area
+    this.router.navigateByUrl("/dashboard");
   }
 
   purgeAuth() {
@@ -65,7 +69,8 @@ export class AuthService {
   attemptAuth(credentials): Observable<any> {
     return this.apiService.post("/login", credentials).pipe(
       map(data => {
-        this.setAuth(data.user);
+        if(data.jwtToken != undefined)
+          this.setAuth(data);
         return data;
       })
     );
@@ -73,5 +78,14 @@ export class AuthService {
 
   getCurrentUser(): any {
     return this.currentUserSubject.value;
+  }
+
+  logout() {
+    return this.apiService.post("/logout").pipe(
+      map(data => {
+        this.purgeAuth();
+        this.router.navigateByUrl("/login");
+      })
+    );
   }
 }

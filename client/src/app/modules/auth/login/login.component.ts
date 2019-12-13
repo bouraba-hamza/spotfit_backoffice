@@ -1,30 +1,50 @@
-import { Component, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, ViewChild } from "@angular/core";
+import { NgForm, FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
+import { AuthService } from "@app/@core/services/auth.service";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"]
 })
-export class LoginComponent  {
+export class LoginComponent {
+  loginForm: FormGroup;
+  errors: String[] = [];
 
-  @ViewChild('f', {static: false}) loginForm: NgForm;
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private authService: AuthService
+  ) {
+    this.createAddForm();
+  }
 
-    constructor(private router: Router,
-        private route: ActivatedRoute) { }
-
-    // On submit button click
-    onSubmit() {
-        this.loginForm.reset();
+  onSubmit() {
+    // this.loginForm.reset();
+    if (this.loginForm.valid) {
+      const credentials = this.loginForm.value;
+      this.authService.attemptAuth(credentials).subscribe(response => {
+        if (response.errors !== undefined) {
+          this.errors = response.errors;
+        } else {
+          this.router.navigateByUrl("dashboard/admins");
+        }
+      });
     }
-    // On Forgot password link click
-    onForgotPassword() {
-        this.router.navigate(['forgotpassword'], { relativeTo: this.route.parent });
-    }
-    // On registration link click
-    onRegister() {
-        this.router.navigate(['register'], { relativeTo: this.route.parent });
-    }
+  }
 
+  createAddForm() {
+    this.loginForm = this.fb.group({
+      username: [null, Validators.required],
+      password: [null, Validators.required],
+      rememberMe: [false]
+    });
+  }
+
+  // On Forgot password link click
+  onForgotPassword() {
+    this.router.navigate(["forgotpassword"], { relativeTo: this.route.parent });
+  }
 }
