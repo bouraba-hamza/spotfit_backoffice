@@ -93,6 +93,8 @@ export class TrainerFormComponent implements OnInit {
   createAddForm() {
     return this.fb.group({
       firstName: [null],
+      weight: [null],
+      length: [null],
       lastName: [null],
       birthDay: [null],
       gender: ["m"],
@@ -114,6 +116,8 @@ export class TrainerFormComponent implements OnInit {
     return this.fb.group({
       firstName: [trainer.firstName],
       lastName: [trainer.lastName],
+      weight: [trainer.weight],
+      length: [trainer.length],
       birthDay: [trainer.birthDay],
       gender: [trainer.gender],
       phoneNumber: [trainer.phoneNumber],

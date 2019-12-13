@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Account;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use JWTAuth;
 use JWTException;
-use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -34,23 +35,51 @@ class AuthController extends Controller
 
         // // return response()->json(compact('user','token'),201);
 
-
         // return $this->respondWithToken($token);
     }
 
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('username', 'password');
 
-        try {
-            if (! $token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'invalid_credentials'], 400);
-            }
-        } catch (JWTException $e) {
-            return response()->json(['error' => 'could_not_create_token'], 500);
+        // verify if the user exist
+        $account = Account::where("username", "=", trim($credentials["username"]))
+            ->orWhere("email", "=", trim($credentials["username"]))
+            ->first();
+
+        // in case request user dosn't exist 
+        if (!$account) {
+            return ["errors" => ["les informations d'identification invalides"]];
         }
 
-        return $this->respondWithToken($token);
+        // verify the password
+        $truePass = \Hash::check($credentials["password"], $account->password);
+
+        // the password dosn't match
+        if (!$truePass) {
+            return ["errors" => ["les informations d'identification invalides"]];
+        }
+
+        // email must to be verified
+        // if(!$account->email_verified_at != null)
+        //     return ["errors" => ["vérifier votre boîte de réception pour confirmer la propriété de l'email"]];
+
+        // disabled account forbidden to access app
+        if ($account->disabled === 1) {
+            return ["errors" => ["le compte est désactivé maintenant, veuillez contacter l'administrateur"]];
+        }
+
+        try {
+            $token = JWTAuth::fromUser($account);
+        } catch (JWTException $e) {
+            return response()->json(['errors' => ["Impossible de générer Impossible de créer un clé d'authentification"]]);
+        }
+
+        // who is the owner
+        $account_owner = $account->owner();
+        // reformat the response
+        $account_owner["jwtToken"] = $this->formatToken($token);
+        return $account_owner;
     }
 
     public function logout()
@@ -62,20 +91,25 @@ class AuthController extends Controller
 
     protected function respondWithToken($token)
     {
-        return response()->json([
-            'access_token' => $token,
-            'token_type'   => 'bearer',
-            'expires_in'   => auth('api')->factory()->getTTL() * 60
-        ]);
+        return response()->json($this->formatToken($token));
     }
 
-
-    public function getAuthenticatedUser()
+    private function formatToken($token)
     {
+        return [
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth('api')->factory()->getTTL() * 60,
+        ];
+    }
+
+    public function getAuthenticatedUser(Request $request)
+    {
+
         try {
 
-            if (! $user = JWTAuth::parseToken()->authenticate()) {
-                    return response()->json(['user_not_found'], 404);
+            if (!$account = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
             }
 
         } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
@@ -92,7 +126,13 @@ class AuthController extends Controller
 
         }
 
-        return $user;
+        $token = JWTAuth::getToken();
+        $formatedToken = $this->formatToken($token . "");
+        // who is the owner
+        $account_owner = $account->owner();
+        // reformat the response
+        $account_owner["jwtToken"] = $formatedToken;
+        return $account_owner;
     }
 
     public function refresh()
