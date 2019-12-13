@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from "./shared/shared.module";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule, HttpClient } from "@angular/common/http";
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS  } from "@angular/common/http";
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 
@@ -20,6 +20,7 @@ import { FullLayoutComponent } from "./layouts/full/full-layout.component";
 import { AuthService } from './@core/services/auth.service';
 import { AuthGuard } from './@core/guards/auth.guard';
 import { ToastrModule } from 'ngx-toastr';
+import { HttpTokenInterceptor } from './@core/interceptors/http.token.interceptor';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -51,7 +52,7 @@ export function createTranslateLoader(http: HttpClient) {
     ToastrModule.forRoot(),
   ],
   providers: [
-    // AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
     AuthGuard,
     {
       provide: PERFECT_SCROLLBAR_CONFIG,

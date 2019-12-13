@@ -11,20 +11,18 @@ use Illuminate\Http\Request;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+ */
 
 Route::post('/login', 'AuthController@login');
 Route::post('/logout', 'AuthController@logout');
 
-Route::group(['middleware' => [/*'jwt'*/]], function() {
+Route::group(['middleware' => ['jwt']], function () {
 
     /**
      * Auth
      */
     Route::get('/me', 'AuthController@getAuthenticatedUser');
     Route::get('/token/refresh', 'AuthController@refresh');
-
-    Auth::routes(['verify' => true]);
 
     /**
      * Admin
@@ -65,7 +63,7 @@ Route::group(['middleware' => [/*'jwt'*/]], function() {
     /**
      * Account
      */
-    Route::post('/account/disable', 'AccountController@disable');    
-    Route::post('/account/activate', 'AccountController@activate');    
+    Route::post('/account/disable', 'AccountController@disable');
+    Route::post('/account/activate', 'AccountController@activate');
 
 });

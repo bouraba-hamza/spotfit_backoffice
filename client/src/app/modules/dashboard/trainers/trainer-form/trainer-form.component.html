@@ -56,6 +56,19 @@
                   <input type="file" id="avatar" style="min-height: 2.8rem;" class="form-control border-secondary" placeholder="Photo de profile" (change)="setAvatar($event.target.files[0])">
                 </div>
             </div>
+            <h4 class="form-section"><i class="icon-equalizer"></i>Santé et bien-être</h4>
+            <div>
+                <div class="row">
+                  <div class="form-group col-md-6 mb-2">
+                    <label class="sr-only" for="weight">Poids</label>
+                    <input class="form-control border-secondary" type="weight" placeholder="Poids" id="weight" formControlName="weight">
+                  </div>
+                  <div class="form-group col-md-6 mb-2">
+                    <label class="sr-only" for="length">Longeur</label>
+                    <input class="form-control border-secondary" type="text" placeholder="Longeur" id="length" formControlName="length">
+                  </div>
+                </div>
+            </div>
 
             <h4 class="form-section"><i class="ft-lock"></i> Identifiant de connexion</h4>
             <div formGroupName="account">

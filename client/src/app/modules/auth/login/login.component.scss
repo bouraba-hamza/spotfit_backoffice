@@ -25,6 +25,15 @@
         color: #fff !important;
       }
     }
+
+    label {
+      text-transform: none!important;
+      font-weight: 400!important;
+      letter-spacing: 1.5px!important;
+      color: #00000061!important;
+      font-size: 1rem!important;
+      letter-spacing: 0.3px!important;
+    }
   
     .forgot-password-option,
     .remember-me {
