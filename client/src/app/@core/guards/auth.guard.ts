@@ -8,7 +8,7 @@ import {
 import { Observable, of } from "rxjs";
 
 import { UserService } from "../http/user.service";
-import { take, map, concatMap } from "rxjs/operators";
+import { take, map, concatMap, tap } from "rxjs/operators";
 import { AuthService } from "../services/auth.service";
 import { JwtService } from "../services/jwt.service";
 
@@ -23,22 +23,12 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): boolean {
-    if (!this.jwtService.getToken()) {
-      this.router.navigateByUrl('/login');
-      return false;
-    }
+  ): Observable<boolean> | Promise<boolean> | boolean {
 
-    return true;
-
-    // return this.authService.isAuthenticated.pipe(
-    //   take(1),
-    //   concatMap(authenticated => {
-    //     if (!authenticated) {
-    //       this.router.navigateByUrl("/login");
-    //       return of(null);
-    //     }
-    //   })
-    // );
+    return this.authService.isAuthenticated.pipe(take(1), tap(isAuthenticated => {
+      if(!isAuthenticated)
+        this.router.navigateByUrl('/login');
+        return isAuthenticated;
+    }));
   }
 }

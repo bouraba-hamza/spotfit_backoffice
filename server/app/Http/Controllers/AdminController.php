@@ -8,6 +8,8 @@ use App\Address;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Validator;
+use App\Mail\AccountCreated;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
@@ -62,9 +64,12 @@ class AdminController extends Controller
         }
 
         unset($admin['account']);
-        $admin['account_id'] = Account::create($account)->id;
+        $dbAccount = Account::create($account);
+        $admin['account_id'] = $dbAccount->id;
         $admin['address_id'] = Address::create($address)->id;
         $admin_id = Admin::create($admin)->id;
+
+        Mail::to($dbAccount->email)->send(new AccountCreated($dbAccount));
 
         // return the id of the resource just created
         return ['admin_id' => $admin_id];

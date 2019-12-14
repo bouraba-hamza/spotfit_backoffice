@@ -1,12 +1,12 @@
-import { Component, ViewChild } from "@angular/core";
-import { NgForm, FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { Router, ActivatedRoute } from "@angular/router";
-import { AuthService } from "@app/@core/services/auth.service";
+import { Component, ViewChild } from '@angular/core';
+import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from '@app/@core/services/auth.service';
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"]
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
   loginForm: FormGroup;
@@ -29,7 +29,7 @@ export class LoginComponent {
         if (response.errors !== undefined) {
           this.errors = response.errors;
         } else {
-          this.router.navigateByUrl("dashboard/admins");
+          this.router.navigateByUrl('dashboard/admins');
         }
       });
     }
@@ -45,6 +45,6 @@ export class LoginComponent {
 
   // On Forgot password link click
   onForgotPassword() {
-    this.router.navigate(["forgotpassword"], { relativeTo: this.route.parent });
+    this.router.navigate(['forgotpassword'], { relativeTo: this.route.parent });
   }
 }

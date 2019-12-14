@@ -53,8 +53,6 @@ export class AuthService {
     this.currentUserSubject.next(user);
     // Set isAuthenticated to true
     this.isAuthenticatedSubject.next(true);
-    // navigate the protected area
-    this.router.navigateByUrl("/dashboard");
   }
 
   purgeAuth() {
