@@ -2,11 +2,11 @@
 
 namespace App\Mail;
 
+use App\Account;
+use DB;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\Account;
 use Illuminate\Support\Str;
 
 class AccountCreated extends Mailable
@@ -26,7 +26,7 @@ class AccountCreated extends Mailable
         // generate a random verification code
         $verificationCode = Str::random(30);
         // update the email_verifications database table
-        \DB::table('email_verification')->insert(
+        DB::table('email_verification')->insert(
             ['email' => $account->email,
                 'code' => $verificationCode,
                 'done' => 0,
@@ -44,7 +44,6 @@ class AccountCreated extends Mailable
      */
     public function build()
     {
-
         return $this->view('emails.accountCreated')
             ->with(['verificationCode' => $this->verificationCode,])
             ->subject('Verification d\'email - SPOTFIT');

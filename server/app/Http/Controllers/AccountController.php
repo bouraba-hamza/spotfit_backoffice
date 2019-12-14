@@ -1,22 +1,47 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Account;
+
+use App\Repositories\AccountRepository;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
 {
-    public function disable(Request $request)
+    private $account;
+
+    public function __construct(AccountRepository $account)
     {
-        $account = Account::findOrFail($request->get("accountId"));
-        $account->update(['disabled' => 1]);
-        return compact('account');
+        $this->account = $account;
     }
 
-    public function activate(Request $request)
+    public function index()
     {
-        $account = Account::findOrFail($request->get("accountId"));
-        $account->update(['disabled' => 0]);
-        return compact('account');
+        return $this->account->all();
+    }
+
+    public function show($accountId)
+    {
+        return $this->account->find($accountId);
+    }
+
+    public function update(Request $request, $accountId)
+    {
+        $args = $request->all();
+        return $this->account->update($accountId, $args);
+    }
+
+    public function store(Request $request)
+    {
+        return $this->account->store($request->all());
+    }
+
+    public function disable($accountId)
+    {
+        return $this->account->update($accountId, ['disabled' => '1']);
+    }
+
+    public function enable($accountId)
+    {
+        return $this->account->update($accountId, ['disabled' => '0']);
     }
 }
