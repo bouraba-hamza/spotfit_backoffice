@@ -61,7 +61,7 @@ export class TrainerListComponent implements OnInit, AfterViewInit {
 
   onActivateAccount(accountId: number) {
     this.accountService
-      .activate(accountId)
+      .enable(accountId)
       .subscribe(response => this.refresh());
   }
 

@@ -16,6 +16,9 @@ use Illuminate\Http\Request;
 Route::post('/login', 'AuthController@login');
 Route::post('/logout', 'AuthController@logout');
 
+/* EMAIL VERIFICATION */
+Route::get('/verify-email/{code}', 'AuthController@verifyEmail');
+
 Route::group(['middleware' => ['jwt']], function () {
 
     /**
@@ -63,7 +66,9 @@ Route::group(['middleware' => ['jwt']], function () {
     /**
      * Account
      */
-    Route::post('/account/disable', 'AccountController@disable');
-    Route::post('/account/activate', 'AccountController@activate');
+    Route::put('/accounts/{accountId}/disable', 'AccountController@disable');
+    Route::put('/accounts/{accountId}/enable', 'AccountController@enable');
 
 });
+
+

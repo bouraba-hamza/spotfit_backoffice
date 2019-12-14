@@ -9,11 +9,11 @@ export class AccountService {
 
   constructor(private apiService: ApiService) { }
 
-  disable(accountId: number) : Observable<any> {
-    return this.apiService.post('/account/disable', { accountId });
+  disable(accountId: number): Observable<any> {
+    return this.apiService.put(`/accounts/${accountId}/disable`);
   }
 
-  activate(accountId: number) : Observable<any> {
-    return this.apiService.post('/account/activate', { accountId });
+  enable(accountId: number): Observable<any> {
+    return this.apiService.put(`/accounts/${accountId}/enable`);
   }
 }
