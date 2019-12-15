@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\Repository;
+use App\Repositories\BaseRepository;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
@@ -11,7 +11,7 @@ class AccountController extends Controller
 
     public function __construct(App\Account $model)
     {
-        $this->model = new Repository($model);
+        $this->model = new BaseRepository($model);
     }
 
     public function index()

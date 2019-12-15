@@ -51,9 +51,7 @@ export class AdminFormComponent implements OnInit {
 
   onSubmit() {
     let formValues = this.removeEmpty(Object.assign({}, this.adminForm.value));
-    formValues.account = JSON.stringify(formValues.account);
-    formValues.address = JSON.stringify(formValues.address);
-    let formData: FormData = this.underscore.objectToFormData(formValues);
+    let formData: FormData = this.underscore.convertJsontoFormData(formValues);
 
     if (this.type == "add") {
       this.adminService.add(formData).subscribe((response: any) => {

@@ -13,6 +13,16 @@ use Illuminate\Http\Request;
 |
  */
 
+//Route::post('/test', function(Request $request) {
+//    \Illuminate\Support\Facades\Log::info($request->all());
+//});
+
+//Route::get('/test', function() {
+//    $accountId = 11;
+//    return redirect(config('app.url')  . "login?accountId={$accountId}&verified=1");
+//
+//});
+
 Route::post('/login', 'AuthController@login');
 Route::post('/logout', 'AuthController@logout');
 

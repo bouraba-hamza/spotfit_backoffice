@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Account;
 use App\Admin;
-use App\Address;
+use App\Http\Requests\AdminRequest;
+use App\Repositories\AccountRepository;
+use App\Repositories\AddressRepository;
+use App\Repositories\AdminRepository;
+use App\Services\ProfileAvatarService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Validator;
-use App\Mail\AccountCreated;
-use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
@@ -25,51 +26,36 @@ class AdminController extends Controller
         'account.password.min' => "la longueur du mot de passe doit être d'au moins 6 caractères",
     ];
 
-    public function index()
+    protected $adminRepository;
+    protected $accountRepository;
+    protected $addressRepository;
+    protected $profileAvatarService;
+
+    public function __construct(AdminRepository $adminRepository, AccountRepository $accountRepository, AddressRepository $addressRepository, ProfileAvatarService $profileAvatarService)
     {
-        return Admin::all();
+        $this->adminRepository = $adminRepository;
+        $this->accountRepository = $accountRepository;
+        $this->addressRepository = $addressRepository;
+        $this->profileAvatarService = $profileAvatarService;
     }
 
-    public function store(Request $request)
+    public function index()
+    {
+        return $this->adminRepository->all();
+    }
+
+    public function store(AdminRequest $request)
     {
         // filter unwanted inputs from request
         $admin = $request->all();
-        // convert the json to php array
-        $account = json_decode($request->get('account'), true);
-        $admin['account'] = $account;
-        // build address object
-        $address = json_decode($request->get('address'), true);
-
-        $validator = Validator::make($admin, [
-            'gender' => 'in:m,f',
-            'birthDay' => 'date_format:Y-m-d',
-            'avatar' => 'image',
-            // these fields required to create account when the admin can use the application
-            'account.email' => 'required|email|unique:accounts,email',
-            'account.username' => 'required|unique:accounts,username',
-            'account.password' => 'required|min:6',
-        ], self::VALIDATION_MESSAGES);
-
-        // stop running function proccesses if the validation fails
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()->all()]);
-        }
 
         // save the file in storage
         if ($request->hasFile("avatar")) {
-            $avatar = $request->file('avatar');
-            $fake_name = Str::slug(Str::random(7) . '_' . $avatar->getClientOriginalName());
-            $path = \Storage::putFileAs('avatars', $avatar, $fake_name);
-            $admin["avatar"] = $fake_name;
+            $admin["avatar"] = $this->profileAvatarService->store($request->file('avatar'))["fakeName"];
         }
 
-        unset($admin['account']);
-        $dbAccount = Account::create($account);
-        $admin['account_id'] = $dbAccount->id;
-        $admin['address_id'] = Address::create($address)->id;
-        $admin_id = Admin::create($admin)->id;
-
-        Mail::to($dbAccount->email)->send(new AccountCreated($dbAccount));
+        // create admin account
+        $admin_id = $this->adminRepository->insert($admin)->id;
 
         // return the id of the resource just created
         return ['admin_id' => $admin_id];
@@ -77,25 +63,21 @@ class AdminController extends Controller
 
     public function show($admin_id)
     {
-        return Admin::findOrFail($admin_id);
+        return $this->adminRepository->find($admin_id);
     }
 
     public function update(Request $request, $admin_id)
     {
         // check if the the requested resource exist in database
-        $__o = Admin::findOrFail($admin_id);
+        $admin = $this->adminRepository->find($admin_id);
+        $data = $request->all();
 
-        $account = json_decode($request->get('account'), true);
-        $address = json_decode($request->get('address'), true);
-        $admin = $request->all();
-        $admin['account'] = $account;
-
-        $validator = Validator::make($admin, [
+        $validator = Validator::make($data, [
             'gender' => 'in:m,f',
             'birthDay' => 'date_format:Y-m-d',
             'avatar' => 'image',
-            'account.email' => 'required|email|unique:accounts,email,' . $__o->account->id,
-            'account.username' => 'required|unique:accounts,username,' . $__o->account->id,
+            'account.email' => 'required|email|unique:accounts,email,' . $admin->account->id,
+            'account.username' => 'required|unique:accounts,username,' . $admin->account->id,
             'account.password' => 'min:6',
         ], self::VALIDATION_MESSAGES);
 
@@ -104,32 +86,17 @@ class AdminController extends Controller
         }
 
         if ($request->hasFile("avatar")) {
-            // delete the old avatar
-            \Storage::delete('avatars/' . $__o->avatar);
-            // save the the received photo
-            $avatar = $request->file('avatar');
-            // generate a random name as prefix
-            $fake_name = Str::slug(Str::random(7) . '_' . $avatar->getClientOriginalName(), '.');
-            // save the file
-            $path = \Storage::putFileAs('avatars', $avatar, $fake_name);
-            $admin["avatar"] = $fake_name;
+            $data["avatar"] = $this->profileAvatarService->update($admin->avatar, $request->file("avatar") )["fakeName"];
         }
 
-        // update the account
-        $__o->account()->first()->update($account);
-        // the the admin profile
-        $__o->update($admin);
-        // finally the address
-        $__o->address()->first()->update($address);
+        $this->adminRepository->update($admin_id, $data);
 
-
-        return ['admin_id' => $__o->id];
+        return ['admin_id' => $admin_id];
     }
 
     public function destroy($admin_id)
     {
-        $admin = Admin::findOrFail($admin_id);
-        $admin->delete();
-        return ['status' => 'success', 'deleted_resource_id' => $admin->id];
+        $this->adminRepository->destroy($admin_id);
+        return ['status' => 'success', 'deleted_resource_id' => $admin_id];
     }
 }
