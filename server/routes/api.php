@@ -23,6 +23,9 @@ use Illuminate\Http\Request;
 //
 //});
 
+
+
+
 Route::post('/login', 'AuthController@login');
 Route::post('/logout', 'AuthController@logout');
 
@@ -30,6 +33,9 @@ Route::post('/logout', 'AuthController@logout');
 Route::get('/verify-email/{code}', 'AuthController@verifyEmail');
 
 Route::group(['middleware' => ['jwt']], function () {
+
+    /* USERS PROFILE PICTURES */
+    Route::get('profile-picture/{filename}', 'ProfilePictureController@getAvatar');
 
     /**
      * Auth
@@ -78,6 +84,9 @@ Route::group(['middleware' => ['jwt']], function () {
      */
     Route::put('/accounts/{id}/disable', 'AccountController@disable');
     Route::put('/accounts/{id}/enable', 'AccountController@enable');
+
+
+
 
 });
 

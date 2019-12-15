@@ -18,6 +18,7 @@ export class AdminFormComponent implements OnInit {
   type: string;
   admin: Admin;
   adminForm: FormGroup;
+  inProgress: boolean = false;
 
   constructor(
     private router: Router,
@@ -53,6 +54,8 @@ export class AdminFormComponent implements OnInit {
     let formValues = this.removeEmpty(Object.assign({}, this.adminForm.value));
     let formData: FormData = this.underscore.convertJsontoFormData(formValues);
 
+    this.inProgress = true;
+
     if (this.type == "add") {
       this.adminService.add(formData).subscribe((response: any) => {
         if (response.admin_id !== undefined && response.admin_id > 0) {
@@ -67,7 +70,7 @@ export class AdminFormComponent implements OnInit {
             closeButton: true
           });
         }
-      });
+      }, (error) => { console.error(error)}, () => { this.inProgress = false; });
     } else {
       this.adminService
         .edit(formData, this.admin.id)
@@ -84,7 +87,7 @@ export class AdminFormComponent implements OnInit {
               closeButton: true
             });
           }
-        });
+        }, (error) => { console.error(error)}, () => { this.inProgress = false; });
     }
   }
 
@@ -150,5 +153,5 @@ export class AdminFormComponent implements OnInit {
     return object;
   }
 
-  
+
 }

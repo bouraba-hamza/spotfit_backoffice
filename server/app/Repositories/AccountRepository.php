@@ -7,7 +7,7 @@ use App\Account;
 use App\Mail\AccountCreated;
 use Illuminate\Support\Facades\Mail;
 
-class AccountRepository implements EloquentRepositoryInterface
+class AccountRepository extends BaseRepository implements EloquentRepositoryInterface
 {
     protected $model;
 
