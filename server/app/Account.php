@@ -17,7 +17,7 @@ class Account extends Authenticatable implements JWTSubject, MustVerifyEmail
      *
      * @var array
      */
-    protected $fillable = [
+    public $fillable = [
         'username', 'email', 'password', 'disabled'
     ];
 
@@ -68,5 +68,10 @@ class Account extends Authenticatable implements JWTSubject, MustVerifyEmail
         if($a) return $a;
 
         return null;
+    }
+
+    public function scopeDisabled($query, $arg)
+    {
+        return $query->where('disabled', $arg);
     }
 }

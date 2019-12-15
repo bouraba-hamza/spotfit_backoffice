@@ -66,8 +66,8 @@ Route::group(['middleware' => ['jwt']], function () {
     /**
      * Account
      */
-    Route::put('/accounts/{accountId}/disable', 'AccountController@disable');
-    Route::put('/accounts/{accountId}/enable', 'AccountController@enable');
+    Route::put('/accounts/{id}/disable', 'AccountController@disable');
+    Route::put('/accounts/{id}/enable', 'AccountController@enable');
 
 });
 

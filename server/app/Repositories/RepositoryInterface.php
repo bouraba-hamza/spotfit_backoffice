@@ -4,9 +4,7 @@
 namespace App\Repositories;
 
 
-use Illuminate\Database\Eloquent\Model;
-
-interface EloquentRepositoryInterface
+interface RepositoryInterface
 {
     public function all($columns = ['*']);
 
@@ -16,5 +14,7 @@ interface EloquentRepositoryInterface
 
     public function update($id, Array $args);
 
-    public function store(Array $attributes);
+    public function insert(Array $attributes);
+
+    public function destroy($id);
 }
