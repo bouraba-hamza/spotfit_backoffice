@@ -1,14 +1,14 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable, BehaviorSubject, ReplaySubject } from "rxjs";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
 
-import { ApiService } from "./api.service";
-import { JwtService } from "./jwt.service";
-import { map, distinctUntilChanged } from "rxjs/operators";
+import { ApiService } from './api.service';
+import { JwtService } from './jwt.service';
+import {map, distinctUntilChanged, tap, catchError} from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: "root" 
+  providedIn: 'root'
 })
 export class AuthService {
   private currentUserSubject = new BehaviorSubject<any>({} as any);
@@ -31,7 +31,7 @@ export class AuthService {
   populate() {
     // If JWT detected, attempt to get & store user's info
     if (this.jwtService.getToken()) {
-      this.apiService.get("/me").subscribe(
+      this.apiService.get('/me').subscribe(
         data => this.setAuth(data),
         err => this.purgeAuth()
       );
@@ -65,7 +65,7 @@ export class AuthService {
   }
 
   attemptAuth(credentials): Observable<any> {
-    return this.apiService.post("/login", credentials).pipe(
+    return this.apiService.post('/login', credentials).pipe(
       map(data => {
         if(data.jwtToken != undefined)
           this.setAuth(data);
@@ -79,11 +79,21 @@ export class AuthService {
   }
 
   logout() {
-    return this.apiService.post("/logout").pipe(
+    return this.apiService.post('/logout').pipe(
       map(data => {
         this.purgeAuth();
-        this.router.navigateByUrl("/login");
+        this.router.navigateByUrl('/login');
       })
+    );
+  }
+
+  refresh() {
+    // request new token
+    return this.apiService.get('/token/refresh').pipe(
+        tap(data => {
+          // update the old stored in localStorage
+          this.jwtService.saveToken(data.access_token);
+        })
     );
   }
 }
