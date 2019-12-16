@@ -3,11 +3,12 @@ import {
   HttpEvent,
   HttpInterceptor,
   HttpHandler,
-  HttpRequest
+  HttpRequest, HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 
 import { JwtService } from '../services/jwt.service';
+import {catchError} from "rxjs/operators";
 
 @Injectable()
 export class HttpTokenInterceptor implements HttpInterceptor {
@@ -29,6 +30,21 @@ export class HttpTokenInterceptor implements HttpInterceptor {
     }
 
     const request = req.clone({ setHeaders: headersConfig });
-    return next.handle(request);
+    return next.handle(request).pipe(
+        catchError(this.handleError)
+    );
+  }
+
+  handleError(error: HttpErrorResponse) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    window.alert(errorMessage);
+    return throwError(errorMessage);
   }
 }

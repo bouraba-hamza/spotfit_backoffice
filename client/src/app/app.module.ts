@@ -21,6 +21,7 @@ import { AuthService } from './@core/services/auth.service';
 import { AuthGuard } from './@core/guards/auth.guard';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpTokenInterceptor } from './@core/interceptors/http.token.interceptor';
+import {HttpErrorInterceptor} from "@app/@core/interceptors/http-error.interceptor";
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -53,6 +54,7 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     AuthGuard,
     {
       provide: PERFECT_SCROLLBAR_CONFIG,

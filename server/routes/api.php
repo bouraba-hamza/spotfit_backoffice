@@ -32,7 +32,7 @@ Route::post('/logout', 'AuthController@logout');
 /* EMAIL VERIFICATION */
 Route::get('/verify-email/{code}', 'AuthController@verifyEmail');
 
-Route::group(['middleware' => ['jwt']], function () {
+Route::group(['middleware' => ['jwt', /* 'jwt.refresh' */]], function () {
 
     /* USERS PROFILE PICTURES */
     Route::get('profile-picture/{filename}', 'ProfilePictureController@getAvatar');
