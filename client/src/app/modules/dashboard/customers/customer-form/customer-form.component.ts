@@ -53,7 +53,7 @@ export class CustomerFormComponent implements OnInit {
     let formValues = this.removeEmpty(Object.assign({}, this.customerForm.value));
     formValues.account = JSON.stringify(formValues.account);
     formValues.address = JSON.stringify(formValues.address);
-    let formData: FormData = this.underscore.objectToFormData(formValues);
+    let formData: FormData = this.underscore.convertJsontoFormData(formValues);
 
     if (this.type == "add") {
       this.customerService.add(formData).subscribe((response: any) => {

@@ -53,7 +53,7 @@ export class PartnerFormComponent implements OnInit {
     let formValues = this.removeEmpty(Object.assign({}, this.partnerForm.value));
     formValues.account = JSON.stringify(formValues.account);
     formValues.address = JSON.stringify(formValues.address);
-    let formData: FormData = this.underscore.objectToFormData(formValues);
+    let formData: FormData = this.underscore.convertJsontoFormData(formValues);
 
     if (this.type == "add") {
       this.partnerService.add(formData).subscribe((response: any) => {

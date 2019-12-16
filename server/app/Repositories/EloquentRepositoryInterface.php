@@ -4,7 +4,9 @@
 namespace App\Repositories;
 
 
-interface RepositoryInterface
+use Illuminate\Database\Eloquent\Model;
+
+interface EloquentRepositoryInterface
 {
     public function all($columns = ['*']);
 

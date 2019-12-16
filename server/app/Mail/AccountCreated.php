@@ -5,11 +5,12 @@ namespace App\Mail;
 use App\Account;
 use DB;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Str;
 
-class AccountCreated extends Mailable
+class AccountCreated extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 

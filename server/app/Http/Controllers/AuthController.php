@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Account;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use JWTAuth;
 use JWTException;
 
@@ -61,8 +60,8 @@ class AuthController extends Controller
         }
 
         // email must to be verified
-        // if(!$account->email_verified_at != null)
-        //     return ["errors" => ["vérifier votre boîte de réception pour confirmer la propriété de l'email"]];
+        if(!$account->email_verified_at != null)
+            return ["errors" => ["vérifier votre boîte de réception pour confirmer la propriété de l'email"]];
 
         // disabled account forbidden to access app
         if ($account->disabled === 1) {
@@ -82,18 +81,6 @@ class AuthController extends Controller
         return $account_owner;
     }
 
-    public function logout()
-    {
-        auth('api')->logout();
-
-        return response()->json(['message' => 'Successfully logged out']);
-    }
-
-    protected function respondWithToken($token)
-    {
-        return response()->json($this->formatToken($token));
-    }
-
     private function formatToken($token)
     {
         return [
@@ -101,6 +88,13 @@ class AuthController extends Controller
             'token_type' => 'bearer',
             'expires_in' => auth('api')->factory()->getTTL() * 60,
         ];
+    }
+
+    public function logout()
+    {
+        auth('api')->logout();
+
+        return response()->json(['message' => 'Successfully logged out']);
     }
 
     public function getAuthenticatedUser(Request $request)
@@ -140,32 +134,39 @@ class AuthController extends Controller
         return $this->respondWithToken(auth('api')->refresh());
     }
 
-    public function verifyEmail($code) {
+    protected function respondWithToken($token)
+    {
+        return response()->json($this->formatToken($token));
+    }
+
+    public function verifyEmail($code)
+    {
         // check if the tag exists
         $ev = \DB::table('email_verification')->where('code', $code)->first();
 
         // in case tag code dosn't belongs to any account
-        if(!$ev)
-            return ["errors" , ["NOT FOUND"]];
+        if (!$ev)
+            return ["errors", ["NOT FOUND"]];
 
         // case two the code expired or used in the past by someone
-        if($ev->done == 1)
-            return ["errors" , ["verification code expired or already consumed, please request a new one."]];
+        if ($ev->done == 1)
+            return ["errors", ["verification code expired or already consumed, please request a new one."]];
 
         // get the account from the email
-        $acc = Account::where('email', $ev->email)->first();
+        $account = Account::where('email', $ev->email)->first();
 
-        if(!$acc)
-            return ["errors" , ["INTERNAL ERRORS"]];
+        if (!$account)
+            return ["errors", ["INTERNAL ERRORS"]];
 
         // update the account and the verification code ticket
-        $acc->email_verified_at = now();
-        $acc->save();
+        $account->email_verified_at = now();
+        $account->save();
 
         \DB::table('email_verification')
             ->where('code', $code)
             ->update(['done' => 1, 'updated_at' => now()]);
 
-        return ["status" => "success"];
+        $redirect_url = config('app.frontend_url') . "/login?accountId={$account->id}&verified=1";
+        return redirect($redirect_url);
     }
 }

@@ -18,6 +18,7 @@ export class AdminFormComponent implements OnInit {
   type: string;
   admin: Admin;
   adminForm: FormGroup;
+  inProgress: boolean = false;
 
   constructor(
     private router: Router,
@@ -51,9 +52,9 @@ export class AdminFormComponent implements OnInit {
 
   onSubmit() {
     let formValues = this.removeEmpty(Object.assign({}, this.adminForm.value));
-    formValues.account = JSON.stringify(formValues.account);
-    formValues.address = JSON.stringify(formValues.address);
-    let formData: FormData = this.underscore.objectToFormData(formValues);
+    let formData: FormData = this.underscore.convertJsontoFormData(formValues);
+
+    this.inProgress = true;
 
     if (this.type == "add") {
       this.adminService.add(formData).subscribe((response: any) => {
@@ -69,7 +70,7 @@ export class AdminFormComponent implements OnInit {
             closeButton: true
           });
         }
-      });
+      }, (error) => { console.error(error)}, () => { this.inProgress = false; });
     } else {
       this.adminService
         .edit(formData, this.admin.id)
@@ -86,7 +87,7 @@ export class AdminFormComponent implements OnInit {
               closeButton: true
             });
           }
-        });
+        }, (error) => { console.error(error)}, () => { this.inProgress = false; });
     }
   }
 
@@ -152,5 +153,5 @@ export class AdminFormComponent implements OnInit {
     return object;
   }
 
-  
+
 }
