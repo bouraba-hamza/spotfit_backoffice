@@ -25,6 +25,16 @@ const routes: Routes = [
     path: "trainers",
     loadChildren: () =>
       import("../dashboard/trainers/trainers.module").then(m => m.TrainersModule)
+  },
+  {
+    path: "calendar",
+    loadChildren: () =>
+      import("../dashboard/calendar/calendar.module").then(m => m.CalendarsModule)
+  },
+  {
+    path: "chat",
+    loadChildren: () =>
+      import("../dashboard/chat/chat.module").then(m => m.ChatModule)
   }
 ];
 
