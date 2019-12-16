@@ -113,19 +113,19 @@ export class AdminFormComponent implements OnInit {
 
   createEditForm(admin: Admin) {
     return this.fb.group({
-      firstName: [admin.firstName],
-      lastName: [admin.lastName],
-      birthDay: [admin.birthDay],
-      gender: [admin.gender],
-      phoneNumber: [admin.phoneNumber],
-      cin: [admin.cin],
+      firstName: [admin.firstName ? admin.firstName: ''],
+      lastName: [admin.lastName ? admin.lastName: ''],
+      birthDay: [admin.birthDay ? admin.birthDay: ''],
+      gender: [admin.gender ? admin.gender: ''],
+      phoneNumber: [admin.phoneNumber ? admin.phoneNumber: ''],
+      cin: [admin.cin ? admin.cin : ''],
       avatar: [null],
       address: this.fb.group({
-        formattedAddress: [admin.address.formattedAddress],
+        formattedAddress: [admin.address ? admin.address.formattedAddress : ''],
       }),
       account: this.fb.group({
-        username: [admin.account.username],
-        email: [admin.account.email],
+        username: [admin.account ? admin.account.username : ''],
+        email: [admin.account ? admin.account.email : ''],
         password: [null]
       })
     });

@@ -3,32 +3,32 @@
 
 namespace App\Repositories;
 
-use App\Admin;
+use App\Trainer;
 
-class AdminRepository extends BaseRepository
+class TrainerRepository extends BaseRepository
 {
     protected $account;
     protected $address;
 
-    public function __construct(Admin $admin, AccountRepository $accountRepository, AddressRepository $addressRepository)
+    public function __construct(Trainer $trainer, AccountRepository $accountRepository, AddressRepository $addressRepository)
     {
-        parent::__construct($admin);
+        parent::__construct($trainer);
         $this->account = $accountRepository;
         $this->address = $addressRepository;
     }
 
     public function update($id, array $args)
     {
-        $admin = $this->find($id);
+        $trainer = $this->find($id);
 
         // update the account
-        $admin->account()->first()->update($args["account"]);
+        $trainer->account()->first()->update($args["account"]);
         // finally the address
-        $admin->address()->first()->update($args["address"]);
-        // the the admin profile
+        $trainer->address()->first()->update($args["address"]);
+        // the the trainer profile
         parent::update($id, $args);
 
-        return $admin;
+        return $trainer;
     }
 
     public function insert(array $attributes)

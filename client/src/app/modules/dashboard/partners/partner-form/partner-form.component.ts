@@ -18,6 +18,7 @@ export class PartnerFormComponent implements OnInit {
   type: string;
   partner: Partner;
   partnerForm: FormGroup;
+  inProgress: boolean = false;
 
   constructor(
     private router: Router,
@@ -51,17 +52,17 @@ export class PartnerFormComponent implements OnInit {
 
   onSubmit() {
     let formValues = this.removeEmpty(Object.assign({}, this.partnerForm.value));
-    formValues.account = JSON.stringify(formValues.account);
-    formValues.address = JSON.stringify(formValues.address);
     let formData: FormData = this.underscore.convertJsontoFormData(formValues);
+
+    this.inProgress = true;
 
     if (this.type == "add") {
       this.partnerService.add(formData).subscribe((response: any) => {
         if (response.partner_id !== undefined && response.partner_id > 0) {
           this.toastr.success(
-            `l'partenaire a ajouté avec succès avec ID: ${response.partner_id}`,
-            this.heading,
-            { timeOut: 5000 }
+              `le partenaire a ajouté avec succès avec ID: ${response.partner_id}`,
+              this.heading,
+              { timeOut: 5000 }
           );
           this.router.navigate(["../"], { relativeTo: this.route });
         } else {
@@ -69,24 +70,23 @@ export class PartnerFormComponent implements OnInit {
             closeButton: true
           });
         }
-      });
+      }, (error) => { console.error(error)}, () => { this.inProgress = false; });
     } else {
-      this.partnerService
-        .edit(formData, this.partner.id)
-        .subscribe((response: any) => {
-          if (response.partner_id !== undefined && response.partner_id > 0) {
-            this.toastr.success(
-              `l'partenaire a modifié avec succès`,
-              this.heading,
-              { timeOut: 5000 }
-            );
-            this.router.navigate(["../"], { relativeTo: this.route });
-          } else {
-            this.toastr.error(`${response.errors[0]}`, this.heading, {
-              closeButton: true
-            });
-          }
-        });
+      this.partnerService.edit(formData, this.partner.id)
+          .subscribe((response: any) => {
+            if (response.partner_id !== undefined && response.partner_id > 0) {
+              this.toastr.success(
+                  `le partenaire a modifié avec succès`,
+                  this.heading,
+                  { timeOut: 5000 }
+              );
+              this.router.navigate(["../"], { relativeTo: this.route });
+            } else {
+              this.toastr.error(`${response.errors[0]}`, this.heading, {
+                closeButton: true
+              });
+            }
+          }, (error) => { console.error(error)}, () => { this.inProgress = false; });
     }
   }
 
@@ -120,7 +120,7 @@ export class PartnerFormComponent implements OnInit {
       cin: [partner.cin],
       avatar: [null],
       address: this.fb.group({
-        formattedAddress: [partner.address.formattedAddress],
+        formattedAddress: [partner.address ? partner.address.formattedAddress : null],
       }),
       account: this.fb.group({
         username: [partner.account.username],
@@ -152,5 +152,5 @@ export class PartnerFormComponent implements OnInit {
     return object;
   }
 
-  
+
 }

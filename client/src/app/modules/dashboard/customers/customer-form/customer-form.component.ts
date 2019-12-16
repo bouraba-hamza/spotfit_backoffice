@@ -18,6 +18,7 @@ export class CustomerFormComponent implements OnInit {
   type: string;
   customer: Customer;
   customerForm: FormGroup;
+  inProgress: boolean = false;
 
   constructor(
     private router: Router,
@@ -51,17 +52,17 @@ export class CustomerFormComponent implements OnInit {
 
   onSubmit() {
     let formValues = this.removeEmpty(Object.assign({}, this.customerForm.value));
-    formValues.account = JSON.stringify(formValues.account);
-    formValues.address = JSON.stringify(formValues.address);
     let formData: FormData = this.underscore.convertJsontoFormData(formValues);
+
+    this.inProgress = true;
 
     if (this.type == "add") {
       this.customerService.add(formData).subscribe((response: any) => {
         if (response.customer_id !== undefined && response.customer_id > 0) {
           this.toastr.success(
-            `l'pratenaire a ajouté avec succès avec ID: ${response.customer_id}`,
-            this.heading,
-            { timeOut: 5000 }
+              `le client a ajouté avec succès avec ID: ${response.customer_id}`,
+              this.heading,
+              { timeOut: 5000 }
           );
           this.router.navigate(["../"], { relativeTo: this.route });
         } else {
@@ -69,24 +70,24 @@ export class CustomerFormComponent implements OnInit {
             closeButton: true
           });
         }
-      });
+      }, (error) => { console.error(error)}, () => { this.inProgress = false; });
     } else {
       this.customerService
-        .edit(formData, this.customer.id)
-        .subscribe((response: any) => {
-          if (response.customer_id !== undefined && response.customer_id > 0) {
-            this.toastr.success(
-              `l'pratenaire a modifié avec succès`,
-              this.heading,
-              { timeOut: 5000 }
-            );
-            this.router.navigate(["../"], { relativeTo: this.route });
-          } else {
-            this.toastr.error(`${response.errors[0]}`, this.heading, {
-              closeButton: true
-            });
-          }
-        });
+          .edit(formData, this.customer.id)
+          .subscribe((response: any) => {
+            if (response.customer_id !== undefined && response.customer_id > 0) {
+              this.toastr.success(
+                  `le client a modifié avec succès`,
+                  this.heading,
+                  { timeOut: 5000 }
+              );
+              this.router.navigate(["../"], { relativeTo: this.route });
+            } else {
+              this.toastr.error(`${response.errors[0]}`, this.heading, {
+                closeButton: true
+              });
+            }
+          }, (error) => { console.error(error)}, () => { this.inProgress = false; });
     }
   }
 

@@ -6,18 +6,18 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class AdminRequest extends FormRequest
+class CustomerRequest extends FormRequest
 {
     public const VALIDATION_MESSAGES = [
-        'birthDay.date_format' => 'la date de naissance dois respecter le format Année-Mois-jour',
-        'avatar.image' => 'la photo de profile  dois respecter le format d\'image ',
-        'account.email.required' => 'le champ email est requis',
-        'account.email.email' => 'il faut respecter le format de mail',
-        'account.email.unique' => 'l\'email déjà pris',
-        'account.username.required' => 'le champ login est requis',
-        'account.username.unique' => 'le nom d\'utilisateur déjà pris',
-        'account.password.required' => 'le champ mote de passe est requis',
-        'account.password.min' => 'la longueur du mot de passe doit être d\'au moins 6 caractères',
+        'birthDay.date_format' => "la date de naissance dois respecter le format Année-Mois-jour",
+        'avatar.image' => "la photo de profile  dois respecter le format d'image ",
+        'account.email.required' => "le champ email est requis",
+        'account.email.email' => "il faut respecter le format de mail",
+        'account.email.unique' => "l'email déjà pris",
+        'account.username.required' => "le champ login est requis",
+        'account.username.unique' => "le nom d'utilisateur déjà pris",
+        'account.password.required' => "le champ mote de passe est requis",
+        'account.password.min' => "la longueur du mot de passe doit être d'au moins 6 caractères",
     ];
 
     /**
@@ -56,9 +56,4 @@ class AdminRequest extends FormRequest
     {
         throw new HttpResponseException(response()->json(["errors" => $validator->errors()->all()], 200));
     }
-
-    // protected function failedValidation(Validator $validator)
-    // {
-    //      throw new HttpResponseException(response()->json($validator->errors(), 422));
-    // }
 }

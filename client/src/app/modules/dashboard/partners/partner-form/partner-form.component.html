@@ -83,14 +83,14 @@
             <button type="button" class="btn btn-raised btn-warning mr-1" (click)="onCancel()">
               <i class="ft-x"></i> Annuler
             </button>
-            <button type="submit" class="btn btn-raised btn-primary" *ngIf="formType == 'add'; else edit">
-              <i class="fa fa-check-square-o"></i> Modifier
-            </button>
-            <ng-template #edit>
-                <button type="submit" class="btn btn-raised btn-primary" >
-                  <i class="fa fa-check-square-o"></i> Enregistrer
-                </button>
-            </ng-template>
+              <button type="submit" class="btn btn-raised btn-primary" *ngIf="type !== 'add'; else add" [disabled]="inProgress">
+                  <i class="fa fa-check-square-o"></i> Modifier
+              </button>
+              <ng-template #add>
+                  <button type="submit" class="btn btn-raised btn-primary" [disabled]="inProgress">
+                      <i class="fa fa-check-square-o"></i> Enregistrer
+                  </button>
+              </ng-template>
           </div>
         </form>
 

@@ -3,32 +3,32 @@
 
 namespace App\Repositories;
 
-use App\Admin;
+use App\Customer;
 
-class AdminRepository extends BaseRepository
+class CustomerRepository extends BaseRepository
 {
     protected $account;
     protected $address;
 
-    public function __construct(Admin $admin, AccountRepository $accountRepository, AddressRepository $addressRepository)
+    public function __construct(Customer $customer, AccountRepository $accountRepository, AddressRepository $addressRepository)
     {
-        parent::__construct($admin);
+        parent::__construct($customer);
         $this->account = $accountRepository;
         $this->address = $addressRepository;
     }
 
     public function update($id, array $args)
     {
-        $admin = $this->find($id);
+        $customer = $this->find($id);
 
         // update the account
-        $admin->account()->first()->update($args["account"]);
+        $customer->account()->first()->update($args["account"]);
         // finally the address
-        $admin->address()->first()->update($args["address"]);
-        // the the admin profile
+        $customer->address()->first()->update($args["address"]);
+        // the the customer profile
         parent::update($id, $args);
 
-        return $admin;
+        return $customer;
     }
 
     public function insert(array $attributes)

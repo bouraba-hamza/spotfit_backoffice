@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class AdminRequest extends FormRequest
+class PartnerRequest extends FormRequest
 {
     public const VALIDATION_MESSAGES = [
         'birthDay.date_format' => 'la date de naissance dois respecter le format Année-Mois-jour',
@@ -56,9 +56,4 @@ class AdminRequest extends FormRequest
     {
         throw new HttpResponseException(response()->json(["errors" => $validator->errors()->all()], 200));
     }
-
-    // protected function failedValidation(Validator $validator)
-    // {
-    //      throw new HttpResponseException(response()->json($validator->errors(), 422));
-    // }
 }

@@ -18,6 +18,7 @@ export class TrainerFormComponent implements OnInit {
   type: string;
   trainer: Trainer;
   trainerForm: FormGroup;
+  inProgress: boolean = false;
 
   constructor(
     private router: Router,
@@ -51,17 +52,17 @@ export class TrainerFormComponent implements OnInit {
 
   onSubmit() {
     let formValues = this.removeEmpty(Object.assign({}, this.trainerForm.value));
-    formValues.account = JSON.stringify(formValues.account);
-    formValues.address = JSON.stringify(formValues.address);
     let formData: FormData = this.underscore.convertJsontoFormData(formValues);
+
+    this.inProgress = true;
 
     if (this.type == "add") {
       this.trainerService.add(formData).subscribe((response: any) => {
         if (response.trainer_id !== undefined && response.trainer_id > 0) {
           this.toastr.success(
-            `l'entraîneur a ajouté avec succès avec ID: ${response.trainer_id}`,
-            this.heading,
-            { timeOut: 5000 }
+              `l'entraîneur a ajouté avec succès avec ID: ${response.trainer_id}`,
+              this.heading,
+              { timeOut: 5000 }
           );
           this.router.navigate(["../"], { relativeTo: this.route });
         } else {
@@ -69,24 +70,24 @@ export class TrainerFormComponent implements OnInit {
             closeButton: true
           });
         }
-      });
+      }, (error) => { console.error(error)}, () => { this.inProgress = false; });
     } else {
       this.trainerService
-        .edit(formData, this.trainer.id)
-        .subscribe((response: any) => {
-          if (response.trainer_id !== undefined && response.trainer_id > 0) {
-            this.toastr.success(
-              `l'entraîneur a modifié avec succès`,
-              this.heading,
-              { timeOut: 5000 }
-            );
-            this.router.navigate(["../"], { relativeTo: this.route });
-          } else {
-            this.toastr.error(`${response.errors[0]}`, this.heading, {
-              closeButton: true
-            });
-          }
-        });
+          .edit(formData, this.trainer.id)
+          .subscribe((response: any) => {
+            if (response.trainer_id !== undefined && response.trainer_id > 0) {
+              this.toastr.success(
+                  `l'entraîneur a modifié avec succès`,
+                  this.heading,
+                  { timeOut: 5000 }
+              );
+              this.router.navigate(["../"], { relativeTo: this.route });
+            } else {
+              this.toastr.error(`${response.errors[0]}`, this.heading, {
+                closeButton: true
+              });
+            }
+          }, (error) => { console.error(error)}, () => { this.inProgress = false; });
     }
   }
 
