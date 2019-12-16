@@ -21,6 +21,7 @@
               "src/favicon.ico"
             ],
             "styles": [
+              "node_modules/angular-calendar/css/angular-calendar.css",
               "node_modules/ngx-toastr/toastr.css",
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/assets/css/demo.css",
@@ -79,7 +80,6 @@
               "src/assets/vendor/pace/pace.min.js"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/assets/css/demo.css",
               "src/assets/sass/app.scss",
               "src/styles.css"

@@ -18,6 +18,8 @@ export const ROUTES: RouteInfo[] = [
     {
         path: '/home', title: 'Spotfit', icon: 'ft-square', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
     },
+    { path: '/dashboard/calendar', title: 'Calendrier', icon: 'ft-calendar', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+    { path: '/dashboard/chat', title: 'Chat', icon: 'ft-message-square', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
     // {
     //     path: '', title: 'Menu Levels', icon: 'ft-align-left', class: 'has-sub', badge: '1', badgeClass: 'badge badge-pill badge-danger float-right mr-1 mt-1', isExternalLink: false,
     //     submenu: [
