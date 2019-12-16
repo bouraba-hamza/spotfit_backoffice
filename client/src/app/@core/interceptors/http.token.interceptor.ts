@@ -1,50 +1,41 @@
-import { Injectable, Injector } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {
-  HttpEvent,
-  HttpInterceptor,
-  HttpHandler,
-  HttpRequest, HttpErrorResponse
+    HttpClient,
+    HttpErrorResponse,
+    HttpEvent,
+    HttpHandler,
+    HttpHeaders,
+    HttpInterceptor,
+    HttpRequest
 } from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 
-import { JwtService } from '../services/jwt.service';
-import {catchError} from "rxjs/operators";
+import {JwtService} from '../services/jwt.service';
+import {catchError, map, share} from "rxjs/operators";
+import {AuthService} from "@app/@core/services/auth.service";
 
 @Injectable()
 export class HttpTokenInterceptor implements HttpInterceptor {
-  constructor(private jwtService: JwtService) {}
-
-  intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-    const headersConfig = {
-      // 'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    };
-
-    const token = this.jwtService.getToken();
-
-    if (token) {
-      headersConfig['Authorization'] = `Bearer ${token}`;
+    constructor(private jwtService: JwtService, private http: HttpClient, private authService: AuthService) {
     }
 
-    const request = req.clone({ setHeaders: headersConfig });
-    return next.handle(request).pipe(
-        catchError(this.handleError)
-    );
-  }
+    intercept(
+        req: HttpRequest<any>,
+        next: HttpHandler
+    ): Observable<HttpEvent<any>> {
+        const headersConfig = {
+            // 'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        };
 
-  handleError(error: HttpErrorResponse) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // client-side error
-      errorMessage = `Error: ${error.error.message}`;
-    } else {
-      // server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+        const token: string = this.jwtService.getToken();
+
+        const request = this.addToken(req, token);
+        return next.handle(request);
     }
-    window.alert(errorMessage);
-    return throwError(errorMessage);
-  }
+
+
+    addToken(req: HttpRequest<any>, token: string): HttpRequest<any> {
+        return req.clone({setHeaders: {'Authorization': `Bearer ${token}`}})
+    }
 }

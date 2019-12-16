@@ -31,6 +31,7 @@ Route::post('/logout', 'AuthController@logout');
 
 /* EMAIL VERIFICATION */
 Route::get('/verify-email/{code}', 'AuthController@verifyEmail');
+Route::get('/token/refresh', 'AuthController@refresh');
 
 Route::group(['middleware' => ['jwt', /* 'jwt.refresh' */]], function () {
 
@@ -41,7 +42,6 @@ Route::group(['middleware' => ['jwt', /* 'jwt.refresh' */]], function () {
      * Auth
      */
     Route::get('/me', 'AuthController@getAuthenticatedUser');
-    Route::get('/token/refresh', 'AuthController@refresh');
 
     /**
      * Admin
