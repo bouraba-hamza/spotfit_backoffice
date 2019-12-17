@@ -8,6 +8,20 @@ export class UnderscoreService {
     constructor(private sanitizer: DomSanitizer) {
     }
 
+    removeEmpty(object) {
+        Object.keys(object).forEach(key => {
+            if (object[key] && typeof object[key] === "object")
+                this.removeEmpty(object[key]);
+            else if (
+                object[key] == null ||
+                object[key].toString().trim() == "" ||
+                object[key] == undefined
+            )
+                delete object[key];
+        });
+        return object;
+    }
+
     base64(file: File) {
         return new Promise((resolve, reject) => {
             const reader: any = new FileReader();

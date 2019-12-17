@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -70,8 +71,16 @@ class Account extends Authenticatable implements JWTSubject, MustVerifyEmail
         return null;
     }
 
-    public function scopeDisabled($query, $arg)
+    public function scopeDisabled($query, $arg = 1)
     {
         return $query->where('disabled', $arg);
+    }
+
+    public function scopeVerified(Builder $query) {
+        return $query->whereNotNull('email_verified_at');
+    }
+
+    public function scope(Builder $query) {
+        return $query->whereNotNull('email_verified_at');
     }
 }

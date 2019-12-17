@@ -23,7 +23,6 @@ class AccountCreated extends Mailable implements ShouldQueue
      */
     public function __construct(Account $account)
     {
-
         // generate a random verification code
         $verificationCode = Str::random(30);
         // update the email_verifications database table

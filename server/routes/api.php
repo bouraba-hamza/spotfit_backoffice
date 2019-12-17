@@ -26,12 +26,22 @@ use Illuminate\Http\Request;
 
 
 
-Route::post('/login', 'AuthController@login');
-Route::post('/logout', 'AuthController@logout');
+    Route::post('/login', 'AuthController@login');
+    Route::post('/logout', 'AuthController@logout');
 
-/* EMAIL VERIFICATION */
-Route::get('/verify-email/{code}', 'AuthController@verifyEmail');
-Route::get('/token/refresh', 'AuthController@refresh');
+    /**
+     * PASSWORD
+     */
+
+    Route::post('/password/update', 'PasswordController@update');
+    Route::get('/password/{ticket}/verify', 'PasswordController@verify');
+    // send reset password link to email passed as parameter
+    Route::post('/reset-password', 'PasswordController@sendResetLink');
+
+    /* EMAIL VERIFICATION */
+    Route::get('/verify-email/{code}', 'AuthController@verifyEmail');
+    Route::get('/token/refresh', 'AuthController@refresh');
+
 
 Route::group(['middleware' => ['jwt', /* 'jwt.refresh' */]], function () {
 
