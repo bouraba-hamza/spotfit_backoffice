@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PartnerRequest;
-use App\Repositories\CustomerRepository;
+use App\Repositories\PartnerRepository;
 use App\Services\ProfileAvatarService;
 use Illuminate\Http\Request;
 use Validator;
@@ -13,7 +13,7 @@ class PartnerController extends Controller
     protected $partner;
     protected $profileAvatarService;
 
-    public function __construct(CustomerRepository $partnerRepository, ProfileAvatarService $profileAvatarService)
+    public function __construct(PartnerRepository $partnerRepository, ProfileAvatarService $profileAvatarService)
     {
         $this->partner = $partnerRepository;
         $this->profileAvatarService = $profileAvatarService;

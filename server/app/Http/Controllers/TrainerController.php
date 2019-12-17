@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TrainerRequest;
-use App\Repositories\CustomerRepository;
+use App\Repositories\TrainerRepository;
 use App\Services\ProfileAvatarService;
 use Illuminate\Http\Request;
 use Validator;
@@ -13,7 +13,7 @@ class TrainerController extends Controller
     protected $trainer;
     protected $profileAvatarService;
 
-    public function __construct(CustomerRepository $trainerRepository, ProfileAvatarService $profileAvatarService)
+    public function __construct(TrainerRepository $trainerRepository, ProfileAvatarService $profileAvatarService)
     {
         $this->trainer = $trainerRepository;
         $this->profileAvatarService = $profileAvatarService;
