@@ -1,0 +1,93 @@
+.table th, .table td{
+  text-align: left !important;
+  vertical-align: middle !important;
+}
+
+
+.ng2-smart-pagination{
+  &.pagination{
+      .page-link{
+          line-height: 1rem;
+      }
+  }
+}
+
+
+.pagination-wrapper{
+width: 7vw;
+margin-left: 1vw;
+}
+.table th, .table td {
+text-align: left !important;
+white-space: nowrap !important;
+}
+
+.img_add_equipement{
+width: 6vw;
+border: 2px dashed #bd4276;
+padding: 1vw;
+margin-top: 1vw;
+}
+
+.modal-content .modal-footer .btn {
+margin: 0;
+color: black;
+}
+
+
+.inputUpdate{
+  color: #6ec76e;
+  border: 1px solid #6ec76e;
+  padding: 0.2%;
+  padding-left: 6%;
+  padding-right: 6%;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 2%;
+}
+.inputUpdate:hover{
+  color: #53a553; 
+  border: 1px solid #53a553;
+}
+
+.inputDelete{
+  color: #ef6666;
+  border: 1px solid #ef6666;
+  padding: 0.2%;
+  padding-left: 4%;
+  padding-right: 4%;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.inputDelete:hover{
+  color: red;
+  border: 1px solid red;
+}
+
+.img_show_materiel{
+  border: 1px solid #efefef;
+  width: 2vw;
+  height: 2.2vw;
+}
+
+.btn{
+   margin-bottom: 0 !important;
+}
+
+.table th, .table td {
+  width: 15%;
+}
+
+
+.btn-success, .btn-success:hover {
+  color: #fff !important;
+}
+.modal-header .close span{
+  color: red;
+    outline: 0 !important;
+}
+
+.content-header-icon {
+  margin-right: 0.7rem;
+  font-size: 2.2rem;
+}

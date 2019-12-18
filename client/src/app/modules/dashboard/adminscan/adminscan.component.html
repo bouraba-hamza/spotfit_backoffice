@@ -1,0 +1,260 @@
+
+<section class="profile">
+    <!--App Profile-->
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="content-header mb-3">Admin scan</div>
+    </div>
+
+ 
+    
+
+
+        <!--QR GENERATOR  
+        <div #div_current_qrcode  class="col-md-3" id="div_current_qrcode">
+          <qrcode [qrdata]="myAngularxQrCode" [size]="150" [level]="'M'"></qrcode>
+        </div>
+        <br>
+    -->
+    
+        <button id="btn_show_bloc_gym_card_admin" class="btn btn-primary btn-lg"  >
+            Contrôle Gym par Qrcode
+        </button>
+
+        <button id="btn_show_bloc_materiel_card_admin" class="btn btn-primary btn-lg" >
+            Contrôle Materiel par Qrcode
+        </button>
+
+        <button id="btn_show_bloc_profil_card_admin" class="btn btn-primary btn-lg" (click)="toggleDiv('profil_card')">
+            Contrôle d'identité par Qrcode
+        </button>
+    
+      <!--  profil card-->
+      <div id="profil_card" class="container emp-profile">
+        <!--QR SCANNER -->
+        <div id="div_scann_qrcode_admin_detection">
+            <qr-scanner id="qr_scanner_admin" #qr_scanner_admin
+            [debug]="true"
+            [canvasWidth]="350"
+            [canvasHeight]="350"
+            [stopAfterScan]="true"
+            [updateTime]="500">
+            </qr-scanner>
+            <input id="btn_play_scann_qrcode_admin" type="button" value="Démmarer la detection" (click)="open_qrcode_scanner()">
+         </div>
+    
+          <form method="post">
+              <div class="row">
+                  <div class="col-md-4">
+                      <div class="profile-img">
+                          <img #val_photo src="../../../assets/img/avatars/z_default_avatar.jpg" alt=""/>
+                          <div class="file btn btn-lg btn-primary">
+                              Change Photo
+                              <input type="file" name="file"/>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="profile-head">
+                                  <h5 #val_name>
+                                      Nom Prénom
+                                  </h5>
+                                  <h6 #val_function>
+                                      Function
+                                  </h6>
+                                  <p class="proile-rating">RANKINGS : <span>?/10</span></p>
+                          <ul class="nav nav-tabs" id="myTab" role="tablist">
+                              <li class="nav-item">
+                                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                              </li>
+                              <li class="nav-item">
+                                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+                  <div class="col-md-2">
+                      <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-4">
+                      <div class="profile-work">
+                          <p>WORK LINK</p>
+                          <a href="">workLink</a><br/>
+                          <a href="">workLink</a><br/>
+                          <a href="">workLink</a>
+                          <p>SKILLS</p>
+                          <a href="">- skills</a><br/>
+                          <a href="">- skills</a><br/>
+                      </div>
+                  </div>
+                  <div class="col-md-8">
+                      <div class="tab-content profile-tab" id="myTabContent">
+                          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                      <div class="row">
+                                          <div class="col-md-6">
+                                              <label>Login</label>
+                                          </div>
+                                          <div class="col-md-6">
+                                              <p #val_login>Login</p>
+                                          </div>
+                                      </div>
+                                      <div class="row">
+                                          <div class="col-md-6">
+                                              <label>Email</label>
+                                          </div>
+                                          <div class="col-md-6">
+                                              <p #val_email>Email</p>
+                                          </div>
+                                      </div>
+                                      <div class="row">
+                                          <div class="col-md-6">
+                                              <label>Phone</label>
+                                          </div>
+                                          <div class="col-md-6">
+                                              <p #val_phone>Phone</p>
+                                          </div>
+                                      </div>
+                                      <div class="row">
+                                          <div class="col-md-6">
+                                              <label>Profession</label>
+                                          </div>
+                                          <div class="col-md-6">
+                                              <p>Profession</p>
+                                          </div>
+                                      </div>
+                                      <div class="row">
+                                          <div class="col-md-6">
+                                              <label>Date_inscription</label>
+                                          </div>
+                                          <div class="col-md-6">
+                                              <p>??-??-??</p>
+                                          </div>
+                                      </div>
+                          </div>
+                          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                      <div class="row">
+                                          <div class="col-md-6">
+                                              <label>Experience</label>
+                                          </div>
+                                          <div class="col-md-6">
+                                              <p>Experience</p>
+                                          </div>
+                                      </div>
+                                      <div class="row">
+                                          <div class="col-md-6">
+                                              <label>Hourly Rate</label>
+                                          </div>
+                                          <div class="col-md-6">
+                                              <p>?$/hr</p>
+                                          </div>
+                                      </div>
+                                      <div class="row">
+                                          <div class="col-md-6">
+                                              <label>Total Projects</label>
+                                          </div>
+                                          <div class="col-md-6">
+                                              <p>Total Projects</p>
+                                          </div>
+                                      </div>
+                                      <div class="row">
+                                          <div class="col-md-6">
+                                              <label>English Level</label>
+                                          </div>
+                                          <div class="col-md-6">
+                                              <p>English Level</p>
+                                          </div>
+                                      </div>
+                                      <div class="row">
+                                          <div class="col-md-6">
+                                              <label>Availability</label>
+                                          </div>
+                                          <div class="col-md-6">
+                                              <p>6 Availability</p>
+                                          </div>
+                                      </div>
+                              <div class="row">
+                                  <div class="col-md-12">
+                                      <label>Your Bio</label><br/>
+                                      <p>Bio</p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </form>
+      </div>
+      <!-- end profil card-->
+    
+    
+    
+    
+      <!--
+          <div ng-init="showModal=true">
+              <button class="btn btn-primary btn-lg" (click)="open('blockqrcodescann')">
+                  Launch demo modal
+              </button>
+    
+              <ng-template #blockqrcodescann let-c="close" let-d="dismiss" style="display: block;">
+               <div class="modal fade in">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          MODAL
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-primary" ng-click="showModal=false">Ok</button>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+               </ng-template>
+          </div>
+    
+     -->
+    
+    
+    
+    
+    
+    
+    
+      <div class="row" id="bloc_admin_scan">
+          <div class="col-sm-12">
+              <div class="card">
+                  <div class="card-header">
+                      <h4 class="card-title">Admin</h4>
+                  </div>
+                  <div class="card-body">
+                      <div class="card-block">
+    
+    <!--QRcode Art -->
+    <div #div_current_qrcode_art  class="col-md-3" id="div_current_qrcode_art">
+            <div id="qrcode_art"></div>
+          </div>
+          <br>
+
+                      </div>
+    
+                  </div>
+              </div>
+          </div>
+      </div>
+    
+    <!--
+      <div>
+        <p *ngFor="let utilisateur of utilisateurs">{{ utilisateur.email }}</p>
+      </div>
+    -->
+     
+    
+ 
+
+</div>
+<!--App Profile Ends-->
+</section>
+
+
+
+
+
