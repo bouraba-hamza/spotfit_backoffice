@@ -43,7 +43,7 @@ use Illuminate\Http\Request;
     Route::get('/token/refresh', 'AuthController@refresh');
 
 
-Route::group(['middleware' => ['jwt',/*  'jwt.refresh' */]], function () {
+Route::group(['middleware' => [ 'jwt', /* 'jwt.refresh' */]], function () {
 
     /* USERS PROFILE PICTURES */
     Route::get('profile-picture/{filename}', 'ProfilePictureController@getAvatar');
