@@ -23,6 +23,8 @@ use Illuminate\Http\Request;
 //
 //});
 
+    /*TEST*/
+    Route::get('/admins', 'AdminController@index');
 
 
 
@@ -56,7 +58,7 @@ Route::group(['middleware' => ['jwt', /* 'jwt.refresh' */]], function () {
     /**
      * Admin
      */
-    Route::get('/admins', 'AdminController@index');
+    // Route::get('/admins', 'AdminController@index');
     Route::post('/admins', 'AdminController@store');
     Route::post('/admins/{admin_id}', 'AdminController@update');
     Route::get('/admins/{admin_id}', 'AdminController@show');
@@ -94,10 +96,6 @@ Route::group(['middleware' => ['jwt', /* 'jwt.refresh' */]], function () {
      */
     Route::put('/accounts/{id}/disable', 'AccountController@disable');
     Route::put('/accounts/{id}/enable', 'AccountController@enable');
-
-
-
-
 });
 
 

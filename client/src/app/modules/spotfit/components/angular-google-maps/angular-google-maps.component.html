@@ -1,19 +1,93 @@
-<div class="container my-3">
-    <div class="mb-2">
-      <h1>Google Maps Places Autocomplete Using angular 2</h1>
-      <input type="text" placeholder="Search for Location" autocorrect="off" autocapitalize="off" spellcheck="off"
-             class="form-control" #search>
-    </div>
-    <agm-map
-            [latitude]="lat"
-            [longitude]="lng"
-            [zoom]="zoom"
-            (mapClick)="onChooseLocation($event)">
-        <agm-marker
+<div class="container my-1">
+    <!--google map-->
+    <div class="propixentien">
+        <agm-map
                 [latitude]="lat"
                 [longitude]="lng"
-                *ngIf="locationChosen"
-                [markerDraggable]="markerDraggable"
-        ></agm-marker>
-    </agm-map>
+                [zoom]="zoom">
+
+            <agm-marker *ngFor="let gym of markers; let i = index"
+                        [latitude]="gym.address.lat"
+                        [longitude]="gym.address.lng"
+                        (markerClick)="clickedMarker(gym.name, i)"
+                        [iconUrl]="gym.logo || markerIconDefault">
+                <agm-info-window>
+                    <b>{{gym.name}}</b>
+                </agm-info-window>
+            </agm-marker>
+        </agm-map>
+    </div>
+
+    <!--filters-->
+    <div class="mt-2">
+        <div class="filter-options">
+            <div class="btn-group" role="group" aria-label="Search Control">
+                <a class="btn btn-flat mr-1 btn-primary" href="javascript:void(0)">Filtrer par</a>
+                <button class="btn btn-raised {{filter.class}} white shadow-z-1-hover"
+                        *ngFor="let filter of filters"
+                        (click)="onChooseFilter(filter.label)"><i
+                        class="{{filter.icon}}"></i> {{filter.label_fr | titlecase}}</button>
+            </div>
+        </div>
+    </div>
+
+    <!--search inputs-->
+    <div>
+        <div class="search-control w-100" [ngSwitch]="selectedFilter">
+
+            <!--gym-->
+            <div class="input-group mb-3" *ngSwitchCase="'gym'">
+                <ng-select [items]="gyms" bindLabel="name" bindValue="name" [multiple]="true"
+                           placeholder="Recherche par nom de gym"
+                           (clear)="reset()"
+                           (change)="onSelectGym($event)">
+                </ng-select>
+            </div>
+
+            <!--activity-->
+            <div class="input-group mb-3" *ngSwitchCase="'activity'">
+                <!--<select class="custom-select" (change)="onSelectActivity($event.target.value)">
+                    <option selected>what activity you want this gym to practice?</option>
+                    <option [value]="activity.id" *ngFor="let activity of activities">{{activity.name}}</option>
+                </select>-->
+                <ng-select [items]="activities" bindLabel="name" bindValue="id" [multiple]="true"
+                           placeholder="Quelle activité voulez-vous que ce gymnase pratique?"
+                           (clear)="reset()"
+                           (change)="onSelectActivity($event)">
+                </ng-select>
+            </div>
+
+            <!--stars-->
+            <div class="d-flex align-items-center mb-3" style="font-size: 1.3rem;" *ngSwitchCase="'stars'">
+                <div class="mr-1">How good it is?</div>
+                <ngb-rating [(rate)]="currentRate" max="5" (rateChange)="onRateChange($event)"></ngb-rating>
+                <!--<select class="custom-select" (change)="onSelectStars($event.target.value)">
+                    <option selected>How good it is?</option>
+                    <option [value]="i" *ngFor="let i of [1,2,3,4,5]">{{i}}</option>
+                </select>-->
+            </div>
+
+            <!--coach-->
+            <div class="input-group mb-3" *ngSwitchCase="'coach'" (change)="onSelectCoach($event.target.value)">
+                <!--<select class="custom-select">
+                    <option selected>Enter a coach name</option>
+                    <option [value]="coach.id" *ngFor="let coach of coaches">{{coach.fullname}}</option>
+                </select>-->
+                <ng-select [items]="coaches" bindLabel="fullname" bindValue="id" [multiple]="true"
+                           placeholder="Quel coach préférez-vous?"
+                           (clear)="reset()"
+                           (change)="onSelectCoach($event)">
+                </ng-select>
+            </div>
+
+            <!--location-->
+            <div [hidden]="selectedFilter !== 'location'">
+                <input type="text" placeholder="Recherche par emplacement"
+                       autocorrect="off" autocapitalize="off"
+                       spellcheck="off" class="form-control" #search [formControl]="searchControl">
+                <p class="text-warning" *ngIf="!gpsEnabled">&#3196; Veuillez accorder un accès à SPOTFIT aux services
+                    GPS sur votre appareil, afin d'afficher les gymnases les plus proches à vous</p>
+            </div>
+        </div>
+    </div>
 </div>
