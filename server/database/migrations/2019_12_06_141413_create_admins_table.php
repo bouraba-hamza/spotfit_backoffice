@@ -15,8 +15,6 @@ class CreateAdminsTable extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('account_id')->nullable();
-            $table->integer('address_id')->nullable();
             $table->string('firstName')->nullable();
             $table->string('lastName')->nullable();
             $table->enum('gender', ['m', 'f'])->nullable();

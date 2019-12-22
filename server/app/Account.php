@@ -56,19 +56,9 @@ class Account extends Authenticatable implements JWTSubject, MustVerifyEmail
         }
     }
 
-    public function owner() {
-        $accountId = $this->id;
-
-        $t = Trainer::where('account_id', '=', $accountId)->first();
-        if($t) return $t;
-        $p = Partner::where('account_id', '=', $accountId)->first();
-        if($p) return $p;
-        $c = Customer::where('account_id', '=', $accountId)->first();
-        if($c) return $c;
-        $a = Admin::where('account_id', '=', $accountId)->first();
-        if($a) return $a;
-
-        return null;
+    public function accountable()
+    {
+        return $this->morphTo();
     }
 
     public function scopeDisabled($query, $arg = 1)

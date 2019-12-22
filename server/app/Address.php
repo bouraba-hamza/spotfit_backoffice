@@ -19,4 +19,9 @@ class Address extends Model
         'longitude',
         'buildingNumber',
     ];
+
+    public function accountable()
+    {
+        return $this->morphTo();
+    }
 }

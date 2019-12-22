@@ -17,7 +17,5 @@ $factory->define(Trainer::class, function (Faker $faker) {
         'cin' => $faker->text,
         'jobTitle' => $faker->jobTitle,
         'avatar' => $faker->imageUrl($width = 640, $height = 480),
-        'address_id' => factory(App\Address::class),
-        'account_id' => factory(App\Account::class),
     ];
 });

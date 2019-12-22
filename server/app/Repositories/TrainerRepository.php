@@ -20,24 +20,29 @@ class TrainerRepository extends BaseRepository
     public function update($id, array $args)
     {
         $trainer = $this->find($id);
-
         // update the account
         $trainer->account()->first()->update($args["account"]);
         // finally the address
-        $trainer->address()->first()->update($args["address"]);
+        if(isset($args['address']))
+        {
+            $trainer->address()->update($args['address']);
+        }
         // the the trainer profile
         parent::update($id, $args);
-
         return $trainer;
     }
 
-    public function insert(array $attributes)
+    public function insert(array $args)
     {
-        $attributes['account_id'] = $this->account->insert($attributes['account'])->id;
-        if (isset($attributes['address'])) {
-            $attributes['address_id'] = $this->address->insert($attributes['address'])->id;
+        $trainer = parent::insert($args);
+
+        if(isset($args['address']))
+        {
+            $trainer->address()->save(new \App\Address($args['address']));
         }
 
-        return parent::insert($attributes);
+        $trainer->account()->save(new \App\Account($args['account']));
+
+        return $trainer;
     }
 }
