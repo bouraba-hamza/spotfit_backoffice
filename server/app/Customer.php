@@ -19,6 +19,7 @@ class Customer extends Model
         'cin',
         'jobTitle',
         'avatar',
+        'ambassador'
     ];
 
     public function address()

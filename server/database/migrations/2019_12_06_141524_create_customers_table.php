@@ -24,6 +24,7 @@ class CreateCustomersTable extends Migration
             $table->string('cin')->nullable();
             $table->string('jobTitle')->nullable();
             $table->string('avatar')->nullable();
+            $table->tinyInteger('ambassador')->default(0);
             $table->timestamps();
         });
     }

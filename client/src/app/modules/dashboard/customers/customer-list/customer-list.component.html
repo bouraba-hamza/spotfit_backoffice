@@ -2,13 +2,6 @@
   <div class="col-12 d-flex align-items-center justify-content-between">
     <content-heading [icon]="'icon-star'" [heading]="'Client'" [subHeading]="'La list des clients.'"></content-heading>
     <div>
-      <a
-        class="btn btn-raised btn-primary m-0 mr-1"
-        [routerLink]="['form']"
-        [queryParams]="{ action: 'add' }"
-      >
-        <i class="fa fa-plus"></i> Ajouter un nouveau
-      </a>
       <button class="btn btn-raised btn-secondary m-0" (click)="refresh()">
         <i class="ft-refresh-ccw"></i>
       </button>
@@ -72,6 +65,13 @@
                     >close</mat-icon
                   >
                 </ng-template>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="ambassador">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Ambassadeur</th>
+              <td mat-cell *matCellDef="let element">
+                <mat-slide-toggle [checked]="element.ambassador == 1 ? true : false" (change)="becomeAmbassador($event, element.id)"></mat-slide-toggle>
               </td>
             </ng-container>
 

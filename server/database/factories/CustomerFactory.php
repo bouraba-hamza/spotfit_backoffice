@@ -16,5 +16,6 @@ $factory->define(Customer::class, function (Faker $faker) {
         'cin' => $faker->text,
         'jobTitle' => $faker->jobTitle,
         'avatar' => $faker->imageUrl($width = 640, $height = 480),
+        'ambassador' => $faker-> randomElement($array = array (0, 1)),
     ];
 });

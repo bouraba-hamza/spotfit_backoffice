@@ -17,6 +17,9 @@ class DatabaseSeeder extends Seeder
                 $account->accountable()->first()->address()->save(factory(App\Address::class)->make());
             });
 
-        \App\Setting::updateOrCreate(["key" => "sponsorship-rate", "value" => 0]);
+        \App\Setting::updateOrCreate(
+            ["key" => "sponsorship-rate", "value" => 0],
+            ["key" => "ambassador-sponsorship-rate", "value" => 10]
+        );
     }
 }

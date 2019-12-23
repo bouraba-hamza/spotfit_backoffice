@@ -77,10 +77,9 @@ Route::group(['middleware' => [ 'jwt', /* 'jwt.refresh' */]], function () {
      * Customer
      */
     Route::get('/customers', 'CustomerController@index');
-    Route::post('/customers', 'CustomerController@store');
     Route::post('/customers/{customer_id}', 'CustomerController@update');
     Route::get('/customers/{customer_id}', 'CustomerController@show');
-    Route::delete('/customers/{customer_id}', 'CustomerController@destroy');
+    Route::put('/becomeAmbassador/{customer_id}/{promote}', 'CustomerController@becomeAmbassador');
 
     /**
      * Trainer

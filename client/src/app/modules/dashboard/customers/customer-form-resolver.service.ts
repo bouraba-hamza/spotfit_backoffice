@@ -20,8 +20,8 @@ export class CustomerFormResolverService implements Resolve<Customer> {
 
     let customerId: any = route.queryParamMap.get("customerId");
     let action = route.queryParamMap.get("action");
-    console.log({customerId, action})
     if (action == 'add') {
+     this.router.navigateByUrl("/dashboard/customer");
       return of(null);
     } else {
       return this.customerService.find(customerId);

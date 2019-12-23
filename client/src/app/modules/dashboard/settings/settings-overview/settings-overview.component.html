@@ -14,8 +14,12 @@
               <h4 class="card-title">Taux de parrainage</h4>
               <p class="card-text">&#3196; Cette valeur affecte le taux de bénéfice pour les parrainages</p>
               <div class="form-group">
-                <label class="sr-only" for="sponsorship-rate">Taux de parrainage</label>
+                <label for="sponsorship-rate">Valeur par default</label>
                 <input (input)="onChange($event)" type="number" min="0" max="10" id="sponsorship-rate" class="form-control" placeholder="Taux de parrainage" [value]="sponsorshipRate">
+              </div>
+              <div class="form-group">
+                <label for="ambassador-sponsorship-rate">Pour les ambassadeurs</label>
+                <input (input)="onChange($event)" type="number" min="0" max="10" id="ambassador-sponsorship-rate" class="form-control" placeholder="Taux de parrainage" [value]="ambassadorSponsorshipRate">
               </div>
             </div>
           </div>

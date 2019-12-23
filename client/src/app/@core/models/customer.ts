@@ -14,5 +14,6 @@ export interface Customer {
   created_at?: string;
   updated_at?: string;
   address?: Address;
-  account?: Account
+  account?: Account;
+  ambassador?: number;
 }

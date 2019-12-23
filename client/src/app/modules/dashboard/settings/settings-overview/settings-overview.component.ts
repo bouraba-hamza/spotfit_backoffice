@@ -14,6 +14,7 @@ export class SettingsOverviewComponent implements OnInit {
   settings: Setting[];
 
   sponsorshipRate: any;
+  ambassadorSponsorshipRate: any;
 
   constructor(
       private settingService: SettingService,
@@ -24,6 +25,7 @@ export class SettingsOverviewComponent implements OnInit {
     this.settingService.onSettingsChanged.subscribe(settings => this.settings = settings);
 
     this.sponsorshipRate = this.valueOf("sponsorship-rate");
+    this.ambassadorSponsorshipRate = this.valueOf("ambassador-sponsorship-rate");
   }
 
   valueOf(key: string) {

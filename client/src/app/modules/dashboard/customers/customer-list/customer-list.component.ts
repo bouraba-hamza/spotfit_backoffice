@@ -7,11 +7,14 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { map } from "rxjs/operators";
 import { Customer } from "@app/@core/models/customer";
 import { AccountService } from "@app/@core/http/account.service";
+import {MatSlideToggleChange} from "@angular/material/slide-toggle";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: "app-customer-list",
   templateUrl: "./customer-list.component.html",
-  styleUrls: ["./customer-list.component.scss"]
+  styleUrls: ["./customer-list.component.scss"],
+  providers: [ToastrService]
 })
 export class CustomerListComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = [
@@ -19,6 +22,7 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
     "email",
     "email_verified_at",
     "disabled",
+    "ambassador",
     "actions"
   ];
   dataSource: MatTableDataSource<any[]>;
@@ -30,7 +34,8 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
     private customerService: CustomerService,
     private route: ActivatedRoute,
     private router: Router,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private toastr: ToastrService,
   ) {
     this.route.data
       .pipe(map(data => data["customers"]))
@@ -78,5 +83,19 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
 
   refresh() {
     this.customerService.findAll().subscribe();
+  }
+
+  becomeAmbassador($event: MatSlideToggleChange, customerId) {
+
+    this.customerService.becomeAmbassador(customerId, $event.checked).subscribe(
+        (response: Customer) => {
+          this.toastr.success(
+              $event.checked ? `Le client "${response.account.username}" est devenu ambassadeur.`
+              : `Le client "${response.account.username}" revient à un client normal.`,
+              "Devenir ambassadeur",
+              { timeOut: 5000 }
+          );
+        }
+    );
   }
 }
