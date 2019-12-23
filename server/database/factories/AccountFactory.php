@@ -6,7 +6,7 @@
 use Faker\Generator as Faker;
 
 
-$factory->define(App\Account::class, function (Faker $faker) {
+$factory->define(\App\Account::class, function (Faker $faker) {
     $accountables = [
         App\Admin::class,
         App\Partner::class,
@@ -16,7 +16,7 @@ $factory->define(App\Account::class, function (Faker $faker) {
 
     $accountableType = $faker->randomElement($accountables);
     $accountable = factory($accountableType)->create();
-    
+
     return [
         'username' => $faker->userName,
         'email' => $faker->unique()->safeEmail,

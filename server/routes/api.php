@@ -100,18 +100,18 @@ Route::group(['middleware' => [ 'jwt', /* 'jwt.refresh' */]], function () {
     /**
     * Upload Images
     */
-    Route::get("/upload_images", "UploadImagesController@index");
-    Route::post("/upload_images", "UploadImagesController@store");
+    // Route::get("/upload_images", "UploadImagesController@index");
+    // Route::post("/upload_images", "UploadImagesController@store");
 
 
 
     /**
     * Rights
     */
-    Route::get("/rights", "RightController@index");
-    Route::post("/rights", "RightController@store");
-    Route::put("/rights", "RightController@update");
-    Route::delete("/rights/{right_id}/delete", "RightController@destroy");
+    // Route::get("/rights", "RightController@index");
+    // Route::post("/rights", "RightController@store");
+    // Route::put("/rights", "RightController@update");
+    // Route::delete("/rights/{right_id}/delete", "RightController@destroy");
 
 
 
@@ -183,6 +183,18 @@ Route::group(['middleware' => [ 'jwt', /* 'jwt.refresh' */]], function () {
     Route::post("/passpartout", "PasspartoutController@store");
     Route::put("/passpartout", "PasspartoutController@update");
     Route::delete("/passpartout/{coupon_id}/delete", "PasspartoutController@destroy");
+
+
+    /**
+     * Settings
+     */
+    Route::apiResource('settings', 'SettingController')->except([
+        'store', 'destroy'
+    ])->parameters([
+        'settings' => 'key'
+    ]);
+
+
 });
 
 

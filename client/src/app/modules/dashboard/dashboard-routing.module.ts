@@ -78,6 +78,10 @@ const routes: Routes = [
     path: 'support',
     loadChildren: () =>
         import("../dashboard/support/support.module").then(m => m.SupportModule)
+  },
+  {
+    path: 'settings',
+    loadChildren: () =>  import("../dashboard/settings/settings.module").then(m => m.SettingsModule)
   }
 ];
 

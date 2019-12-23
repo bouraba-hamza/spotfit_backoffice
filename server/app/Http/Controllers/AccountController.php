@@ -9,7 +9,7 @@ class AccountController extends Controller
 {
     private $model;
 
-    public function __construct(App\Account $model)
+    public function __construct(\App\Account $model)
     {
         $this->model = new BaseRepository($model);
     }

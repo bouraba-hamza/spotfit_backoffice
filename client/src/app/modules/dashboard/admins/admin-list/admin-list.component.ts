@@ -45,8 +45,6 @@ export class AdminListComponent implements OnInit, AfterViewInit {
         this.dataSource.paginator = this.paginator;
 
         this.adminService.onAdminsChanged.subscribe((data: any) => {
-
-            console.log(data);
             this.dataSource.data = data;
         });
     }

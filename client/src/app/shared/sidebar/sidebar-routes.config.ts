@@ -46,6 +46,9 @@ export const ROUTES: RouteInfo[] = [
     },
     {
         path: '/dashboard/support', title: 'Support', icon: 'ft-life-buoy', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
-    }
+    },
+    {
+        path: '/dashboard/settings', title: 'Settings', icon: 'ft-settings', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+    },
 
 ];

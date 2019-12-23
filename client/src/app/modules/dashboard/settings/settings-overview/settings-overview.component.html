@@ -1,0 +1,25 @@
+<div class="row text-left">
+  <div class="col-12 ">
+    <content-heading icon="ft-settings" heading="Settings" subHeading="Ces propriétés modifient le cœur de l'application, faites attention lorsque vous les traitez."></content-heading>
+    <div>
+  </div>
+</div>
+<section id="options" class="w-100">
+  <div class="row">
+      <!--sponsorship rate-->
+      <form class="col-xl-4 col-lg-12">
+        <div class="card">
+          <div class="card-content">
+            <div class="card-body">
+              <h4 class="card-title">Taux de parrainage</h4>
+              <p class="card-text">&#3196; Cette valeur affecte le taux de bénéfice pour les parrainages</p>
+              <div class="form-group">
+                <label class="sr-only" for="sponsorship-rate">Taux de parrainage</label>
+                <input (input)="onChange($event)" type="number" min="0" max="10" id="sponsorship-rate" class="form-control" placeholder="Taux de parrainage" [value]="sponsorshipRate">
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      </div>
+</section>
