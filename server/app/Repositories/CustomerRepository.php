@@ -20,24 +20,29 @@ class CustomerRepository extends BaseRepository
     public function update($id, array $args)
     {
         $customer = $this->find($id);
-
         // update the account
         $customer->account()->first()->update($args["account"]);
         // finally the address
-        $customer->address()->first()->update($args["address"]);
+        if(isset($args['address']))
+        {
+            $customer->address()->update($args['address']);
+        }
         // the the customer profile
         parent::update($id, $args);
-
         return $customer;
     }
 
-    public function insert(array $attributes)
+    public function insert(array $args)
     {
-        $attributes['account_id'] = $this->account->insert($attributes['account'])->id;
-        if (isset($attributes['address'])) {
-            $attributes['address_id'] = $this->address->insert($attributes['address'])->id;
+        $customer = parent::insert($args);
+
+        if(isset($args['address']))
+        {
+            $customer->address()->save(new \App\Address($args['address']));
         }
 
-        return parent::insert($attributes);
+        $customer->account()->save(new \App\Account($args['account']));
+
+        return $customer;
     }
 }

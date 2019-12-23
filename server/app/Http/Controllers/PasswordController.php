@@ -52,7 +52,7 @@ class PasswordController extends Controller
         );
 
         // and send mail with this ticket
-        Mail::to($email)->send(new resetPasswordLinkSend($ticket));
+        Mail::to($email)->later(1, new resetPasswordLinkSend($ticket));
 
         return response()->json(["status" => "success"]);
     }

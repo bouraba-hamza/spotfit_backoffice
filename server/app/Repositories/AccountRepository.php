@@ -4,6 +4,9 @@
 namespace App\Repositories;
 
 use App\Account;
+use App\Jobs\SendVerificationMail;
+use Illuminate\Support\Facades\Log;
+use Spatie\Async\Pool;
 use App\Mail\AccountCreated;
 use Illuminate\Support\Facades\Mail;
 
@@ -17,7 +20,7 @@ class AccountRepository extends BaseRepository implements EloquentRepositoryInte
     public function insert(array $attributes)
     {
         $account = parent::insert($attributes);
-        Mail::to($account->email)->send(new AccountCreated($account));
+        Mail::to($account->email)->later(1, new AccountCreated($account));
         return $account;
     }
 }

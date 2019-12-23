@@ -20,24 +20,29 @@ class PartnerRepository extends BaseRepository
     public function update($id, array $args)
     {
         $partner = $this->find($id);
-
         // update the account
         $partner->account()->first()->update($args["account"]);
         // finally the address
-        $partner->address()->first()->update($args["address"]);
+        if(isset($args['address']))
+        {
+            $partner->address()->update($args['address']);
+        }
         // the the partner profile
         parent::update($id, $args);
-
         return $partner;
     }
 
-    public function insert(array $attributes)
+    public function insert(array $args)
     {
-        $attributes['account_id'] = $this->account->insert($attributes['account'])->id;
-        if (isset($attributes['address'])) {
-            $attributes['address_id'] = $this->address->insert($attributes['address'])->id;
+        $partner = parent::insert($args);
+
+        if(isset($args['address']))
+        {
+            $partner->address()->save(new \App\Address($args['address']));
         }
 
-        return parent::insert($attributes);
+        $partner->account()->save(new \App\Account($args['account']));
+
+        return $partner;
     }
 }

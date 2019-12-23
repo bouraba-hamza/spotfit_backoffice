@@ -17,8 +17,6 @@ class CreateTrainersTable extends Migration
             $table->bigIncrements('id');
             $table->float('weight')->nullable();
             $table->float('length')->nullable();
-            $table->integer('account_id');
-            $table->integer('address_id')->nullable();
             $table->string('firstName')->nullable();
             $table->string('lastName')->nullable();
             $table->enum('gender', ['m', 'f'])->nullable();

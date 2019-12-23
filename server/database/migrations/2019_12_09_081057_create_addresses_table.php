@@ -26,6 +26,8 @@ class CreateAddressesTable extends Migration
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
             $table->integer('buildingNumber')->nullable();
+            $table->unsignedInteger("addressable_id");
+            $table->string("addressable_type");
             $table->timestamps();
         });
     }

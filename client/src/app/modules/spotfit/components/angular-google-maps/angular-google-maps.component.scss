@@ -1,0 +1,19 @@
+@import '~assets/sass/scss/include-media';
+
+agm-map {
+  height: 400px;
+  @include media("<phone") { height: 300px; }
+}
+
+.ng-select {
+  width: 50%;
+  @include media("<tablet") { width: 100%; }
+}
+
+.btn-group {
+  flex-flow: wrap;
+}
+
+.propixentien {
+  @include media("<=425px") { margin-left: -15px; margin-right: -15px; }
+}

@@ -75,7 +75,7 @@ class AuthController extends Controller
         }
 
         // who is the owner
-        $account_owner = $account->owner();
+        $account_owner = $account->accountable()->first();
         // reformat the response
         $account_owner["jwtToken"] = $this->formatToken($token);
         return $account_owner;

@@ -20,24 +20,29 @@ class AdminRepository extends BaseRepository
     public function update($id, array $args)
     {
         $admin = $this->find($id);
-
         // update the account
         $admin->account()->first()->update($args["account"]);
         // finally the address
-        $admin->address()->first()->update($args["address"]);
+        if(isset($args['address']))
+        {
+            $admin->address()->update($args['address']);
+        }
         // the the admin profile
         parent::update($id, $args);
-
         return $admin;
     }
 
-    public function insert(array $attributes)
+    public function insert(array $args)
     {
-        $attributes['account_id'] = $this->account->insert($attributes['account'])->id;
-        if (isset($attributes['address'])) {
-            $attributes['address_id'] = $this->address->insert($attributes['address'])->id;
+        $admin = parent::insert($args);
+
+        if(isset($args['address']))
+        {
+            $admin->address()->save(new \App\Address($args['address']));
         }
 
-        return parent::insert($attributes);
+        $admin->account()->save(new \App\Account($args['account']));
+
+        return $admin;
     }
 }

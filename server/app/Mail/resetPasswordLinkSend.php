@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
 
-class resetPasswordLinkSend extends Mailable
+class resetPasswordLinkSend extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
