@@ -11,7 +11,7 @@ import {PasswordService} from "@app/@core/http/password.service";
   templateUrl: './edit-password.component.html',
   styleUrls: ['./edit-password.component.scss']
 })
-export class EditPasswordComponent  {
+export class EditPasswordComponent {
   editPasswordForm: FormGroup;
   errors: String[] = [];
   ticket: string;

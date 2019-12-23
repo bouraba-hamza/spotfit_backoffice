@@ -1,0 +1,220 @@
+
+
+
+
+
+
+
+
+
+
+
+<section class="profile">
+    <!--App Profile-->
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="content-header mb-3">Profile</div>
+    </div>
+
+
+      <!--QR SCANNER
+      <div id="div_scann_qrcode_admin_detection">
+          <qr-scanner id="qr_scanner_admin"
+          [debug]="false"
+          [canvasWidth]="350"
+          [canvasHeight]="350"
+          [stopAfterScan]="true"
+          [updateTime]="500">
+          </qr-scanner>
+          <input id="btn_play_scann_qrcode_admin" type="button" value="Démmarer la detection" (click)="open_qrcode_scanner()">
+       </div>
+
+
+ <div>
+  <p>{{current_admin?.user | json}}</p>
+  <p>----------------------</p>
+  <p>id: {{current_admin?.user.id | json}}</p>
+  <p>first_name: {{current_admin?.user.first_name | json}}</p>
+  <p>last_name: {{current_admin?.user.last_name | json}}</p>
+  <p>email: {{current_admin?.user.email | json}}</p>
+  <p>role_id: {{current_admin?.user.role_id | json}}</p>
+  <p>qrcode: {{current_admin?.user.qrcode | json}}</p>
+  <p>photo: {{current_admin?.user.photo | json}}</p>
+</div>
+
+ -->
+
+
+
+  <!--  profil card-->
+  <div id="profil_card" class="container emp-profile">
+        <form method="post">
+            <div class="row" id="row_top_profil">
+                <div class="col-md-4">
+                    <div class="profile-img">
+                        <img #val_photo  src="../../../assets/img/avatars/lafdaoui_hamza.jpg" alt=""/>
+                        <div class="file btn btn-lg btn-primary" style="color:white !important;height: 2.5vw !important;">
+                            Change Photo
+                            <input type="file" name="file"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="profile-head">
+                                <h5 #val_name>
+                                    FirstName LastName
+                                </h5>
+                                <h6 #val_function>
+                                    Function
+                                </h6>
+                                <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div #div_current_qrcode  class="col-md-3" id="div_current_qrcode">
+                  <qrcode [qrdata]="myAngularxQrCode" [size]="150" [level]="'M'"></qrcode>
+                </div>
+
+                <div class="col-md-2">
+                    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-work">
+                        <p>WORK LINK</p>
+                        <a href="">Website Link</a><br/>
+                        <a href="">Bootsnipp Profile</a><br/>
+                        <a href="">Bootply Profile</a>
+                        <p>SKILLS</p>
+                        <a href="">Web Designer</a><br/>
+                        <a href="">Web Developer</a><br/>
+                        <a href="">WordPress</a><br/>
+                        <a href="">WooCommerce</a><br/>
+                        <a href="">PHP, .Net</a><br/>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Login</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p #val_login>login</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Name</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p #val_name>name</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Email</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p #val_email>mail</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Adress</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p #val_adress>adress</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Phone</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p #val_phone>phone</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Profession</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p #val_function>function</p>
+                                        </div>
+                                    </div>
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Experience</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>Expert</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Hourly Rate</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>30$/hr</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Total Projects</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>230</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>English Level</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>Expert</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Availability</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>6 months</p>
+                                        </div>
+                                    </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>Your Bio</label><br/>
+                                    <p>Your detail description</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- end profil card-->
+
+</div>
+<!--App Profile Ends-->
+</section>
+
+
+
+
+

@@ -6,6 +6,7 @@ use App\Account;
 use Illuminate\Http\Request;
 use JWTAuth;
 use JWTException;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {

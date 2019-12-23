@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS  } from "@angular/common/http";
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import { ToastyService, ToastyConfig } from 'ng2-toasty';
 
 import { 
   PerfectScrollbarModule, 
@@ -53,6 +54,8 @@ export function createTranslateLoader(http: HttpClient) {
     ToastrModule.forRoot(),
   ],
   providers: [
+    ToastyService,
+    ToastyConfig,
     { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     AuthGuard,

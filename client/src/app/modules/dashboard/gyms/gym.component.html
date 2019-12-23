@@ -1,0 +1,291 @@
+
+<div class="d-flex align-items-center">
+    <i class="icon-users content-header-icon"></i>
+    <div>
+        <div class="content-header"> Gym </div>
+        <p class="content-sub-header">Panneaux de contrôle - Robot AI -  </p>
+    </div>
+</div>
+
+<!--Confirm Action Starts-->
+<section id="action">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+  
+                <!--  GYM Component SHOW -->
+                <div class="card-body">
+                    <div class="card-block">
+  
+                <div>  
+                    <table id="gym_table"   class="table table-hover" >
+                      <thead>
+  
+  
+                              <tr class='table-filters'>
+                                      <th class="text-center priority-1" > <input _ngcontent-c6="" class="form-control form-control-success" (click)="resizepage()" placeholder="Qrcode" type="hidden"> </th>
+                                      <th class="text-center priority-1" > <input _ngcontent-c6="" class="form-control form-control-success" (click)="resizepage()" placeholder="Logo" type="text"> </th>
+                                      <th class="text-center priority-1" > <input _ngcontent-c6="" class="form-control form-control-success" (click)="resizepage()" placeholder="Name" type="text"> </th>
+                                      <th class="text-center priority-7" style="width: 8%;">  <input _ngcontent-c6="" class="form-control form-control-success"  placeholder="Adress" type="text"></th> 
+                                      <th class="text-center priority-9"  >  <input _ngcontent-c6="" class="form-control form-control-success" (click)="resizepage()" placeholder="Tel" type="text"></th>
+                                      <th class="text-center priority-9" >  <input _ngcontent-c6="" class="form-control form-control-success" (click)="resizepage()" placeholder="Gamme" type="text"></th>
+                                      <th class="text-center priority-9"  >  <input _ngcontent-c6="" class="form-control form-control-success" (click)="resizepage()" placeholder="Avis" type="text"></th>
+                                      <th class="text-center priority-3" style="width: 7vw;margin: 0 !important;padding: 0 !important;"  > <button class="btn  btn-outline-primary" (click)="open(content)"><i class="ft-add-2 font-medium-1 mr-2"></i>add new</button>  </th>
+                             
+                                      <th></th>
+                                          <th></th>
+                                  </tr>
+  
+                                  
+                          <tr> 
+                              <th>Logo</th>  
+                              <th>Qrcode</th> 
+                              <th>Name</th> 
+                              <th>Adress</th>  
+                              <th>Tel</th> 
+                              <th>Gamme</th> 
+                              <th>Avis</th>
+
+                              <th>ACTIONS</th> 
+                          <tr>
+                      </thead>
+                      <tbody>
+                              <tr *ngFor="let gym of gyms"  >
+                                  <td> <img class="logo_gym" src="./../../assets/img/gyms/logos/{{gym.logo}}"  > </td>
+                                  
+                                  <td>
+                                   <qrcode [qrdata]="gym.qrcode" [size]="25" [level]="'M'"></qrcode>
+                                  </td> 
+
+                                  <td (click)="open(contentGym,gym)" style="cursor:pointer;">{{gym.name}}</td>
+                                      <td>{{gym.adress}}</td>
+                                      <td>{{gym.tel}}</td>
+                                      <td class="color_{{gym.gamme}}"> <span class="gamme_span_{{gym.gamme}}">{{gym.gamme}}</span> </td>
+                                      <td>
+                                          <star-rating  value="{{gym.avis}}" checkedcolor="#fc0" uncheckedcolor="black" size="24px"    readonly="false" (rate)="onRate($event)"></star-rating>
+                                      </td>
+                                      <td> 
+                                        <button type="button" class="btn" (click)="open(contentProviderUpdate)"><i class="ft-edit-2 info font-medium-1 mr-2"></i></button><button type="button" class="btn" (click)="opensm(contentProviderDelete)"><i class="ft-x danger font-medium-1 mr-2"></i></button>
+                                      </td>
+  
+  
+                                      
+  
+           <!-- DELETE GYM TEMPLATE-->
+           <ng-template #contentProviderDelete let-c="close" let-d="dismiss">
+              <div class="modal-header" style="background-color: #DD4B39">
+                <h4 class="modal-title" style="color: white">Supprimer Gym</h4>
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div class="modal-body">
+                <dl class="row">
+ 
+                  <dd class="col-sm-3" class="delete_logo_gym">  
+                    <img src="./../../assets/img/gyms/logos/{{gym.logo}}"  >
+                  </dd>
+                 
+                   
+                  <dd class=" delete_name_gym">
+                    {{gym.name}}
+                      <div class="div_detail_logo_gym">
+                         <star-rating class="detail_qrcode_gym"  value="{{gym.avis}}" checkedcolor="#fc0" uncheckedcolor="black" size="33px"    readonly="false"></star-rating>
+                      </div>
+                  </dd>
+                  
+                  <br>
+                  <dt class="col-sm-3">Adress</dt>
+                  <dd class="col-sm-3">{{gym.adress}}</dd>
+  
+                  <dt class="col-sm-3">Tel</dt>
+                  <dd class="col-sm-3">{{gym.tel}}</dd>
+
+                  <dt class="col-sm-3">Gamme</dt>
+                  <dd class="col-sm-3 color_{{gym.gamme}}">{{gym.gamme}}</dd>
+
+                  <dt class="col-sm-3">QrCode</dt>
+                  <dd class="col-sm-3"> <qrcode [qrdata]="gym.qrcode" [size]="100" [level]="'M'"></qrcode></dd>
+   
+                </dl>
+              </div>
+  
+              <div class="modal-footer">
+                <button type="button" class="btn btn-dark btn-square"  (click)="d('Cross click')">Annuler</button>
+                <button type="button" class="btn btn-danger btn-square" (click)="delete(gym);d('Cross click')"><i class="icofont icofont-warning-alt"></i> Supprimer</button>
+              </div>
+  
+            </ng-template>
+       <!-- END DELETE GYM TEMPLATE-->
+  
+  
+  
+  
+  
+       <!--  UPDATE GYM TEMPLATE-->
+       <ng-template #contentProviderUpdate let-c="close" let-d="dismiss">
+              <div class="modal-header" style="background-color: #4cd787">
+                <h4 class="modal-title" id="modal-basic-title" style="color: white">Modifier Gym</h4>
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+  
+                <form [formGroup]="myformUpdate">
+                    <div class="form-group">
+                     <dd class="col-sm-3" class="update_logo_gym">  
+                            <img src="./../../assets/img/gyms/logos/{{gym.logo}}"  >
+                      </dd>
+                     
+                      <star-rating  value="{{gym.avis}}" checkedcolor="#fc0" uncheckedcolor="black" size="24px"    readonly="false" (rate)="onRate($event)"></star-rating>
+
+                      <input type="hidden" class="form-control"  value='{{gym.logo}}' formControlName="logo" ngModel>
+
+                    <label  class="col-form-label">Name :</label>
+                    <input type="text" class="form-control"  value='{{gym.name}}' formControlName="name" ngModel>
+
+                    <label  class="col-form-label">Adress :</label>
+                    <input type="text" class="form-control"  value='{{gym.adress}}' formControlName="adress" ngModel>
+
+                    <label class="col-form-label">Tel :</label>
+                    <input type="text" class="form-control"  value='{{gym.tel}}' formControlName="tel" ngModel>
+
+                    <label  class="col-form-label">Gamme :</label>
+                    <input type="text" class="form-control color_{{gym.gamme}}" value='{{gym.gamme}}'  formControlName="gamme" ngModel >
+
+                    <label  class="col-form-label">QrCode :</label>
+                    <qrcode [qrdata]="gym.qrcode" [size]="90" [level]="'M'"></qrcode>
+                    <input type="hidden" class="form-control"  value='{{gym.qrcode}}' formControlName="qrcode" ngModel>
+
+                   </div>
+  
+                  <div class="modal-footer">
+                    <button class="btn btn-dark" (click)="c('Close click')">Annuler</button>
+                    <button type="button" value="Submit" class="btn btn-success" (click)="onUpdate(gym.id,gym.logo,gym.qrcode,gym.name,gym.adress,gym.tel ,gym.gamme ,gym.avis   );"><i class="icofont icofont-edit"></i>Modifier</button>
+                  </div>
+  
+                </form>
+              </div>
+            </ng-template>
+       <!-- END UPDATE GYM TEMPLATE-->
+  
+  
+  
+       
+  
+       <!-- CLICK SHOW ONE GYM TEMPLATE-->
+       <ng-template #contentGym let-c="close" let-d="dismiss">
+              <div class="modal-header" style="background-color: #00AEEF">
+                <h4 class="modal-title" style="color: white">Detail Gym</h4>
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <dl class="row">
+ 
+                  <dd class="col-sm-3" class="detail_logo_gym">  
+                    <img src="./../../assets/img/gyms/logos/{{gym.logo}}"  >
+                  </dd>
+                 
+                   
+                  <dd class=" detail_name_gym">
+                    {{gym.name}}
+                      <div class="div_detail_logo_gym">
+                         <star-rating class="detail_qrcode_gym"  value="{{gym.avis}}" checkedcolor="#fc0" uncheckedcolor="black" size="42px"    readonly="false"></star-rating>
+                      </div>
+                  </dd>
+                  
+                  <br>
+                  <dt class="col-sm-3">Adress</dt>
+                  <dd class="col-sm-3">{{gym.adress}}</dd>
+  
+                  <dt class="col-sm-3">Tel</dt>
+                  <dd class="col-sm-3">{{gym.tel}}</dd>
+
+                  <dt class="col-sm-3">Gamme</dt>
+                  <dd class="col-sm-3">{{gym.gamme}}</dd>
+
+                  <dt class="col-sm-3">QrCode</dt>
+                  <dd class="col-sm-3"> <qrcode [qrdata]="gym.qrcode" [size]="100" [level]="'M'"></qrcode></dd>
+   
+                </dl>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-light" (click)="c('Close click')">Fermer</button>
+              </div>
+            </ng-template>
+            <!-- END CLICK SHOW ONE GYM TEMPLATE-->
+  
+  
+  
+  
+  
+                                 </tr>
+                      </tbody>
+                  </table>
+                  
+                </div>
+  
+              </div>
+          </div>
+           <!-- end GYM Component SHOW -->
+  
+  
+  
+            </div>
+        </div>
+    </div>
+  </section>
+  <!--Confirm Action Ends-->
+  
+  
+  
+  
+            
+      <!-- ADD GYM TEMPLATE-->
+      <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header" style="background-color: #4cd787">
+         <h4 class="modal-title" id="modal-basic-title" style="color: white">Ajouter Gym</h4>
+         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <div class="modal-body">
+     
+          <form [formGroup]="myform"  >
+            <div class="form-group">
+                          <dd class="col-sm-3" class="update_logo_gym">  
+                           <img src="./../../assets/img/gyms/logos/test.jpg"  >
+                          </dd>
+
+                     <star-rating  value="2.5" checkedcolor="#fc0" uncheckedcolor="black" size="24px"    readonly="false" (rate)="onRate($event)"></star-rating>
+
+                   <label  class="col-form-label">Name :</label>
+                   <input type="text" class="form-control"  value='' formControlName="name" ngModel>
+
+                   <label  class="col-form-label">Adress :</label>
+                   <input type="text" class="form-control"  value='' formControlName="adress" ngModel>
+
+                   <label class="col-form-label">Tel :</label>
+                   <input type="text" class="form-control"  value='' formControlName="tel" ngModel>
+
+                   <label  class="col-form-label">Gamme :</label>
+                   <input type="text" class="form-control" value=''  formControlName="gamme" ngModel >
+
+                   <label  class="col-form-label">QrCode :</label>
+                   <input type="text" class="form-control"  value='empty_spotfit_qrcode' formControlName="qrcode" ngModel>
+        </div>
+     
+           <div class="modal-footer">
+             <button class="btn btn-dark" (click)="c('Close click')">Annuler</button>
+             <button type="button" value="Submit" class="btn btn-success" (click)="onSubmit($event);//c('Close click')"><i class="icofont icofont-ui-add"></i>Ajouter</button>
+           </div>
+     
+         </form>
+       </div>
+     
+     </ng-template>
+     <!-- END ADD GYM TEMPLATE-->
