@@ -43,6 +43,18 @@ const routes: Routes = [
 
   },
   {
+    path: 'pass',
+    loadChildren: () =>
+        import("./pass/pass.module").then(m => m.PassModule)
+
+  },
+  {
+    path: 'class',
+    loadChildren: () =>
+        import("./class/class.module").then(m => m.ClassModule)
+
+  },
+  {
     path: 'gyms',
     loadChildren: () =>
         import("../dashboard/gyms/gym.module").then(m => m.GymModule)

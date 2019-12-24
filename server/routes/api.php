@@ -25,6 +25,8 @@ use Illuminate\Http\Request;
 
 
 
+    Route::resource('/pass', 'PassController');
+    Route::resource('/class', 'ClassesController');
 
     Route::post('/login', 'AuthController@login');
     Route::post('/logout', 'AuthController@logout');
@@ -183,7 +185,14 @@ Route::group(['middleware' => [ 'jwt', /* 'jwt.refresh' */]], function () {
        Route::delete("/passpartout/{coupon_id}/delete", "PasspartoutController@destroy");
 
 
+        /*
+        Class
+        */
 
+        /*
+        Pass
+        */
+//         Route::resource('/pass', 'PassController');
 
 
 });
