@@ -31,4 +31,21 @@ class Customer extends Model
     {
         return $this->morphOne(account::class, 'accountable');
     }
+
+    public function subscriptions()
+    {
+        return $this->belongsToMany(Subscription::class)
+            ->using(customerSubscription::class)
+            ->withPivot([
+            "price",
+            "consumption_date_begin",
+            "consumption_date_end",
+        ])
+        ->withTimestamps();
+    }
+
+    public function sponsorships()
+    {
+        return $this->hasMany(Sponsorship::class);
+    }
 }
