@@ -13,6 +13,7 @@ import { CustomerFormComponent } from './customer-form/customer-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { SharedModule } from '@app/shared/shared.module';
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 @NgModule({
   declarations: [CustomerListComponent, CustomerFormComponent],
@@ -32,6 +33,7 @@ import { SharedModule } from '@app/shared/shared.module';
 
     // Toastr
     ToastrModule.forRoot(),
+    MatSlideToggleModule,
 
     // Shared
     SharedModule,

@@ -19,17 +19,33 @@ class Customer extends Model
         'cin',
         'jobTitle',
         'avatar',
-        'account_id',
-        'address_id'
+        'ambassador'
     ];
-
-    public function account()
-    {
-        return $this->hasOne('App\Account', 'id', 'account_id');
-    }
 
     public function address()
     {
-        return $this->hasOne('App\Address', 'id', 'address_id');
+        return $this->morphOne(Address::class, 'addressable');
+    }
+
+    public function account()
+    {
+        return $this->morphOne(account::class, 'accountable');
+    }
+
+    public function subscriptions()
+    {
+        return $this->belongsToMany(Subscription::class)
+            ->using(customerSubscription::class)
+            ->withPivot([
+            "price",
+            "consumption_date_begin",
+            "consumption_date_end",
+        ])
+        ->withTimestamps();
+    }
+
+    public function sponsorships()
+    {
+        return $this->hasMany(Sponsorship::class);
     }
 }

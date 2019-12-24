@@ -15,8 +15,6 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('account_id');
-            $table->integer('address_id')->nullable();
             $table->text('qrcode')->nullable();
             $table->string('firstName')->nullable();
             $table->string('lastName')->nullable();
@@ -26,6 +24,7 @@ class CreateCustomersTable extends Migration
             $table->string('cin')->nullable();
             $table->string('jobTitle')->nullable();
             $table->string('avatar')->nullable();
+            $table->tinyInteger('ambassador')->default(0);
             $table->timestamps();
         });
     }

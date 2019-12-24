@@ -24,23 +24,6 @@ class CustomerController extends Controller
         return $this->customer->all();
     }
 
-    public function store(CustomerRequest $request)
-    {
-        // filter unwanted inputs from request
-        $customer = $request->all();
-
-        // save the file in storage
-        if ($request->hasFile("avatar")) {
-            $customer["avatar"] = $this->profileAvatarService->store($request->file('avatar'))["fakeName"];
-        }
-
-        // create customer account
-        $customer_id = $this->customer->insert($customer)->id;
-
-        // return the id of the resource just created
-        return ['customer_id' => $customer_id];
-    }
-
     public function show($customer_id)
     {
         return $this->customer->find($customer_id);
@@ -74,9 +57,12 @@ class CustomerController extends Controller
         return ['customer_id' => $customer_id];
     }
 
-    public function destroy($customer_id)
-    {
-        $this->customer->destroy($customer_id);
-        return ['status' => 'success', 'deleted_resource_id' => $customer_id];
+    public function becomeAmbassador(Request $request, $customer_id, $promote) {
+        $customer = $this->customer->find($customer_id);
+        if(!$customer) abort(404);
+
+        $customer->update(["ambassador" => $promote]);
+
+        return $customer;
     }
 }

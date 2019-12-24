@@ -10,34 +10,6 @@ use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
-    {
-        // $validator = \Validator::make($request->all(), [
-        //     'username' => 'required|string|max:255',
-        //     'email' => 'required|string|email|max:255|unique:accounts',
-        //     'password' => 'required|string|min:3',
-        // ]);
-
-        // if($validator->fails()){
-        //     return response()->json($validator->errors()->toJson(), 400);
-        // }
-
-        // $user = Account::create([
-        //     'username'  => $request->username,
-        //     'email'    => $request->email,
-        //     'password' => $request->password,
-        //     'disabled' => 0,
-        //     'owner_id' => 2,
-        //     'owner' => 'App\Customer',
-        //  ]);
-
-        // $token = JWTAuth::fromUser($user);
-
-        // // return response()->json(compact('user','token'),201);
-
-        // return $this->respondWithToken($token);
-    }
-
     public function login(Request $request)
     {
         $credentials = $request->only('username', 'password');
@@ -76,7 +48,7 @@ class AuthController extends Controller
         }
 
         // who is the owner
-        $account_owner = $account->owner();
+        $account_owner = $account->accountable()->first();
         // reformat the response
         $account_owner["jwtToken"] = $this->formatToken($token);
         return $account_owner;
@@ -124,7 +96,7 @@ class AuthController extends Controller
         $token = JWTAuth::getToken();
         $formatedToken = $this->formatToken($token . "");
         // who is the owner
-        $account_owner = $account->owner();
+        $account_owner = $account->accountable()->first();
         // reformat the response
         $account_owner["jwtToken"] = $formatedToken;
         return $account_owner;

@@ -37,11 +37,11 @@ export class CustomerService {
     return this.apiService.get(`/customers/${id}`);
   }
 
-  add(body) : Observable<Customer> {
-    return this.apiService.post(`/customers/`, body);
-  }
-
   edit(body, customerId: number) : Observable<Customer> {
     return this.apiService.post(`/customers/${customerId}`, body);
+  }
+
+  becomeAmbassador(id, promote: boolean) : Observable<Customer> {
+    return this.apiService.put(`/becomeAmbassador/${id}/${promote ? 1 : 0}`);
   }
 }
