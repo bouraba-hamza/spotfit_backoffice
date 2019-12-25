@@ -30,6 +30,12 @@ export const ROUTES: RouteInfo[] = [
         path: '/dashboard/equipment', title: 'Materiels', icon: 'ft-layout', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
     },
     {
+        path: '/dashboard/pass', title: 'Pass', icon: 'ft-layout', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+    },
+    {
+        path: '/dashboard/class', title: 'Class', icon: 'ft-layout', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+    },
+    {
         path: '/full-layout', title: 'Packs / Passes', icon: 'ft-layout', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
     },
     {

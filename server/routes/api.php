@@ -183,6 +183,18 @@ Route::group(['middleware' => [ 'jwt', /* 'jwt.refresh' */]], function () {
     Route::put("/passpartout", "PasspartoutController@update");
     Route::delete("/passpartout/{coupon_id}/delete", "PasspartoutController@destroy");
 
+  /*
+        Class
+        */
+
+        /*
+        Pass
+        */
+
+    Route::resource('/pass', 'PassController');
+    Route::resource('/class', 'ClassesController');
+
+
 
     /**
      * Settings
