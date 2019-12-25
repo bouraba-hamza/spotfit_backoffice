@@ -1,0 +1,18 @@
+<!--linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 5%, rgba(255,255,255,0) 78%),-->
+<div class="subscription"
+     [ngStyle]="{
+     'background-image':
+     (innerWidth > 992 ? linearGradient + ', ' : '')  +
+     'url(assets/icons/subscription/' + subscription.icon + ')'}">
+    <div >
+        <div class="subscription__heading">
+            <div>
+                <h3 class="subscription__heading--main">{{subscription.name | titlecase}}</h3> <span class="subscription__heading--secondary">({{subscription.duration}})</span>
+            </div>
+        </div>
+        <div class="subscription__subtitle">{{subscription.description}}</div>
+        <ul class="subscription__options">
+            <li *ngFor="let feature of subscription.features"><i class="ft-chevron-right"></i> {{feature}}</li>
+        </ul>
+    </div>
+</div>

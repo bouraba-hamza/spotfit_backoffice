@@ -1,0 +1,18 @@
+@import '~assets/sass/scss/include-media';
+
+// break points
+$tablet: "<992px";
+$phone: "<479px";
+
+// colors
+$primary: #9d9ebf;
+$primary-light: #bebafc;
+$primary-light-1: #cfc9e9;
+$primary-light-2: #e0dff9;
+$primary-light-3: #edecfa;
+$secondary: #89d8bb;
+$special: #fac0fb;
+
+.subscription {
+  border: 1px solid $primary-light-3;
+}
