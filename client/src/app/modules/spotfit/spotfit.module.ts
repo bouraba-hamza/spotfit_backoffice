@@ -9,11 +9,13 @@ import { AgmCoreModule } from '@agm/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgSelectModule} from "@ng-select/ng-select";
 import {NgbRatingModule} from "@ng-bootstrap/ng-bootstrap";
-import { VirtualScrollComponent } from './pages/virtual-scroll/virtual-scroll.component';
 import {ScrollingModule} from "@angular/cdk/scrolling";
+import { SubscriptionCardComponent } from './components/subscription-card/subscription-card.component';
+import { SubscriptionCollectionComponent } from './pages/subscription-collection/subscription-collection.component';
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 @NgModule({
-  declarations: [HomeComponent, AngularGoogleMapsComponent, VirtualScrollComponent],
+  declarations: [HomeComponent, AngularGoogleMapsComponent, SubscriptionCardComponent, SubscriptionCollectionComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -21,6 +23,7 @@ import {ScrollingModule} from "@angular/cdk/scrolling";
     SpotfitRoutingModule,
     AgmCoreModule,
     ScrollingModule,
+    FlexLayoutModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDXuzcjaZ17frGIg9ZVR6ar9HexIHvBsPY',
       libraries: ['places'],

@@ -1,0 +1,13 @@
+<div class="container mt-3">
+  <section>
+    <div class="card-intro">
+      <h3>Subscriptoins</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure neque, quae.</p>
+    </div>
+    <div class="row">
+      <div class="col-md-4 ulowpet" *ngFor="let subscription of subscriptions">
+        <app-subscription-card [subscription]="subscription"></app-subscription-card>
+      </div>
+    </div>
+  </section>
+</div>
