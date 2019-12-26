@@ -18,7 +18,6 @@ class AuthController extends Controller
         $account = Account::where("username", "=", trim($credentials["username"]))
             ->orWhere("email", "=", trim($credentials["username"]))
             ->first();
-
         // in case request user dosn't exist
         if (!$account) {
             return ["errors" => ["les informations d'identification invalides"]];
@@ -48,10 +47,15 @@ class AuthController extends Controller
         }
 
         // who is the owner
+//         $account_owner = $account->accountable()->first();
         $account_owner = $account->accountable()->first();
+
+
         // reformat the response
         $account_owner["jwtToken"] = $this->formatToken($token);
         return $account_owner;
+
+
     }
 
     private function formatToken($token)

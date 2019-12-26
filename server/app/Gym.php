@@ -15,11 +15,14 @@ class Gym extends Model
         "name",
         "adress",
         "tel",
-        "gamme",
-        "avis",
-        "qrcode"
+        "qrcode",
+        "planing",
     ];
 
+    protected $casts = [
+         'planing' => 'array'
+         'facilities' => 'array'
+    ];
 
     public function gyms() {
         return $this->belongsToMany('App\Gym', "gyms");

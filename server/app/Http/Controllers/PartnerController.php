@@ -33,7 +33,6 @@ class PartnerController extends Controller
         if ($request->hasFile("avatar")) {
             $partner["avatar"] = $this->profileAvatarService->store($request->file('avatar'))["fakeName"];
         }
-
         // create partner account
         $partner_id = $this->partner->insert($partner)->id;
 

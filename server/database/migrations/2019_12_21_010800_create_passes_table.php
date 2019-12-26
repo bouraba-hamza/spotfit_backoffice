@@ -17,6 +17,7 @@ class CreatePassesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('image')->nullable();
+            $table->text('description')->nullable();
             $table->integer('duration')->nullable();
             $table->timestamps();
         });

@@ -11,4 +11,6 @@ class Pass extends Model
             'duration',
             'image',
         ];
+
+        
 }
