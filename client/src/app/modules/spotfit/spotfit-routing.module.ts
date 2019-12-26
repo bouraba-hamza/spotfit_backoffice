@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
+import {SubscriptionCollectionComponent} from "@app/modules/spotfit/pages/subscription-collection/subscription-collection.component";
+import {GymDetailComponent} from "@app/modules/spotfit/pages/gym-detail/gym-detail.component";
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo: 'gym-detail' },
+  { path: 'subscriptions', component: SubscriptionCollectionComponent },
+  { path: 'gym-detail', component: GymDetailComponent },
 ];
 
 @NgModule({

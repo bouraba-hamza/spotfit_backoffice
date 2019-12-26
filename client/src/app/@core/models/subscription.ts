@@ -3,6 +3,5 @@ export interface Subscription {
     name: string;
     duration?: string;
     description?: string;
-    features?: string[];
     icon?: string;
 }

@@ -13,9 +13,10 @@ import {ScrollingModule} from "@angular/cdk/scrolling";
 import { SubscriptionCardComponent } from './components/subscription-card/subscription-card.component';
 import { SubscriptionCollectionComponent } from './pages/subscription-collection/subscription-collection.component';
 import {FlexLayoutModule} from "@angular/flex-layout";
+import { GymDetailComponent } from './pages/gym-detail/gym-detail.component';
 
 @NgModule({
-  declarations: [HomeComponent, AngularGoogleMapsComponent, SubscriptionCardComponent, SubscriptionCollectionComponent],
+  declarations: [HomeComponent, AngularGoogleMapsComponent, SubscriptionCardComponent, SubscriptionCollectionComponent, GymDetailComponent],
   imports: [
     CommonModule,
     FormsModule,

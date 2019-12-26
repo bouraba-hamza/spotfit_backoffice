@@ -13,11 +13,6 @@ export class SubscriptionCollectionComponent implements OnInit {
             name: "daily",
             duration: "24 hour",
             description: "Lorem ipsum dolor sit amet, consectetur adipisicing.",
-            features: [
-                "Lorem ipsum dolor.",
-                "Amet beatae consequatur?",
-                "Sit amet, consectetur adipisicing.",
-            ],
             icon: "hour.svg",
         },
         {
@@ -25,11 +20,6 @@ export class SubscriptionCollectionComponent implements OnInit {
             name: "monthly",
             duration: "30 jour",
             description: "Lorem ipsum dolor sit amet, consectetur adipisicing.",
-            features: [
-                "Lorem ipsum dolor.",
-                "Amet beatae consequatur?",
-                "Sit amet, consectetur adipisicing.",
-            ],
             icon: "month.svg",
         },
         {
@@ -37,11 +27,6 @@ export class SubscriptionCollectionComponent implements OnInit {
             name: "yearly",
             duration: "12 month",
             description: "Lorem ipsum dolor sit amet, consectetur adipisicing.",
-            features: [
-                "Lorem ipsum dolor.",
-                "Amet beatae consequatur?",
-                "Sit amet, consectetur adipisicing.",
-            ],
             icon: "year.svg",
         }
     ];
