@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePassClassTable extends Migration
+class CreateClassSubscriptionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreatePassClassTable extends Migration
      */
     public function up()
     {
-        Schema::create('class_pass', function (Blueprint $table) {
+        Schema::create('class_sbuscription', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('pass_id')->unsigned();
+            $table->integer('subscription_id')->unsigned();
             $table->integer('class_id')->unsigned();
             $table->integer('prix_min')->nullable();
             $table->integer('prix_max')->nullable();
@@ -30,6 +30,6 @@ class CreatePassClassTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('class_pass');
+        Schema::dropIfExists('class_sbuscription');
     }
 }

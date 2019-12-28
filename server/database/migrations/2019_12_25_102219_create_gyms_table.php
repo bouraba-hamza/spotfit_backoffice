@@ -15,17 +15,22 @@ class CreateGymsTable extends Migration
     {
         Schema::create('gyms', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('group_id');
             $table->text('logo')->nullable();
             $table->string('name');
-//             $table->json('planing');
             $table->float('rate', 8, 2);
-            $table->json('facilities');
-            //Todo ajouter la matrice des prix en fonction du passe liaison enre gym et passe
             $table->text('qrcode')->nullable();
             $table->unsignedInteger('class_id');
-                        $table->foreign('class_id')->references('id')->on('classes')
-                            ->onDelete('restrict')
-                            ->onUpdate('restrict');
+            $table->json('facilities');
+            $table->json('planning')->comment(
+                "format: \"{\"dayofweek(int)\": [{\"from\":\"hh:mm:ss\", \"to\": \"hh:mm:ss\",\"activity\": {name:\"cardio\", gender: \"male\", image: \"/path/to/image.png\"}}]}\""
+            );
+
+
+
+            $table->foreign('class_id')->references('id')->on('classes')
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
             $table->timestamps();
         });
     }

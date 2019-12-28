@@ -12,7 +12,7 @@ class EquipementController extends Controller
 {
     public function index()
     {
-        return DB::table("equipements")->get();
+        return DB::table("equipments")->get();
     }
 
     public function get($equipement_id)
@@ -23,8 +23,8 @@ class EquipementController extends Controller
     public function show()
     {
         $sql = "
-           select equipements.id, equipements.image, equipements.libelle, equipements.code_barre, equipements.gamme, equipements.etat       
-           from equipements
+           select equipments.id, equipments.image, equipments.libelle, equipments.code_barre, equipments.gamme, equipments.etat
+           from equipments
         ";
         return \DB::select(\DB::raw($sql));
     }
@@ -67,7 +67,7 @@ class EquipementController extends Controller
 
     public function destroy($equipement_id)
     {
-        DB::table('equipements')->where('id', '=', $equipement_id)->delete();
+        DB::table('equipments')->where('id', '=', $equipement_id)->delete();
         return ["ok" => 1, "feedback" => "the resource softly deleted, check the trash"];
     }
 }

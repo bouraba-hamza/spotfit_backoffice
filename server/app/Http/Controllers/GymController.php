@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Gym;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Validator;
 use DB;
+use Illuminate\Http\Request;
+use Validator;
 
 class GymController extends Controller
 {
@@ -27,7 +26,7 @@ class GymController extends Controller
 
     public function get($gym_id)
     {
-       return Gym::findOrFail($gym_id);
+        return Gym::findOrFail($gym_id);
     }
 
 
@@ -55,24 +54,23 @@ class GymController extends Controller
 
         $validator = Validator::make($request->all(), $rules);
 
-        if($validator->fails()) {
-            return response()->json(["ok"=> 0, "error"=> $validator->errors()->first() ]);
+        if ($validator->fails()) {
+            return response()->json(["ok" => 0, "error" => $validator->errors()->first()]);
         }
 
         Gym::create($request->all());
 
-        return response()->json(["ok"=> 1, "feedback"=> "we generate a new resource for you" ]);
+        return response()->json(["ok" => 1, "feedback" => "we generate a new resource for you"]);
 
     }
-
 
 
     public function update(Request $request)
     {
         Gym::where("id", $request->get("id"))
-        ->update($request->except(["id"]));
+            ->update($request->except(["id"]));
 
-        return response()->json(["ok"=> 1, "feedback"=> "go to main page to see changes"]);
+        return response()->json(["ok" => 1, "feedback" => "go to main page to see changes"]);
     }
 
 

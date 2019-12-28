@@ -37,11 +37,12 @@ class Customer extends Model
         return $this->belongsToMany(Subscription::class)
             ->using(customerSubscription::class)
             ->withPivot([
-            "price",
-            "consumption_date_begin",
-            "consumption_date_end",
-        ])
-        ->withTimestamps();
+                "price",
+                "consumed_at",
+                "activated_at",
+                "canceled_at",
+            ])
+            ->withTimestamps();
     }
 
     public function sponsorships()

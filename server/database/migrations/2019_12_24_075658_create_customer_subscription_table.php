@@ -16,10 +16,22 @@ class CreateCustomerSubscriptionTable extends Migration
         Schema::create('customer_subscription', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('customer_id');
-            $table->integer('subscription_id');
+            $table->integer('group_subscription_id');
+            $table->integer('group_subscription_type_id');
             $table->float('price');
-            $table->dateTime('consumption_date_begin');
-            $table->dateTime('consumption_date_end');
+            $table->text('qrcode');
+            $table->integer('payment_method_id');
+            $table->dateTime('consumed_at');
+            $table->integer('remaining_sessions');
+
+
+            // #forgotten
+            // if(consumed_at + 1min  > now && activated_at === null)
+            // #expired
+            // if(consumed_at + 1min  < activated_at && activated_at != null)
+            // #canceled
+            // if(canceled_at != null)
+
             $table->timestamps();
         });
     }

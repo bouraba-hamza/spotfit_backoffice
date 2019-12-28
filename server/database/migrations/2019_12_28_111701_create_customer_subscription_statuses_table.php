@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateActivityTable extends Migration
+class CreateCustomerSubscriptionStatusesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateActivityTable extends Migration
      */
     public function up()
     {
-        Schema::create('activities', function (Blueprint $table) {
-                 $table->bigIncrements('id');
-                 $table->string('name');
-                 $table->text('icon')->nullable();
+        Schema::create('customer_subscription_statuses', function (Blueprint $table) {
+            $table->integer('customer_subscription_id');
+            $table->integer('status_id');
+            $table->timestamp("datetime");
         });
     }
 
@@ -27,6 +27,6 @@ class CreateActivityTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('activities');
+        Schema::dropIfExists('customer_subscription_statuses');
     }
 }

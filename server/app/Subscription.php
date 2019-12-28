@@ -9,6 +9,8 @@ class Subscription extends Model
     protected $fillable = [
         "name",
         "duration",
+        "image",
+        "description",
     ];
 
     public function users()
@@ -16,8 +18,9 @@ class Subscription extends Model
         return $this->belongsToMany(Customer::class)->using(customerSubscription::class)
             ->withPivot([
                 "price",
-                "consumption_date_begin",
-                "consumption_date_end",
+                "consumed_at",
+                "activated_at",
+                "canceled_at",
             ])
             ->withTimestamps();
     }

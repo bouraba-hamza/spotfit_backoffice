@@ -11,12 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-//         factory(App\Customer::class, 50)->create();
-//         factory(App\Admin::class, 50)->create();
-//         factory(App\Partner::class, 50)->create();
-//         factory(App\Trainer::class, 50)->create();
         factory(App\Classes::class, 3)->create();
-        factory(App\Pass::class, 3)->create();
+        factory(App\Subscription::class, 3)->create();
 
         factory(\App\Account::class, 50)
             ->create()
@@ -35,42 +31,5 @@ class DatabaseSeeder extends Seeder
         // Settings
         \App\Setting::insert(["key" => "sponsorship-rate", "value" => 0]);
         \App\Setting::insert(["key" => "ambassador-sponsorship-rate", "value" => 10]);
-
-        // Subscriptoins
-        \App\Subscription::insert(["name" => "daily", "duration" => "24"]);
-        \App\Subscription::insert(["name" => "monthly", "duration" => "672"]);
-        \App\Subscription::insert(["name" => "yearly", "duration" => "‭8,064‬"]);
-
-        // Customer subscriptions
-        \App\customerSubscription::create(
-            [
-                "customer_id" => 1,
-                "subscription_id" => 1,
-                "price" => 30,
-                "consumption_date_begin" => now(),
-                "consumption_date_end" => now(),
-            ]
-        );
-
-        \App\customerSubscription::create(
-            [
-                "customer_id" => 2,
-                "subscription_id" => 2,
-                "price" => 70,
-                "consumption_date_begin" => now()->addHour(5),
-                "consumption_date_end" => now()->addMonth(1)->addHour(5),
-            ]
-        );
-
-        // Sponsoring
-        \App\Customer::first()->sponsorships()->create(
-            [
-                "customer_subscription_id" => 2,
-                "amount" => 3,
-                "code" => \Illuminate\Support\Str::random(),
-                "date" => now(),
-            ]
-        );
-
     }
 }

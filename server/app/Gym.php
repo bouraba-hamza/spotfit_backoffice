@@ -16,11 +16,10 @@ class Gym extends Model
         "adress",
         "tel",
         "qrcode",
-        "planing",
+        "rate",
     ];
 
     protected $casts = [
-         'planing' => 'array'
          'facilities' => 'array'
     ];
 

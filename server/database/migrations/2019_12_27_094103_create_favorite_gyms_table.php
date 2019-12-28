@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubscriptionsTable extends Migration
+class CreateFavoriteGymsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateSubscriptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subscriptions', function (Blueprint $table) {
+        Schema::create('favorite_gyms', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->text('image');
-            $table->string('duration');
-            $table->text('description');
+            $table->integer('gym_id');
+            $table->integer('customer_id');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateSubscriptionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subscriptions');
+        Schema::dropIfExists('favorite_gyms');
     }
 }

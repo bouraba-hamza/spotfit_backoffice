@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateActivityGymTable extends Migration
+class CreateGymActivityTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,14 +14,8 @@ class CreateActivityGymTable extends Migration
     public function up()
     {
         Schema::create('gym_activity', function (Blueprint $table) {
-           $table->integer('activity_id')->unsigned();
-
-           $table->integer('gym_id')->unsigned();
-
-            $table->foreign('activity_id')->references('id')->on('activity')
-            ->onDelete('cascade');
-            $table->foreign('gym_id')->references('id')->on('gyms')
-             ->onDelete('cascade');
+            $table->integer('activity_id');
+            $table->integer('gym_id');
         });
     }
 
@@ -32,6 +26,6 @@ class CreateActivityGymTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('activity_gym');
+        Schema::dropIfExists('gym_activity');
     }
 }

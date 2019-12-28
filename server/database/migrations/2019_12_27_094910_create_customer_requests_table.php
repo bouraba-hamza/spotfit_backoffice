@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePassesTable extends Migration
+class CreateCustomerRequestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreatePassesTable extends Migration
      */
     public function up()
     {
-        Schema::create('passes', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->text('image')->nullable();
-            $table->text('description')->nullable();
-            $table->integer('duration')->nullable();
+        Schema::create('customer_requests', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer('customer_id');
+            $table->string('subject');
+            $table->json('data');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreatePassesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('passes');
+        Schema::dropIfExists('customer_requests');
     }
 }

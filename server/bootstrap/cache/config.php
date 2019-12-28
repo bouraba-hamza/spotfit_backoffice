@@ -1,10 +1,10 @@
 <?php return array (
   'app' => 
   array (
-    'name' => 'Laravel',
+    'name' => 'SPOTFIT',
     'env' => 'local',
     'debug' => true,
-    'url' => 'http://localhost',
+    'url' => 'http://localhost:8000',
     'client_url' => 'http://localhost:4200',
     'frontend_url' => 'http://localhost:4200',
     'asset_url' => NULL,
@@ -12,7 +12,7 @@
     'locale' => 'en',
     'fallback_locale' => 'en',
     'faker_locale' => 'en_US',
-    'key' => 'base64:nlkibFMewottDuI8QJ4hew2eQpxJrijsd3nE+tUoXE8=',
+    'key' => 'base64:LJrVb5uCXN68JRQ9ghfRoAmZxkS/3BFjwOJUSMRymps=',
     'cipher' => 'AES-256-CBC',
     'providers' => 
     array (
@@ -180,7 +180,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => '/var/www/html/spotfit_test/server/storage/framework/cache/data',
+        'path' => 'C:\\Users\\Lenovo T450S\\spotfit\\server\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -219,7 +219,7 @@
         'endpoint' => NULL,
       ),
     ),
-    'prefix' => 'laravel_cache',
+    'prefix' => 'spotfit_cache',
   ),
   'database' => 
   array (
@@ -230,7 +230,7 @@
       array (
         'driver' => 'sqlite',
         'url' => NULL,
-        'database' => 'spotfit',
+        'database' => 'spotfit_#1',
         'prefix' => '',
         'foreign_key_constraints' => true,
       ),
@@ -240,9 +240,9 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'spotfit',
-        'username' => 'phpmyadmin',
-        'password' => '1234',
+        'database' => 'spotfit_#1',
+        'username' => 'root',
+        'password' => '',
         'unix_socket' => '',
         'charset' => 'utf8mb4',
         'collation' => 'utf8mb4_unicode_ci',
@@ -260,9 +260,9 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'spotfit',
-        'username' => 'phpmyadmin',
-        'password' => '1234',
+        'database' => 'spotfit_#1',
+        'username' => 'root',
+        'password' => '',
         'charset' => 'utf8',
         'prefix' => '',
         'prefix_indexes' => true,
@@ -275,9 +275,9 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'spotfit',
-        'username' => 'phpmyadmin',
-        'password' => '1234',
+        'database' => 'spotfit_#1',
+        'username' => 'root',
+        'password' => '',
         'charset' => 'utf8',
         'prefix' => '',
         'prefix_indexes' => true,
@@ -290,7 +290,7 @@
       'options' => 
       array (
         'cluster' => 'redis',
-        'prefix' => 'laravel_database_',
+        'prefix' => 'spotfit_database_',
       ),
       'default' => 
       array (
@@ -319,13 +319,13 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => '/var/www/html/spotfit_test/server/storage/app',
+        'root' => 'C:\\Users\\Lenovo T450S\\spotfit\\server\\storage\\app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => '/var/www/html/spotfit_test/server/storage/app/public',
-        'url' => 'http://localhost/storage',
+        'root' => 'C:\\Users\\Lenovo T450S\\spotfit\\server\\storage\\app/public',
+        'url' => 'http://localhost:8000/storage',
         'visibility' => 'public',
       ),
       's3' => 
@@ -355,15 +355,15 @@
   ),
   'jwt' => 
   array (
-    'secret' => 'a6EwwWqkPGJ9C9kF1iClTOQE5U7dkiZmkwdxUAVvXG0khueQN2ujD2arHsNb3ySW',
+    'secret' => 'zRp6UQyS6VqXhyProolOAXVeXBmKOY5EpiEv8pYs6HfdF87iBC3hh2q3eNhvGNDj',
     'keys' => 
     array (
       'public' => NULL,
       'private' => NULL,
       'passphrase' => NULL,
     ),
-    'ttl' => 60,
-    'refresh_ttl' => 20160,
+    'ttl' => '60',
+    'refresh_ttl' => '60',
     'algo' => 'HS256',
     'required_claims' => 
     array (
@@ -406,13 +406,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => '/var/www/html/spotfit_test/server/storage/logs/laravel.log',
+        'path' => 'C:\\Users\\Lenovo T450S\\spotfit\\server\\storage\\logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => '/var/www/html/spotfit_test/server/storage/logs/laravel.log',
+        'path' => 'C:\\Users\\Lenovo T450S\\spotfit\\server\\storage\\logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -469,26 +469,26 @@
     'port' => '2525',
     'from' => 
     array (
-      'address' => 'hello@example.com',
-      'name' => 'Example',
+      'address' => 'verify-email@spotfit.com',
+      'name' => 'SPOTFIT',
     ),
-    'encryption' => NULL,
-    'username' => NULL,
-    'password' => NULL,
+    'encryption' => 'tls',
+    'username' => '96d36b7adbcbc1',
+    'password' => 'f5bfee35ef6700',
     'sendmail' => '/usr/sbin/sendmail -bs',
     'markdown' => 
     array (
       'theme' => 'default',
       'paths' => 
       array (
-        0 => '/var/www/html/spotfit_test/server/resources/views/vendor/mail',
+        0 => 'C:\\Users\\Lenovo T450S\\spotfit\\server\\resources\\views/vendor/mail',
       ),
     ),
     'log_channel' => NULL,
   ),
   'queue' => 
   array (
-    'default' => 'sync',
+    'default' => 'database',
     'connections' => 
     array (
       'sync' => 
@@ -560,7 +560,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => '/var/www/html/spotfit_test/server/storage/framework/sessions',
+    'files' => 'C:\\Users\\Lenovo T450S\\spotfit\\server\\storage\\framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -569,7 +569,7 @@
       0 => 2,
       1 => 100,
     ),
-    'cookie' => 'laravel_session',
+    'cookie' => 'spotfit_session',
     'path' => '/',
     'domain' => NULL,
     'secure' => false,
@@ -580,9 +580,9 @@
   array (
     'paths' => 
     array (
-      0 => '/var/www/html/spotfit_test/server/resources/views',
+      0 => 'C:\\Users\\Lenovo T450S\\spotfit\\server\\resources\\views',
     ),
-    'compiled' => '/var/www/html/spotfit_test/server/storage/framework/views',
+    'compiled' => 'C:\\Users\\Lenovo T450S\\spotfit\\server\\storage\\framework\\views',
   ),
   'cors' => 
   array (

@@ -7,7 +7,7 @@ namespace App\Services;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class PassImageService
+class SubscriptionImageService
 {
     const BASE_DIR = "pass/";
 
