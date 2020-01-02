@@ -55,6 +55,7 @@
     "resize-observer-polyfill": "1.5.1",
     "rxjs": "6.5.2",
     "screenfull": "4.2.0",
+    "subsink": "^1.0.0",
     "tslib": "1.9.3",
     "videogular2": "^6.4.0",
     "web-animations-js": "github:angular/web-animations-js#release_pr208",

@@ -48,6 +48,22 @@ Route::group(['middleware' => ['jwt', 'role:admin']], function () {
     Route::get('/admins/{admin_id}', 'AdminController@show');
 
     /**
+     * Supervisor
+     */
+    Route::get('/supervisors', 'SupervisorController@index');
+    Route::post('/supervisors', 'SupervisorController@store');
+    Route::post('/supervisors/{supervisor_id}', 'SupervisorController@update');
+    Route::get('/supervisors/{supervisor_id}', 'SupervisorController@show');
+
+    /**
+     * Receptionist
+     */
+    Route::get('/receptionists', 'ReceptionistController@index');
+    Route::post('/receptionists', 'ReceptionistController@store');
+    Route::post('/receptionists/{receptionist_id}', 'ReceptionistController@update');
+    Route::get('/receptionists/{receptionist_id}', 'ReceptionistController@show');
+
+    /**
      * Partner
      */
     Route::get('/partners', 'PartnerController@index');

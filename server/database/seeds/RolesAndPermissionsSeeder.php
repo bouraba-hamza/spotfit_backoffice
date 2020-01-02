@@ -21,7 +21,7 @@ class RolesAndPermissionsSeeder extends Seeder
             "customer",
             "trainer",
             "supervisor",
-            "receptionists",
+            "receptionist",
         ];
 
         foreach ($roles as $r) {

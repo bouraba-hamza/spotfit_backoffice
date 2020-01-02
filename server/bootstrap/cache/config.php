@@ -95,16 +95,16 @@
     ),
     'guards' => 
     array (
-      'web' => 
-      array (
-        'driver' => 'session',
-        'provider' => 'accounts',
-      ),
       'api' => 
       array (
         'driver' => 'jwt',
         'provider' => 'accounts',
         'hash' => false,
+      ),
+      'web' => 
+      array (
+        'driver' => 'session',
+        'provider' => 'accounts',
       ),
     ),
     'providers' => 
@@ -532,6 +532,18 @@
       'model_key' => 'name',
       'store' => 'default',
     ),
+  ),
+  'query-builder' => 
+  array (
+    'parameters' => 
+    array (
+      'include' => 'include',
+      'filter' => 'filter',
+      'sort' => 'sort',
+      'fields' => 'fields',
+      'append' => 'append',
+    ),
+    'count_suffix' => 'Count',
   ),
   'queue' => 
   array (

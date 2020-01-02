@@ -12,6 +12,16 @@ const routes: Routes = [
             import("../dashboard/admins/admins.module").then(m => m.AdminsModule)
     },
     {
+        path: 'supervisors',
+        loadChildren: () =>
+            import("../dashboard/supervisors/supervisors.module").then(m => m.SupervisorsModule)
+    },
+    {
+        path: 'receptionists',
+        loadChildren: () =>
+            import("../dashboard/receptionists/receptionists.module").then(m => m.ReceptionistsModule)
+    },
+    {
         path: 'partners',
         loadChildren: () =>
             import("../dashboard/partners/partners.module").then(m => m.PartnersModule)

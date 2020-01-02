@@ -20,7 +20,6 @@ export class AdminFormResolverService implements Resolve<Admin> {
 
     let adminId: any = route.queryParamMap.get("adminId");
     let action = route.queryParamMap.get("action");
-    console.log({adminId, action})
     if (action == 'add') {
       return of(null);
     } else {

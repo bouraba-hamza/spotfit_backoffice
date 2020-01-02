@@ -1,18 +1,28 @@
 import { RouteInfo } from './sidebar.metadata';
 
 export const ROUTES: RouteInfo[] = [
-
     {
-        path: '/dashboard/admins', title: 'Administrateurs', icon: 'icon-users', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
-    },
-    {
-        path: '/dashboard/partners', title: 'Partenaires', icon: 'icon-notebook', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
-    },
-    {
-        path: '/dashboard/customers', title: 'Clients', icon: 'icon-star', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
-    },
-    {
-        path: '/dashboard/trainers', title: 'Entraîneurs', icon: 'icon-flag', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+        path: '', title: 'Utilisateurs', icon: 'ft-users', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
+        submenu: [
+            {
+                path: '/dashboard/admins', title: 'Administrateurs', icon: 'icon-users', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+            },
+            {
+                path: '/dashboard/partners', title: 'Partenaires', icon: 'icon-notebook', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+            },
+            {
+                path: '/dashboard/customers', title: 'Clients', icon: 'icon-star', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+            },
+            {
+                path: '/dashboard/trainers', title: 'Entraîneurs', icon: 'icon-flag', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+            },
+            {
+                path: '/dashboard/supervisors', title: 'Superviseurs', icon: 'ft-triangle', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+            },
+            {
+                path: '/dashboard/receptionists', title: 'Receptionist', icon: 'ft-pie-chart', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+            }
+        ]
     },
     {
         path: '/dashboard/home', title: 'Spotfit', icon: 'ft-square', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []

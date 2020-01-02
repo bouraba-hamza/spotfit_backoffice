@@ -34,7 +34,6 @@ export class EditPasswordComponent {
 
     const data = { password: this.editPasswordForm.get("password").value, ticket: this.ticket };
     this.passwordService.update(data).subscribe((response: any) => {
-      console.log(response);
       if (response.errors !== undefined) {
         this.errors = response.errors;
       } else if(response.status === "success") {

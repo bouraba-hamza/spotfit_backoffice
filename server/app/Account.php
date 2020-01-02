@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Services\AccountService;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,6 +14,8 @@ class Account extends Authenticatable implements JWTSubject, MustVerifyEmail
 {
     use Notifiable, HasRoles;
     protected $guard_name = 'api';
+
+
 
     /**
      * The attributes that are mass assignable.
@@ -76,5 +79,14 @@ class Account extends Authenticatable implements JWTSubject, MustVerifyEmail
     public function scope(Builder $query)
     {
         return $query->whereNotNull('email_verified_at');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::creating(function ($model) {
+            AccountService::assignRole($model);
+        });
     }
 }

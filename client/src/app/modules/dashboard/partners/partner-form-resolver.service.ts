@@ -20,7 +20,6 @@ export class PartnerFormResolverService implements Resolve<Partner> {
 
     let partnerId: any = route.queryParamMap.get("partnerId");
     let action = route.queryParamMap.get("action");
-    console.log({partnerId, action})
     if (action == 'add') {
       return of(null);
     } else {

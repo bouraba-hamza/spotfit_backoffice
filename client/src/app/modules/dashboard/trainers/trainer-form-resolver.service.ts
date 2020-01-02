@@ -20,7 +20,6 @@ export class TrainerFormResolverService implements Resolve<Trainer> {
 
     let trainerId: any = route.queryParamMap.get("trainerId");
     let action = route.queryParamMap.get("action");
-    console.log({trainerId, action})
     if (action == 'add') {
       return of(null);
     } else {
