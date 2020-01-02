@@ -2,16 +2,17 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class Account extends Authenticatable implements JWTSubject, MustVerifyEmail
 {
-    use Notifiable;
+    use Notifiable, HasRoles;
+    protected $guard_name = 'api';
 
     /**
      * The attributes that are mass assignable.
@@ -49,9 +50,10 @@ class Account extends Authenticatable implements JWTSubject, MustVerifyEmail
     {
         return [];
     }
+
     public function setPasswordAttribute($password)
     {
-        if ( !empty($password) ) {
+        if (!empty($password)) {
             $this->attributes['password'] = bcrypt($password);
         }
     }
@@ -66,11 +68,13 @@ class Account extends Authenticatable implements JWTSubject, MustVerifyEmail
         return $query->where('disabled', $arg);
     }
 
-    public function scopeVerified(Builder $query) {
+    public function scopeVerified(Builder $query)
+    {
         return $query->whereNotNull('email_verified_at');
     }
 
-    public function scope(Builder $query) {
+    public function scope(Builder $query)
+    {
         return $query->whereNotNull('email_verified_at');
     }
 }

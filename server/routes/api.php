@@ -29,7 +29,7 @@ Route::get('/verify-email/{code}', 'AuthController@verifyEmail');
 Route::get('/token/refresh', 'AuthController@refresh');
 
 
-Route::group(['middleware' => ['jwt', /* 'jwt.refresh' */]], function () {
+Route::group(['middleware' => ['jwt', 'role:admin']], function () {
 
     /* USERS PROFILE PICTURES */
     Route::get('profile-picture/{filename}', 'ProfilePictureController@getAvatar');
