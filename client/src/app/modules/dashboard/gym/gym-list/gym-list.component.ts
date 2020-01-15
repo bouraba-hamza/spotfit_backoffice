@@ -3,11 +3,12 @@ import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { Sort, MatSort } from "@angular/material/sort";
 import { ActivatedRoute, Router } from "@angular/router";
-import { map } from "rxjs/operators";
+import { map } from 'rxjs/operators';
 import {GymService} from "@app/@core/http/gym.service";
 import {Gym} from "@app/@core/models/gym";
 
 import { StarRatingComponent } from 'ng-starrating';
+import { Observable } from '../../../../../../node_modules/rxjs';
 
 @Component({
   selector: "app-gym-list",
@@ -30,7 +31,7 @@ export class GymListComponent implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<any[]>;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  gym: Gym[];
+  gym: Observable<Gym>;
   public gymAngularxQrCode: string = null;
   public currentRate: Number; 
 

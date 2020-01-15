@@ -23,7 +23,8 @@ class CreateSupervisorsTable extends Migration
             $table->string('jobTitle')->nullable();
             $table->string('cin')->nullable();
             $table->string('avatar')->nullable();
-            $table->integer('gym_id');
+            $table->integer('gym_id')->nullable();;
+            $table->timestamps();
         });
     }
 

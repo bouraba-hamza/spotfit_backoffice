@@ -2,7 +2,6 @@ import { RouteInfo } from '@app/shared/sidebar/sidebar.metadata';
 
 export const ROUTES: RouteInfo[] = [
 
-
     {
         path: '/dashboard/home', title: 'Spotfit', icon: 'ft-square', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
     },
@@ -13,6 +12,12 @@ export const ROUTES: RouteInfo[] = [
             { path: '/dashboard/partners', title: 'Partenaires', icon: 'icon-notebook', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []},
             { path: '/dashboard/customers', title: 'Clients', icon: 'icon-star', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []},
             { path: '/dashboard/trainers', title: 'Entraîneurs', icon: 'icon-flag', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []},        
+            {
+                path: '/dashboard/supervisors', title: 'Superviseurs', icon: 'ft-triangle', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+            },
+            {
+                path: '/dashboard/receptionists', title: 'Receptionist', icon: 'ft-pie-chart', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+            },
         ]
     },
 

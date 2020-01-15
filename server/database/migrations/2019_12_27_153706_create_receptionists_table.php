@@ -15,7 +15,6 @@ class CreateReceptionistsTable extends Migration
     {
         Schema::create('receptionists', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('supervisor_id');
             $table->string('firstName')->nullable();
             $table->string('lastName')->nullable();
             $table->enum('gender', ['m', 'f'])->nullable();
@@ -24,6 +23,8 @@ class CreateReceptionistsTable extends Migration
             $table->string('jobTitle')->nullable();
             $table->string('cin')->nullable();
             $table->string('avatar')->nullable();
+            $table->string('gym_id')->nullable();;
+            $table->timestamps();
         });
     }
 

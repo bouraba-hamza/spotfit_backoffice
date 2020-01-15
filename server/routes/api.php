@@ -43,8 +43,7 @@ Route::post('/reset-password', 'PasswordController@sendResetLink');
 Route::get('/verify-email/{code}', 'AuthController@verifyEmail');
 Route::get('/token/refresh', 'AuthController@refresh');
 
-
-    /**
+   /**
      * Base64ToPngs
      */
     Route::get("/base64ToPng", "Base64ToPngController@index");
@@ -67,7 +66,7 @@ Route::group(['middleware' => ['jwt', /* 'jwt.refresh' */]], function(){
     Route::post('/home', 'HomeController@store');
     Route::post('/home/{home_id}', 'HomeController@update');
     Route::get('/home/{home_id}', 'HomeController@show');
-    
+
 
     /**
      * Classes
@@ -77,7 +76,7 @@ Route::group(['middleware' => ['jwt', /* 'jwt.refresh' */]], function(){
     Route::post('/classe', 'ClasseController@store');
     Route::post('/classe/{classe_id}', 'ClasseController@update');
     Route::get('/classe/{classe_id}', 'ClasseController@show');
-    
+
 
     /**
      * Activities
@@ -87,7 +86,7 @@ Route::group(['middleware' => ['jwt', /* 'jwt.refresh' */]], function(){
     Route::post('/activitie', 'ActivitieController@store');
     Route::post('/activitie/{activitie_id}', 'ActivitieController@update');
     Route::get('/activitie/{activitie_id}', 'ActivitieController@show');
-    
+
 
     /**
      * Facilities
@@ -97,7 +96,7 @@ Route::group(['middleware' => ['jwt', /* 'jwt.refresh' */]], function(){
     Route::post('/facilitie', 'FacilitieController@store');
     Route::post('/facilitie/{facilitie_id}', 'FacilitieController@update');
     Route::get('/facilitie/{facilitie_id}', 'FacilitieController@show');
-    
+
 
 
     /**
@@ -129,7 +128,9 @@ Route::group(['middleware' => ['jwt', /* 'jwt.refresh' */]], function(){
     Route::post('/facture/{facture_id}', 'FactureController@update');
     Route::get('/facture/{facture_id}', 'FactureController@show');
 
+});
 
+Route::group(['middleware' => ['jwt', 'role:admin']], function () {
 
     /* USERS PROFILE PICTURES */
     Route::get('profile-picture/{filename}', 'ProfilePictureController@getAvatar');
@@ -146,6 +147,22 @@ Route::group(['middleware' => ['jwt', /* 'jwt.refresh' */]], function(){
     Route::post('/admins', 'AdminController@store');
     Route::post('/admins/{admin_id}', 'AdminController@update');
     Route::get('/admins/{admin_id}', 'AdminController@show');
+
+    /**
+     * Supervisor
+     */
+    Route::get('/supervisors', 'SupervisorController@index');
+    Route::post('/supervisors', 'SupervisorController@store');
+    Route::post('/supervisors/{supervisor_id}', 'SupervisorController@update');
+    Route::get('/supervisors/{supervisor_id}', 'SupervisorController@show');
+
+    /**
+     * Receptionist
+     */
+    Route::get('/receptionists', 'ReceptionistController@index');
+    Route::post('/receptionists', 'ReceptionistController@store');
+    Route::post('/receptionists/{receptionist_id}', 'ReceptionistController@update');
+    Route::get('/receptionists/{receptionist_id}', 'ReceptionistController@show');
 
     /**
      * Partner
@@ -203,7 +220,6 @@ Route::group(['middleware' => ['jwt', /* 'jwt.refresh' */]], function(){
 });
 
 
-
     /**
      * Groups
      */
@@ -236,3 +252,4 @@ Route::group(['middleware' => ['jwt', /* 'jwt.refresh' */]], function(){
     Route::put("/equipements", "EquipementController@update");
     Route::post("/equipements/update", "EquipementController@update");
     Route::delete("/equipements/del/{equipement_id}", "EquipementController@destroy");
+

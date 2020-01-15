@@ -7,7 +7,6 @@ use App\Repositories\AdminRepository;
 use App\Services\ProfileAvatarService;
 use Illuminate\Http\Request;
 use Validator;
-use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
 {
@@ -22,7 +21,6 @@ class AdminController extends Controller
 
     public function index()
     {
-
         return $this->admin->all();
     }
 

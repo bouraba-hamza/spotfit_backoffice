@@ -25,10 +25,18 @@ export class GymService {
   }
 
 
-
+/*
   getGym(): Gym[] {
     return this.gym$.getValue();
   }
+*/
+  getGym(): Observable<Gym> {
+    return this.apiService.post(`/gym/`);
+  }
+  getGyms(): Observable<Gym> {
+    return this.apiService.post(`/gym/`);
+  }
+
 
   find(id: number) : Observable<Gym> {
     return this.apiService.get(`/gym/${id}`);

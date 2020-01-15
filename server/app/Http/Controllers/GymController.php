@@ -93,6 +93,7 @@ class GymController extends Controller
     }
 
    $gym_id = $this->gym->insert($gym)->id;
+   //todo insert group_subscription_type
    // return the id of the resource j
     return ['gym_id' => $gym_id];
     }
