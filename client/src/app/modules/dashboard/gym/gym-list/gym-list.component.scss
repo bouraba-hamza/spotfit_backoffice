@@ -1,0 +1,26 @@
+
+
+body{
+
+}
+
+.class_image{
+    width: auto;
+    height: 2.5rem;
+}
+.class_image_planing{
+    height: 2.5rem;
+    border: 1px solid silver;
+    padding: 0.1vw;
+    width: 5rem;
+}
+.class_image_qrcode{
+    width: 3.5rem;
+    height: 2.5rem;
+    background: #ececec;
+}
+
+qrcode img{
+    display: block;
+    width: 2.3rem;
+}

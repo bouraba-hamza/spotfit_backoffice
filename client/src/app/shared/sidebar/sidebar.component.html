@@ -5,17 +5,55 @@
             <div class="logo-img">
                 <img [src]="logoUrl" />
             </div>
-            <span class="text align-middle">APEX</span>
         </a>
+        
+
+
+
         <a class="nav-toggle d-none d-sm-none d-md-none d-lg-block" id="sidebarToggle" href="javascript:;">
             <i #toggleIcon appSidebarToggle class="ft-toggle-right toggle-icon" data-toggle="expanded"></i>
         </a>
         <a class="nav-close d-block d-md-block d-lg-none d-xl-none" id="sidebarClose" href="javascript:;">
             <i class="ft-x"></i>
         </a>
-    </div>
+    </div> 
+
+
 </div>
 <!-- Sidebar Header Ends -->
+
+
+<!--
+        {{user.firstName}}
+
+    {"id":1,
+    "firstName":"Walker",
+    "lastName":"Padberg",
+    "gender":"f",
+    "birthDay":"1978-12-03 00:00:00",
+    "phoneNumber":"+1-791-686-8216",
+    "jobTitle":"Insurance Claims Clerk",
+    "cin":"77777",
+    "avatar":"https:\/\/lorempixel.com\/640\/480\/?63872",
+    "created_at":"2019-12-30 11:58:21",
+    "updated_at":"2019-12-30 11:58:21","jwtToken":{"access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC90b2tlblwvcmVmcmVzaCIsImlhdCI6MTU3NzgwNDMzOSwiZXhwIjoxNTc3ODExNTY1LCJuYmYiOjE1Nzc4MDc5NjUsImp0aSI6IkhRdkhMd2dOdlN6UE9XcE4iLCJzdWIiOjEsInBydiI6ImI2ZjdmNDdhY2JmMWE1ZWUxMWIyYjAyOGRjNTZhYTM1ZjIwYzFhN2UifQ.noa32DY_EbIMcWQNCyhq3qS_nE77qucfk8eyhREGcgU","token_type":"bearer","expires_in":3600},"address":{"id":1,"street":"585 Kuvalis Court","formattedAddress":"82839 Elmira Summit Apt. 062","province":"Wyoming","state":"IL","region":"Maine","city":"East Dahlia","country":"Finland","postcode":"02800-3925","latitude":"4.615185","longitude":"2.050465","buildingNumber":949,"addressable_id":1,"addressable_type":"App\\Partner","created_at":"2019-12-30 11:58:37","updated_at":"2019-12-30 11:58:37"},"account":{"id":1,"parent_account":null,"username":"admin","email":"contact@spotfit.com","email_verified_at":"2019-12-30 11:58:21","disabled":0,"accountable_id":1,"accountable_type":"App\\Partner","created_at":"2019-12-30 11:58:35","updated_at":"2019-12-30 11:58:35"}}
+
+-->
+
+<div id="div_current_user">
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img id="div_current_user_img" src="./../../../assets/img/avatars/{{user.avatar}}" class="img-circle user-img-circle" alt="User Image">
+            </div>
+            <div class="pull-right info">
+                <p id="div_current_user_fullname"> {{user.firstName}} {{user.lastName}}</p>
+                <a href="#" id="div_current_user_email"><span class="txtOnline"> {{user.jobTitle}}</span></a>
+            </div>
+        </div>
+</div>
+
+
+
 
 <!-- Sidebar Content starts -->
 <div class="sidebar-content"  [perfectScrollbar]>

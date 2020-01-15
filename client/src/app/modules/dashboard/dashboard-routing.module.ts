@@ -3,8 +3,52 @@ import {RouterModule, Routes} from "@angular/router";
 
 const routes: Routes = [
     {
+        path: 'home',
+        loadChildren: () =>
+        import("../dashboard/home/home.module").then(m => m.HomeModule)
+    },
+    
+    {
+        path: 'group',
+        loadChildren: () =>
+        import("../dashboard/group/group.module").then(m => m.GroupModule)
+    },
+    
+    {
+        path: 'classe',
+        loadChildren: () =>
+        import("../dashboard/classe/classe.module").then(m => m.ClasseModule)
+    },
+    
+    {
+        path: 'activitie',
+        loadChildren: () =>
+        import("../dashboard/activitie/activitie.module").then(m => m.ActivitieModule)
+    },
+    
+    {
         path: '',
-        redirectTo: 'admins',
+        redirectTo: 'home',
+    },
+    {
+        path: 'facilitie',
+        loadChildren: () =>
+        import("../dashboard/facilitie/facilitie.module").then(m => m.FacilitieModule)
+    },
+    {
+        path: 'gym',
+        loadChildren: () =>
+        import("../dashboard/gym/gym.module").then(m => m.GymModule)
+    },
+    {
+        path: 'equipement',
+        loadChildren: () =>
+        import("../dashboard/equipement/equipement.module").then(m => m.EquipementModule)
+    },
+    {
+        path: 'facture',
+        loadChildren: () =>
+        import("../dashboard/facture/facture.module").then(m => m.FactureModule)
     },
     {
         path: 'admins',
@@ -36,28 +80,16 @@ const routes: Routes = [
         loadChildren: () =>
             import("../dashboard/chat/chat.module").then(m => m.ChatModule)
     },
-    {
-        path: 'equipment',
-        loadChildren: () =>
-            import("./equipments/materiel.module").then(m => m.MaterielModule)
-
-    },
-    {
+   /* {
         path: 'pass',
         loadChildren: () =>
             import("./pass/pass.module").then(m => m.PassModule)
 
-    },
+    },*/
     {
-        path: 'class',
+        path: 'group',
         loadChildren: () =>
-            import("./class/class.module").then(m => m.ClassModule)
-
-    },
-    {
-        path: 'gyms',
-        loadChildren: () =>
-            import("../dashboard/gyms/gym.module").then(m => m.GymModule)
+            import("../dashboard/group/group.module").then(m => m.GroupModule)
     },
     // {
     //   path: 'home',

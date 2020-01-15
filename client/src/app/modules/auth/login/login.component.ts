@@ -29,7 +29,7 @@ export class LoginComponent {
         if (response.errors !== undefined) {
           this.errors = response.errors;
         } else {
-          this.router.navigateByUrl('dashboard/admins');
+          this.router.navigateByUrl('dashboard/home');
         }
       });
     }

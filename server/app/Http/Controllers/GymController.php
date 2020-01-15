@@ -1,82 +1,177 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
+
 use App\Gym;
-use DB;
+use App\Repositories\GymRepository;
+use App\Http\Requests\GymRequest;
 use Illuminate\Http\Request;
 use Validator;
+use Illuminate\Support\Facades\Log;
 
 class GymController extends Controller
 {
+
+
+
+ /**
+     * @var gym
+     */
+    private $gym;
+
+
+    /**
+     * gymController constructor.
+     * @param GymRepository $GymRepository
+     */
+    public function __construct(GymRepository $gymRepository)
+    {
+        $this->gym = $gymRepository;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        return DB::table("gyms")->get();
+    return $this->gym->all();
+
     }
 
-    public function show()
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
-        $sql = "
-           select gyms.id,gyms.name , gyms.adress , gyms.tel , gyms.gamme ,  gyms.avis ,  gyms.qrcode , users.login
-           from gyms , users
-           where   gyms.id_gerant = users.id
-        ";
-        return \DB::select(\DB::raw($sql));
+        //
     }
 
-    public function get($gym_id)
-    {
-        return Gym::findOrFail($gym_id);
-    }
-
-
-    public function getByAdmin($id_gerant)
-    {
-        $sql = "
-            select * from gyms where id_gerant=$id_gerant
-        ";
-        return \DB::select(\DB::raw($sql));
-
-    }
-
-
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
+        // filter unwanted inputs from request
+                       $gym = $request->all();
 
-        $rules = [
-            'name' => 'required',
-            'adress' => 'required',
-            'tel' => 'required',
-            'gamme' => 'required',
-            'avis' => 'required',
-            'qrcode' => 'required'
-        ];
+                       $validator = Validator::make($gym, [
+'group_id'=> 'required',
+'logo'=> 'required',
+'name'=> 'required',
+'rate'=> 'required',
+'qrcode'=> 'required',
+'class_id'=> 'required',
+'facilities'=> 'required',
+'planning'=> 'required',
+'file' => 'required|image|mimes:jpeg,png,jpg,bmp,gif,svg|max:2048'
 
-        $validator = Validator::make($request->all(), $rules);
+                       ], GymRequest::VALIDATION_MESSAGES);
+
+                       if ($validator->fails()) {
+                            return response()->json(['errors' => $validator->errors()->all()]);
+                       }
+
+
+      if ($request->hasFile('file')) {
+        $image = $request->file('file');
+        $qrcode = $request->get('qrcode');
+        // $name = time().'.'.$image->getClientOriginalExtension();
+        $destinationPath = public_path('uploads/logo/');
+        $image->move($destinationPath, 'gymLogo_'.$qrcode.'.'.$image->getClientOriginalExtension() );
+
+
+        $gym['logo'] = 'gymLogo_'.$qrcode.'.'.$image->getClientOriginalExtension() ;
+    }
+
+   $gym_id = $this->gym->insert($gym)->id;
+   // return the id of the resource j
+    return ['gym_id' => $gym_id];
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Gym  $gym
+     * @return \Illuminate\Http\Response
+     */
+    public function show($gym_id)
+    {
+        return $this->gym->find($gym_id);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Gym  $gym
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Gym $gym)
+    {
+        //
+    }
+
+    /*
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Gym  $gym
+     * @return \Illuminate\HttpResponse
+     */
+    public function update(Request $request, $gym_id)
+    {
+       // check if the the requested resource exist in database
+        $gym = $this->gym->find($gym_id);
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
+'group_id'=> 'required',
+'logo'=> 'required',
+'name'=> 'required',
+'rate'=> 'required',
+'qrcode'=> 'required',
+'class_id'=> 'required',
+'facilities'=> 'required',
+'planning'=> 'required',
+
+        ], GymRequest::VALIDATION_MESSAGES);
 
         if ($validator->fails()) {
-            return response()->json(["ok" => 0, "error" => $validator->errors()->first()]);
+            return response()->json(['errors' => $validator->errors()->all()]);
         }
 
-        Gym::create($request->all());
+        $this->gym->update($gym_id, $data);
 
-        return response()->json(["ok" => 1, "feedback" => "we generate a new resource for you"]);
-
+        return ['gym_id' => $gym_id];
     }
 
 
-    public function update(Request $request)
+
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Gym  $gym
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($gym_id)
     {
-        Gym::where("id", $request->get("id"))
-            ->update($request->except(["id"]));
-
-        return response()->json(["ok" => 1, "feedback" => "go to main page to see changes"]);
+        $this->gym->destroy($gym_id);
+        return ['status' => 'success', 'deleted_resource_id' => $gym_id];
     }
 
 
-    public function destroy($id)
-    {
-        DB::table('gyms')->where('id', '=', $id)->delete();
-        return ["ok" => 1, "feedback" => "the resource softly deleted, check the trash"];
-    }
+
 }
+
+
+

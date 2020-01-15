@@ -24,7 +24,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { HttpTokenInterceptor } from './@core/interceptors/http.token.interceptor';
 import {HttpErrorInterceptor} from "@app/@core/interceptors/http-error.interceptor";
 
-
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false

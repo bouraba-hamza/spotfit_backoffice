@@ -16,6 +16,7 @@ class CreateEquipmentsTable extends Migration
         Schema::create('equipments', function (Blueprint $table) {
               $table->bigIncrements('id');
                         $table->text('libelle')->nullable();
+                        $table->string('photo')->nullable();
 //                         $table->string('code_barre');
 //                         $table->text('state')->nullable();
                         $table->float('rate', 8, 2);

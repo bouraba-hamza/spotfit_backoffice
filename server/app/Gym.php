@@ -1,5 +1,4 @@
 <?php
-
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
@@ -11,19 +10,20 @@ class Gym extends Model
     protected  $table = "gyms";
 
     protected $fillable = [
-        "logo",
-        "name",
-        "adress",
-        "tel",
-        "qrcode",
-        "rate",
-    ];
-
-    protected $casts = [
-         'facilities' => 'array'
+     "group_id",
+"logo",
+"name",
+"rate",
+"qrcode",
+"class_id",
+"facilities",
+"planning",
+ 
     ];
 
     public function gyms() {
         return $this->belongsToMany('App\Gym', "gyms");
     }
 }
+
+

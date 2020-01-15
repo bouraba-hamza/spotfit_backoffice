@@ -5,11 +5,13 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { TranslateService } from '@ngx-translate/core';
 import { customAnimations } from "../animations/custom-animations";
 import { ConfigService } from '../services/config.service';
+import { AuthService } from '@app/@core/services/auth.service';
 
 @Component({
   selector: "app-sidebar",
   templateUrl: "./sidebar.component.html",
-  animations: customAnimations
+  animations: customAnimations,
+  styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit, AfterViewInit {
 
@@ -20,8 +22,9 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   activeTitles: string[] = [];
   expanded: boolean;
   nav_collapsed_open = false;
-  logoUrl = 'assets/img/logo.png';
+  logoUrl = 'assets/img/logo.svg';
   public config: any = {};
+  user: any;
 
 
   constructor(
@@ -31,11 +34,15 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     public translate: TranslateService,
     private configService: ConfigService,
+    private authService: AuthService
   ) {
     if (this.depth === undefined) {
       this.depth = 0;
-      this.expanded = true;
+      this.expanded = false;
     }
+
+    this.user = this.authService.getCurrentUser();
+
   }
 
 
@@ -46,10 +53,10 @@ export class SidebarComponent implements OnInit, AfterViewInit {
 
 
     if (this.config.layout.sidebar.backgroundColor === 'white') {
-      this.logoUrl = 'assets/img/logo-dark.png';
+      this.logoUrl = 'assets/img/logo.svg';
     }
     else {
-      this.logoUrl = 'assets/img/logo.png';
+      this.logoUrl = 'assets/img/logo.svg';
     }
 
 

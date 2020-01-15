@@ -1,73 +1,152 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
+
 use App\Equipement;
+use App\Repositories\EquipementRepository;
+use App\Http\Requests\EquipementRequest;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Validator;
-use DB;
 
 class EquipementController extends Controller
 {
+
+
+
+ /**
+     * @var equipement
+     */
+    private $equipement;
+
+
+    /**
+     * equipementController constructor.
+     * @param EquipementRepository $EquipementRepository
+     */
+    public function __construct(EquipementRepository $equipementRepository)
+    {
+        $this->equipement = $equipementRepository;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        return DB::table("equipments")->get();
+    return $this->equipement->all();
+
     }
 
-    public function get($equipement_id)
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
-        return Equipement::findOrFail($equipement_id);
+        //
     }
 
-    public function show()
-    {
-        $sql = "
-           select equipments.id, equipments.image, equipments.libelle, equipments.code_barre, equipments.gamme, equipments.etat
-           from equipments
-        ";
-        return \DB::select(\DB::raw($sql));
-    }
-
-
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
+        // filter unwanted inputs from request
+                       $equipement = $request->all();
+                       
+                       $validator = Validator::make($equipement, [
+'libelle'=> 'required',
+'rate'=> 'required',
+'gym_id'=> 'required',
 
-        $rules = [
-            'libelle' => 'required',
-            'id_gym' => 'required',
-            'code_barre' => 'required',
-            'gamme' => 'required',
-            'etat' => 'required',
-            'image' => 'required'
-        ];
+                       ], EquipementRequest::VALIDATION_MESSAGES);
 
-        $validator = Validator::make($request->all(), $rules);
+                       if ($validator->fails()) {
+                            return response()->json(['errors' => $validator->errors()->all()]);
+                       }
 
-        if($validator->fails()) {
-            return response()->json(["ok"=> 0, "error"=> $validator->errors()->first() ]);
-        }
-
-        Equipement::create($request->all());
-
-        return response()->json(["ok"=> 1, "feedback"=> "we generate a new resource for you" ]);
-
+                       $equipement_id = $this->equipement->insert($equipement)->id;
+                       // return the id of the resource j
+                      return ['equipement_id' => $equipement_id];
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Equipement  $equipement
+     * @return \Illuminate\Http\Response
+     */
+    public function show($equipement_id)
+    {  
+        return $this->equipement->find($equipement_id);
+    }
 
-
-    public function update(Request $request)
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Equipement  $equipement
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Equipement $equipement)
     {
-        Equipement::where("id", $request->get("id"))
-            ->update($request->except(["id"]));
+        //
+    }
 
-        return response()->json(["ok"=> 1, "feedback"=> "go to main page to see changes"]);
+    /*
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Equipement  $equipement
+     * @return \Illuminate\HttpResponse
+     */
+    public function update(Request $request, $equipement_id)
+    {
+       // check if the the requested resource exist in database
+        $equipement = $this->equipement->find($equipement_id);
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
+'libelle'=> 'required',
+'rate'=> 'required',
+'gym_id'=> 'required',
+
+        ], EquipementRequest::VALIDATION_MESSAGES);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+ 
+        $this->equipement->update($equipement_id, $data);
+
+        return ['equipement_id' => $equipement_id];
     }
 
 
+
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Equipement  $equipement
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($equipement_id)
     {
-        DB::table('equipments')->where('id', '=', $equipement_id)->delete();
-        return ["ok" => 1, "feedback" => "the resource softly deleted, check the trash"];
+        $this->equipement->destroy($equipement_id);
+        return ['status' => 'success', 'deleted_resource_id' => $equipement_id];
     }
+
+
 }
+
+
+

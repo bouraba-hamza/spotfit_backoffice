@@ -1,0 +1,61 @@
+
+
+<div class="card">
+    <div class="card-header pb-2">
+      <h4 class="card-title" id="hidden-label-colored-controls">{{ heading }}</h4>
+    </div>
+    <div class="card-content">
+      <div class="px-3">
+        <form class="form" [formGroup]="base64ToPngForm" (ngSubmit)="onSubmit()">
+         
+
+         
+          <div class="form-body">
+            <h4 class="form-section"><i class="ft-info"></i> Informations Personnelles</h4>
+
+            <div class="row">
+
+              
+ <div class="form-base64ToPng col-md-6 mb-2"> 
+     <label class="sr-only" for="name">name</label> 
+     <input type="text" id="name" class="form-control border-secondary" placeholder="name du base64ToPng" name="name" formControlName="name"> 
+   </div>    
+
+ <div class="form-base64ToPng col-md-6 mb-2"> 
+     <label class="sr-only" for="code">code</label> 
+     <input type="text" id="code" class="form-control border-secondary" placeholder="code du base64ToPng" name="code" formControlName="code"> 
+   </div>    
+
+ 
+
+            </div>
+
+
+          </div>
+
+
+
+
+          <div class="form-actions right">
+            <button type="button" class="btn btn-raised btn-warning mr-1" (click)="onCancel()">
+              <i class="ft-x"></i> Annuler
+            </button>
+              <button type="submit" class="btn btn-raised btn-primary" *ngIf="type !== 'add'; else add" [disabled]="inProgress">
+                  <i class="fa fa-check-square-o"></i> Modifier
+              </button>
+              <ng-template #add>
+                  <button type="submit" class="btn btn-raised btn-primary" [disabled]="inProgress">
+                      <i class="fa fa-check-square-o"></i> Enregistrer
+                  </button>
+              </ng-template>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+
+
+ 

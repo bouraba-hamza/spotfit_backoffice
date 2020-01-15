@@ -1,0 +1,146 @@
+
+
+
+<div class="row text-left">
+  <div class="col-12 d-flex align-items-center justify-content-between">
+    <content-heading id="icone_module_gym" [icon]="'icon-notebook'" [heading]="'Gym'" [subHeading]=""></content-heading>
+    <div>
+      <a
+        class="btn btn-raised btn-primary m-0 mr-1"
+        [routerLink]="['form']"
+        [queryParams]="{ action: 'add' }"
+      >
+        <i class="fa fa-plus"></i>
+      </a>
+      <button class="btn btn-raised btn-secondary m-0" (click)="refresh()">
+        <i class="ft-refresh-ccw"></i>
+      </button>
+    </div>
+  </div>
+</div>
+<section id="extended">
+  <div class="row text-left">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-content">
+          <table mat-table [dataSource]="dataSource" matSort>
+
+            
+
+
+
+ <ng-container matColumnDef="logo"> 
+ <th mat-header-cell *matHeaderCellDef mat-sort-header>Logo</th> 
+   <td mat-cell *matCellDef="let element"> 
+     <img class="class_image" src="http://localhost:8000/uploads/logo/{{ element.logo | lowercase }}">
+   </td> 
+   </ng-container> 
+
+
+   <ng-container matColumnDef="qrcode"> 
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Qrcode</th> 
+      <td mat-cell *matCellDef="let element">
+        <qrcode class="class_image_qrcode" [qrdata]="element.qrcode"   [size]="25" [level]="'M'"></qrcode>
+      </td> 
+      </ng-container> 
+   
+
+
+ <ng-container matColumnDef="name"> 
+ <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th> 
+   <td mat-cell *matCellDef="let element"> 
+     <b>{{ element.name | lowercase }}</b> 
+   </td> 
+   </ng-container> 
+
+
+ <ng-container matColumnDef="rate"> 
+
+ <th mat-header-cell *matHeaderCellDef mat-sort-header>Rate</th> 
+   <td mat-cell *matCellDef="let element"> 
+     <star-rating  value="{{element.rate}}" checkedcolor="silver" uncheckedcolor="lightgray" size="24px"    readonly="false" (rate)="onRate($event)"></star-rating>
+   </td> 
+   </ng-container> 
+
+
+
+   <ng-container matColumnDef="group_id"> 
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Group</th> 
+      <td mat-cell *matCellDef="let element"> 
+        <b  [innerHTML]="element.group_id " ></b>  
+      </td> 
+      </ng-container> 
+
+
+ <ng-container matColumnDef="class_id"> 
+ <th mat-header-cell *matHeaderCellDef mat-sort-header>Classe</th> 
+   <td mat-cell *matCellDef="let element"> 
+     <b  [innerHTML]="element.class_id " ></b>  
+   </td> 
+   </ng-container> 
+
+
+ <ng-container matColumnDef="facilities"> 
+ <th mat-header-cell *matHeaderCellDef mat-sort-header>Facilities</th> 
+   <td mat-cell *matCellDef="let element"> 
+     <b>{{ element.facilities | lowercase }}</b> 
+   </td> 
+   </ng-container> 
+
+
+ <ng-container matColumnDef="planning"> 
+ <th mat-header-cell *matHeaderCellDef mat-sort-header>Planning</th> 
+   <td mat-cell *matCellDef="let element"> 
+    <!-- <b>{{ element.planning | lowercase }}</b> -->  
+     <img class="class_image_planing" src="http://localhost:8000/uploads/img/gymPlaning_{{ element.qrcode | lowercase }}.png">
+   </td> 
+   
+   
+   </ng-container> 
+
+ 
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-button [matMenuTriggerFor]="menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button
+                    mat-menu-item
+                    (click)="onEdit(element.id)"
+                    class="text-warning"
+                  >
+                    <mat-icon class="text-warning">edit</mat-icon>Modifier
+                  </button>
+                  <button mat-menu-item aria-label="remove" (click)="onDelete(element.id)">
+                    <mat-icon style="color: red">delete</mat-icon>
+                    <span>Remove</span>
+                  </button>
+                </mat-menu>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns" class="mr-auto"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+
+          <mat-paginator
+            [length]="gym.length"
+            [pageSize]="10"
+            [pageSizeOptions]="[5, 10, 25, 100]"
+          >
+          </mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+ 

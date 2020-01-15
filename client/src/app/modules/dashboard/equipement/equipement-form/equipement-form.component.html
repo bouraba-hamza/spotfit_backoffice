@@ -1,0 +1,68 @@
+
+
+<div class="card">
+    <div class="card-header pb-2">
+      <h4 class="card-title" id="hidden-label-colored-controls">{{ heading }}</h4>
+    </div>
+    <div class="card-content">
+      <div class="px-3">
+        <form class="form" [formGroup]="equipementForm" (ngSubmit)="onSubmit()">
+         
+
+         
+          <div class="form-body">
+            <h4 class="form-section"><i class="ft-info"></i> Informations Personnelles</h4>
+
+            <div class="row">
+
+              
+ <div class="form-equipement col-md-6 mb-2"> 
+     <label class="sr-only" for="libelle">libelle</label> 
+     <input type="text" id="libelle" class="form-control border-secondary" placeholder="libelle du equipement" name="libelle" formControlName="libelle"> 
+   </div>    
+
+ <div class="form-equipement col-md-6 mb-2"> 
+     <label class="sr-only" for="rate">rate</label> 
+     <input type="text" id="rate" class="form-control border-secondary" placeholder="rate du equipement" name="rate" formControlName="rate"> 
+   </div>    
+
+ <div class="form-equipement col-md-6 mb-2"> 
+     <label class="sr-only" for="gym_id">gym_id</label> 
+   <select  id="gym_id" class="form-control border-secondary" placeholder="gym_id du equipement" name="gym_id" formControlName="gym_id">
+      <option selected value="-1">-- Gym --</option>
+      <option *ngFor="let gym of gyms" value="{{gym.id}}">{{gym.name}}</option>	 
+    </select>
+    </div>  
+ 
+
+            </div>
+
+
+          </div>
+
+
+
+
+          <div class="form-actions right">
+            <button type="button" class="btn btn-raised btn-warning mr-1" (click)="onCancel()">
+              <i class="ft-x"></i> Annuler
+            </button>
+              <button type="submit" class="btn btn-raised btn-primary" *ngIf="type !== 'add'; else add" [disabled]="inProgress">
+                  <i class="fa fa-check-square-o"></i> Modifier
+              </button>
+              <ng-template #add>
+                  <button type="submit" class="btn btn-raised btn-primary" [disabled]="inProgress">
+                      <i class="fa fa-check-square-o"></i> Enregistrer
+                  </button>
+              </ng-template>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+
+
+ 

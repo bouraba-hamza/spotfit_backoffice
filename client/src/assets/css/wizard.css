@@ -134,7 +134,7 @@
             -webkit-box-shadow: 0 0 0 100px rgba(0, 0, 0, 0.1) inset;
             box-shadow: 0 0 0 100px rgba(0, 0, 0, 0.1) inset; }
         .main-content .wizard > .actions > ul > li > a[href="#previous"] {
-          background-color: #FF8D60;
+          background-color: #968eff;
           color: #FFF;
           }
           .main-content .wizard > .actions > ul > li > a[href="#previous"]:hover {

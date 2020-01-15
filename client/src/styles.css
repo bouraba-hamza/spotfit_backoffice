@@ -1,0 +1,209 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+
+/* @import url("assets/css/bootstrap.min.css"); */
+/* @import url("../src/assets/css/prism.min.css");
+@import url("../src/assets/css/sweetalert2.min.css");
+@import url("../src/assets/css/bootstrap-timepicker.min.css");
+@import url("../src/assets/css/wizard.css");
+@import url("../src/assets/css/leaflet.css");
+@import url("../src/assets/css/jquery-jvectormap-2.0.3.css");
+@import url("../src/assets/css/ng2-toastr.min.css");
+@import url("../src/assets/css/nouislider.min.css");
+@import url("../src/assets/css/data-table/index.css");
+@import url("../src/assets/css/data-table/icons.css");
+@import url("../src/assets/css/demo.css"); */
+
+@font-face {
+  font-family: "CustomFont";
+  src: url("CustomFont.eot");
+  src: url("CustomFont.woff") format("woff"),
+  url("CustomFont.otf") format("opentype"),
+  url("CustomFont.svg#filename") format("svg");
+  }
+  
+ 
+  @font-face {
+    font-family: "opensans";
+    src: url("assets/fonts/open-sans/OpenSans-Regular.ttf");
+    }
+  
+    
+html,
+body {
+  height: 100%;
+}
+*{
+  font-family: opensans;
+  letter-spacing: 0.05vw;
+}
+body {
+  margin: 0;
+  font-family: opensans, Roboto, "Helvetica Neue", sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.05vw;
+}
+table {
+  width: 100%;
+}
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+td.mat-cell {
+  padding: 0;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  font-family: opensans;
+  font-size: 1.1rem;
+}
+
+.app-sidebar {
+  z-index: 5;
+  background: #0000008c;
+  box-shadow: none;
+}
+body {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+.navbar {
+  background-color:  #f4f4fa;
+  box-shadow: none;
+}
+.main-panel {
+  background: #f4f4fa;
+}
+.wrapper {
+  background: #f4f4fa ;
+}
+
+
+/*
+.app-sidebar {
+  padding-right: 7%;
+}
+.app-sidebar .navigation li > a:before, .off-canvas-sidebar .navigation li > a:before {
+  border-radius: 5em 0 0 5em;
+}
+.app-sidebar .navigation li, .off-canvas-sidebar .navigation li {
+margin-left: 1vw;
+}
+
+.app-sidebar .navigation li > a:before{
+  border: none;
+}
+.app-sidebar .logo-img{
+  width: 100%;
+}
+.app-sidebar .logo .logo-text {
+  width: 100%;
+  margin: auto;
+}*/
+.app-sidebar .navigation li > a:before{
+  border: none !important;
+}
+.app-sidebar .navigation li > a:before, .off-canvas-sidebar .navigation li > a:before {
+  border-radius: 5em 0 0 5em !important;
+  background: url('assets/img/BUTTON1.png') !important;
+  background-size: 100% !important;
+  background-repeat: no-repeat !important;
+  background-position-x: 100% !important;
+}
+.app-sidebar .navigation li, .off-canvas-sidebar .navigation li {
+  padding-left: 32px;
+}
+
+.sidebar-content{
+  width: 100%;
+}
+.app-sidebar {
+  z-index: 5;
+  background: #0000008c;
+  box-shadow: none;
+  /*padding-right: 5.5vw;*/
+}
+.app-sidebar .logo, .off-canvas-sidebar .logo {
+  width: 100%;  
+}
+.app-sidebar .logo-img{
+  width: 100%;
+}
+.app-sidebar .logo .logo-text {
+  width: 66%;
+  margin: auto;
+  padding-left: 1em;
+}
+
+/*current active menu link*/
+
+.app-sidebar .navigation li > a:before, .off-canvas-sidebar .navigation li > a:before {
+  background: white;
+}
+
+.ps__thumb-y {
+  right: -2px;
+}
+.app-sidebar .sidebar-content, .off-canvas-sidebar .sidebar-content{
+  display: inline-block;
+}
+
+.sidebar-background{
+  display: none;
+}
+.app-sidebar, .off-canvas-sidebar {
+  background-color: transparent !important;
+}
+
+.app-sidebar .sidebar-background, .off-canvas-sidebar .sidebar-background {
+ /* width: 90%;*/
+}
+
+.app-sidebar{
+  display: inline-block !important;
+}
+#right-sidebar-bloc{
+  width: 2.3em;
+  height: 100%;
+  display: inline-block;
+  z-index: 9;
+  top: 0;
+  background-color: transparent !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background: transparent;
+  position: absolute;
+  /* background-color: #f3f3f9 !important; */
+  /* border: 1px solid blue;*/
+}
+
+#right-sidebar-bloc-top{
+  width: 100%;
+  background: url('assets/img/menu_top.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* position: absolute; */
+  top: 0;
+  height: 4.5vw;
+}
+#right-sidebar-bloc-bottom{
+  background: url('assets/img/menu_bottom.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: 0;
+  height: 4.3em;
+  width: 2.3em;
+  z-index: 9;
+  right: 0;
+  background-color: #f4f4fa;
+}
+
+.navbar-right div .form-control {
+   background: transparent !important; 
+   border: none; 
+}
+
+.app-sidebar .navigation{
+  margin-top: 4.8vw !important;
+}

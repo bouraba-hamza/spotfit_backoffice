@@ -8,6 +8,7 @@ use JWTAuth;
 use JWTException;
 use Illuminate\Support\Facades\Log;
 
+
 class AuthController extends Controller
 {
     public function login(Request $request)
@@ -20,7 +21,7 @@ class AuthController extends Controller
             ->first();
         // in case request user dosn't exist
         if (!$account) {
-            return ["errors" => ["les informations d'identification invalides"]];
+            return ["errors" => ["les informations d'identification invalides: "]];
         }
 
         // verify the password
@@ -28,7 +29,7 @@ class AuthController extends Controller
 
         // the password dosn't match
         if (!$truePass) {
-            return ["errors" => ["les informations d'identification invalides"]];
+            return ["errors" => ["les informations d'identification invalides: "]];
         }
 
         // email must to be verified

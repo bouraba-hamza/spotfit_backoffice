@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
 
-import { ApiService } from './api.service';
-import { JwtService } from './jwt.service';
+import { ApiService } from '@app/@core/services/api.service';
+import { JwtService } from '@app/@core/services/jwt.service';
 import {map, distinctUntilChanged, tap, catchError} from 'rxjs/operators';
 import { Router } from '@angular/router';
 
