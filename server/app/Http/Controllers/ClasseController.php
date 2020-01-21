@@ -6,8 +6,11 @@ namespace App\Http\Controllers;
 
 use App\Classe;
 use App\Repositories\ClasseRepository;
+use App\Services\ClassImageService;
 use App\Http\Requests\ClasseRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Validator;
 
 class ClasseController extends Controller
@@ -20,14 +23,17 @@ class ClasseController extends Controller
      */
     private $classe;
 
+    protected $classImageService;
 
     /**
      * classeController constructor.
      * @param ClasseRepository $ClasseRepository
      */
-    public function __construct(ClasseRepository $classeRepository)
+    public function __construct(ClasseRepository $classeRepository, ClassImageService $classImageService)
     {
         $this->classe = $classeRepository;
+        $this->classImageService = $classImageService;
+
     }
 
     /**
@@ -37,7 +43,31 @@ class ClasseController extends Controller
      */
     public function index()
     {
-    return $this->classe->all();
+  //  return $this->classe->all();
+
+        $classData = $this->classe->all();
+
+
+
+        foreach($classData as $key => $oneData){
+
+            $photo = $oneData->image;
+
+            if($photo) {
+                $slices = explode('.', $photo);
+                $ext = end($slices);
+                $content = Storage::get('class/' . $photo);
+                $encoded_content = base64_encode($content);
+                $imageData = 'data:' . 'image/' . $ext  . ';base64,' . $encoded_content;
+                $classData[$key]->photo= $imageData;
+            } else {
+                $imageData = false;
+            }
+
+        }
+
+
+        return $classData;
 
     }
 
@@ -60,23 +90,28 @@ class ClasseController extends Controller
     public function store(Request $request)
     {
         // filter unwanted inputs from request
-                       $classe = $request->all();
-                       
-                       $validator = Validator::make($classe, [
-'name'=> 'required',
-'image'=> 'required',
-'prix_min'=> 'required',
-'prix_max'=> 'required',
 
-                       ], ClasseRequest::VALIDATION_MESSAGES);
 
-                       if ($validator->fails()) {
-                            return response()->json(['errors' => $validator->errors()->all()]);
-                       }
+        $class = $request->all();
+        // save the file in storage
+        if ($request->hasFile("image")) {
+            $class["image"] = $this->classImageService->store($request->file('image'))["fakeName"];
+        }
 
-                       $classe_id = $this->classe->insert($classe)->id;
-                       // return the id of the resource j
-                      return ['classe_id' => $classe_id];
+        // Todo create class_pass row
+        $class_pass = $this->classe->insert($class);
+
+        if($passe_with_price = $request->get('passes'))
+        {
+            foreach ($passe_with_price as $passe_price_id => $priceAttach)
+            {
+                    if($priceAttach) $class_pass->subscription()->attach($priceAttach['passid'], ['prix_min' => $priceAttach['prix_min'], 'prix_max' => $priceAttach['prix_max']]);
+
+            }
+        }
+
+        return ['class_id' => $class_pass->id];
+
     }
 
     /**
@@ -86,7 +121,7 @@ class ClasseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($classe_id)
-    {  
+    {
         return $this->classe->find($classe_id);
     }
 
@@ -115,25 +150,19 @@ class ClasseController extends Controller
         $data = $request->all();
 
         $validator = Validator::make($data, [
-'name'=> 'required',
-'image'=> 'required',
-'prix_min'=> 'required',
-'prix_max'=> 'required',
+                'name'=> 'required',
+                'image'=> 'required',
 
         ], ClasseRequest::VALIDATION_MESSAGES);
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
         }
- 
+
         $this->classe->update($classe_id, $data);
 
         return ['classe_id' => $classe_id];
     }
-
-
-
-
 
     /**
      * Remove the specified resource from storage.

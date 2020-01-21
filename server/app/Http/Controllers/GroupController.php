@@ -61,10 +61,10 @@ class GroupController extends Controller
     {
         // filter unwanted inputs from request
                        $group = $request->all();
-                       
+
                        $validator = Validator::make($group, [
-'name'=> 'required',
-'partner_id'=> 'required',
+                           'name' => 'required',
+                           'partner_id' => 'required',
 
                        ], GroupRequest::VALIDATION_MESSAGES);
 
@@ -84,7 +84,7 @@ class GroupController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($group_id)
-    {  
+    {
         return $this->group->find($group_id);
     }
 
@@ -121,7 +121,7 @@ class GroupController extends Controller
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
         }
- 
+
         $this->group->update($group_id, $data);
 
         return ['group_id' => $group_id];

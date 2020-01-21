@@ -13,13 +13,18 @@ const routes: Routes = [
         loadChildren: () =>
         import("../dashboard/group/group.module").then(m => m.GroupModule)
     },
-    
     {
-        path: 'classe',
+        path: 'pass',
         loadChildren: () =>
-        import("../dashboard/classe/classe.module").then(m => m.ClasseModule)
+            import("./pass/pass.module").then(m => m.PassModule)
+
     },
-    
+    {
+        path: 'class',
+        loadChildren: () =>
+            import('./class/class.module').then(m => m.ClassModule)
+
+    },
     {
         path: 'activitie',
         loadChildren: () =>

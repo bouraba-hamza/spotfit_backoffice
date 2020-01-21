@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Facilitie;
 use App\Repositories\FacilitieRepository;
 use App\Http\Requests\FacilitieRequest;
+use App\Services\FacilitieService;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -14,20 +15,21 @@ class FacilitieController extends Controller
 {
 
 
-
- /**
+    /**
      * @var facilitie
      */
     private $facilitie;
-
+    protected $facilitieService;
 
     /**
      * facilitieController constructor.
      * @param FacilitieRepository $FacilitieRepository
      */
-    public function __construct(FacilitieRepository $facilitieRepository)
+    public function __construct(FacilitieRepository $facilitieRepository, FacilitieService $facilitieService)
     {
         $this->facilitie = $facilitieRepository;
+
+        $this->facilitieService = $facilitieService;
     }
 
     /**
@@ -37,7 +39,8 @@ class FacilitieController extends Controller
      */
     public function index()
     {
-    return $this->facilitie->all();
+
+        return $this->facilitie->all();
 
     }
 
@@ -54,45 +57,49 @@ class FacilitieController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         // filter unwanted inputs from request
-                       $facilitie = $request->all();
-                       
-                       $validator = Validator::make($facilitie, [
-'icon'=> 'required',
-'name'=> 'required',
-'order'=> 'required',
+        $facilitie = $request->all();
 
-                       ], FacilitieRequest::VALIDATION_MESSAGES);
+        if ($request->hasFile("icon")) {
+            $facilitie["icon"] = $this->facilitieService->store($request->file('icon'))["fakeName"];
+        }
 
-                       if ($validator->fails()) {
-                            return response()->json(['errors' => $validator->errors()->all()]);
-                       }
 
-                       $facilitie_id = $this->facilitie->insert($facilitie)->id;
-                       // return the id of the resource j
-                      return ['facilitie_id' => $facilitie_id];
+        $validator = Validator::make($facilitie, [
+            'name' => 'required',
+            'order' => 'required',
+
+        ], FacilitieRequest::VALIDATION_MESSAGES);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        $facilitie_id = $this->facilitie->insert($facilitie)->id;
+        // return the id of the resource j
+        return ['facilitie_id' => $facilitie_id];
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Facilitie  $facilitie
+     * @param \App\Facilitie $facilitie
      * @return \Illuminate\Http\Response
      */
     public function show($facilitie_id)
-    {  
+    {
         return $this->facilitie->find($facilitie_id);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Facilitie  $facilitie
+     * @param \App\Facilitie $facilitie
      * @return \Illuminate\Http\Response
      */
     public function edit(Facilitie $facilitie)
@@ -109,34 +116,31 @@ class FacilitieController extends Controller
      */
     public function update(Request $request, $facilitie_id)
     {
-       // check if the the requested resource exist in database
+        // check if the the requested resource exist in database
         $facilitie = $this->facilitie->find($facilitie_id);
         $data = $request->all();
 
         $validator = Validator::make($data, [
-'icon'=> 'required',
-'name'=> 'required',
-'order'=> 'required',
+            'icon' => 'required',
+            'name' => 'required',
+            'order' => 'required',
 
         ], FacilitieRequest::VALIDATION_MESSAGES);
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
         }
- 
+
         $this->facilitie->update($facilitie_id, $data);
 
         return ['facilitie_id' => $facilitie_id];
     }
 
 
-
-
-
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Facilitie  $facilitie
+     * @param \App\Facilitie $facilitie
      * @return \Illuminate\Http\Response
      */
     public function destroy($facilitie_id)

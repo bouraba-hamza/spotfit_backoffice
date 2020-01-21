@@ -12,7 +12,7 @@
     'locale' => 'en',
     'fallback_locale' => 'en',
     'faker_locale' => 'en_US',
-    'key' => 'base64:TWZv0UM5dtWWmFtu4lGH3RfVgMsWuXbDOvGaJ0zxzd4=',
+    'key' => '',
     'cipher' => 'AES-256-CBC',
     'providers' => 
     array (
@@ -181,7 +181,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'C:\\Users\\Joundo Allah\\Desktop\\final-until-now\\spotfit\\server\\storage\\framework/cache/data',
+        'path' => '/var/www/html/spot-final/server/storage/framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -231,7 +231,7 @@
       array (
         'driver' => 'sqlite',
         'url' => NULL,
-        'database' => 'spotfit_master',
+        'database' => 'spotfit',
         'prefix' => '',
         'foreign_key_constraints' => true,
       ),
@@ -241,9 +241,9 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'spotfit_master',
-        'username' => 'root',
-        'password' => '',
+        'database' => 'spotfit',
+        'username' => 'phpmyadmin',
+        'password' => '1234',
         'unix_socket' => '',
         'charset' => 'utf8mb4',
         'collation' => 'utf8mb4_unicode_ci',
@@ -261,9 +261,9 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'spotfit_master',
-        'username' => 'root',
-        'password' => '',
+        'database' => 'spotfit',
+        'username' => 'phpmyadmin',
+        'password' => '1234',
         'charset' => 'utf8',
         'prefix' => '',
         'prefix_indexes' => true,
@@ -276,9 +276,9 @@
         'url' => NULL,
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'spotfit_master',
-        'username' => 'root',
-        'password' => '',
+        'database' => 'spotfit',
+        'username' => 'phpmyadmin',
+        'password' => '1234',
         'charset' => 'utf8',
         'prefix' => '',
         'prefix_indexes' => true,
@@ -320,12 +320,12 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\Users\\Joundo Allah\\Desktop\\final-until-now\\spotfit\\server\\storage\\app',
+        'root' => '/var/www/html/spot-final/server/storage/app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\Users\\Joundo Allah\\Desktop\\final-until-now\\spotfit\\server\\storage\\app/public',
+        'root' => '/var/www/html/spot-final/server/storage/app/public',
         'url' => 'http://localhost/storage',
         'visibility' => 'public',
       ),
@@ -356,7 +356,7 @@
   ),
   'jwt' => 
   array (
-    'secret' => 'mGfyzYjNDAolekb2ocOjF4s4EVSXSljRSnfjGvWI7ruuPRpyIz0gAjNk7KjkMn5P',
+    'secret' => 'a6EwwWqkPGJ9C9kF1iClTOQE5U7dkiZmkwdxUAVvXG0khueQN2ujD2arHsNb3ySW',
     'keys' => 
     array (
       'public' => NULL,
@@ -407,13 +407,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'C:\\Users\\Joundo Allah\\Desktop\\final-until-now\\spotfit\\server\\storage\\logs/laravel.log',
+        'path' => '/var/www/html/spot-final/server/storage/logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'C:\\Users\\Joundo Allah\\Desktop\\final-until-now\\spotfit\\server\\storage\\logs/laravel.log',
+        'path' => '/var/www/html/spot-final/server/storage/logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -482,7 +482,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'C:\\Users\\Joundo Allah\\Desktop\\final-until-now\\spotfit\\server\\resources\\views/vendor/mail',
+        0 => '/var/www/html/spot-final/server/resources/views/vendor/mail',
       ),
     ),
     'log_channel' => NULL,
@@ -619,7 +619,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => 'C:\\Users\\Joundo Allah\\Desktop\\final-until-now\\spotfit\\server\\storage\\framework/sessions',
+    'files' => '/var/www/html/spot-final/server/storage/framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -639,9 +639,9 @@
   array (
     'paths' => 
     array (
-      0 => 'C:\\Users\\Joundo Allah\\Desktop\\final-until-now\\spotfit\\server\\resources\\views',
+      0 => '/var/www/html/spot-final/server/resources/views',
     ),
-    'compiled' => 'C:\\Users\\Joundo Allah\\Desktop\\final-until-now\\spotfit\\server\\storage\\framework\\views',
+    'compiled' => '/var/www/html/spot-final/server/storage/framework/views',
   ),
   'cors' => 
   array (

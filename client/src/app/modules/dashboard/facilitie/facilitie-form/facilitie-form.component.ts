@@ -58,6 +58,18 @@ export class FacilitieFormComponent implements OnInit {
     let formData: FormData = this.underscore.convertJsontoFormData(formValues);
     console.log(formData);
 
+    let photo: any = document.querySelector('#image ');
+
+    let files = photo.files;
+
+    let fileList: FileList = files;
+
+
+    if (fileList.length > 0) {
+      let file: File = fileList[0];
+      formData.append('icon', file, file.name);
+    }
+    console.log(formData);
 
     this.inProgress = true;
 
@@ -100,7 +112,7 @@ export class FacilitieFormComponent implements OnInit {
   createAddForm() {
     return this.facilitieForm = this.fb.group({
 
-     icon: [null], 
+     icon: [null],
      name: [null], 
      order: [null], 
     });
@@ -109,7 +121,7 @@ export class FacilitieFormComponent implements OnInit {
   createEditForm(facilitie: Facilitie) {
     return this.facilitieForm = this.fb.group({
 
-     icon: [facilitie.icon], 
+     icon: [facilitie.icon],
      name: [facilitie.name], 
      order: [facilitie.order], 
     });
@@ -133,4 +145,3 @@ export class FacilitieFormComponent implements OnInit {
 }
 
 
- 

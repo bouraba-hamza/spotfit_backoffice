@@ -1,328 +1,364 @@
-
-
 <div class="card">
     <div class="card-header pb-2">
-      <h4 class="card-title" id="hidden-label-colored-controls">{{ heading }}</h4>
+        <h4 class="card-title" id="hidden-label-colored-controls">{{ heading }}</h4>
     </div>
     <div class="card-content">
-      <div class="px-3">
-        <form class="form" [formGroup]="gymForm" (ngSubmit)="onSubmit()">
-         
-
-         
-          <div class="form-body">
-            <h4 class="form-section"><i class="ft-info"></i> Informations Personnelles</h4>
-
-            <div class="row">
- 
+        <div class="px-3">
+            <form class="form" [formGroup]="gymForm" (ngSubmit)="onSubmit()">
 
 
-	<div class="form-gym col-md-6 mb-2"> 
-		<h2>Logo</h2>            
-		<div class="form-group">
-				<input type="file" name="image" (change)="fileProgress($event)" />
-		</div>
-		<div *ngIf="fileUploadProgress">
-				Upload progress: {{ fileUploadProgress }}
-		</div>
-		<div class="image-preview mb-3" *ngIf="previewUrl">
-				<img [src]="previewUrl" height="300" />                 
-		</div>
+                <div class="form-body">
+                    <h4 class="form-section"><i class="ft-info"></i> Informations Personnelles</h4>
 
-		<div class="mb-3" *ngIf="uploadedFilePath">
-		</div>
-		 <!--
-		<div class="form-group">
-				<button class="btn btn-primary"  (click)="onSubmit()">Submit</button>
-		</div>
-		-->
-</div>
-<br>
+                    <div class="row">
 
 
- <div class="form-gym col-md-6 mb-2" hidden> 
-     <label class="sr-only" for="logo">logo</label> 
-     <input type="text" id="logo" class="form-control border-secondary" placeholder="logo du gym" name="logo" formControlName="logo" value="gymLogo_qrcode.png"> 
-	 </div>    
+                        <div class="form-gym col-md-6 mb-2">
+                            <h2>Logo</h2>
+                            <div class="form-group">
+                                <input type="file" name="image" (change)="fileProgress($event)"/>
+                            </div>
+                            <div *ngIf="fileUploadProgress">
+                                Upload progress: {{ fileUploadProgress }}
+                            </div>
+                            <div class="image-preview mb-3" *ngIf="previewUrl">
+                                <img [src]="previewUrl" height="300"/>
+                            </div>
 
-	 <div class="form-gym col-md-6 mb-2"> 
-			 <label class="sr-only" for="qrcode">qrcode</label> 
-			 <input type="hidden" id="qrcode" class="form-control border-secondary" placeholder="qrcode du gym" name="qrcode" formControlName="qrcode" readonly> 
-		 
-				<qrcode id="qrcode_view" [qrdata]="guid" [size]="150" [level]="'M'"></qrcode>
-    </div>    
+                            <div class="mb-3" *ngIf="uploadedFilePath">
+                            </div>
 
-
-	 <div class="form-gym col-md-6 mb-2"> 
-		<label class="sr-only" for="name">name</label> 
-		<input type="text" id="name" class="form-control border-secondary" placeholder="name du gym" name="name" formControlName="name"> 
-	</div>   
-
-
+                        </div>
+                        <br>
 
 
+                        <div class="form-gym col-md-6 mb-2" hidden>
+                            <label class="sr-only" for="logo">logo</label>
+                            <input type="text" id="logo" class="form-control border-secondary" placeholder="logo du gym"
+                                   name="logo" formControlName="logo" value="gymLogo_qrcode.png">
+                        </div>
 
-	<div class="form-gym col-md-6 mb-2"> 
-		<label class="sr-only" for="rate">rate</label> 
-		<input type="hidden"class="form-control border-secondary" placeholder="rate du gym"  id="rate" formControlName="rate"  value="{{currentRate}}" > 
-			   
-	    <star-rating  id="rate_"  value="{{currentRate}}" checkedcolor="silver" uncheckedcolor="lightgray" size="25px"    readonly="false" (rate)="onRate($event)"></star-rating>
-		
-	   </div>    
-   
+                        <div class="form-gym col-md-6 mb-2">
+                            <label class="sr-only" for="qrcode">qrcode</label>
+                            <input type="hidden" id="qrcode" class="form-control border-secondary"
+                                   placeholder="qrcode du gym" name="qrcode" formControlName="qrcode" readonly>
 
-
-
-
-
-
+                            <qrcode id="qrcode_view" [qrdata]="guid" [size]="150" [level]="'M'"></qrcode>
+                        </div>
 
 
-	<div class="form-gym col-md-6 mb-2"> 
-		<label class="sr-only" for="class_id">class_id</label> 
-		<select  id="class_id" class="form-control border-secondary" placeholder="class_id du gym" name="class_id" formControlName="class_id">
-		 <option selected value="-1">-- Class --</option>
-		 <option *ngFor="let class of classes" value="{{class.id}}">{{class.name}}</option>	 
-	 </select>
- </div>   
-
-	 <div class="form-gym col-md-6 mb-2"> 
-		<label class="sr-only" for="group_id">group_id</label> 
-	 <select  id="group_id" class="form-control border-secondary" placeholder="group_id du gym" name="group_id" value="-1" formControlName="group_id">
-		 <option selected value="-1">-- Group --</option>
-		 <option *ngFor="let group of groups" value="{{group.id}}">{{group.name}}</option>	 
-	 </select>
- </div>    
+                        <div class="form-gym col-md-6 mb-2">
+                            <label class="sr-only" for="name">name</label>
+                            <input type="text" id="name" class="form-control border-secondary" placeholder="name du gym"
+                                   name="name" formControlName="name">
+                        </div>
 
 
-	 <div class="form-gym col-md-6 mb-2"> 
-		<label class="sr-only" for="facilities">facilities</label> 
-		<input type="text" id="facilities" class="form-control border-secondary" placeholder="facilities du gym" name="facilities" formControlName="facilities" value="{{facilities_choices_name_facilitie}}"   readonly> 
-		<div id="divFacilitiesForm"> 
-			<div id="divFacilitiesForm_select">
-				<select  id="facilities_" class="form-control border-secondary" placeholder="facilities_ du gym" name="facilities_" (change)="select_current_facilitie($event)"  >
-					<option selected value="-1">-- Facilities --</option>
-					<option *ngFor="let facilitie of facilities_left; let i = index" [attr.data-index]="i" value="{{facilities_left[i].id}}">{{facilities_left[i].name}}</option>	 
-				</select>
-				
+                        <div class="form-gym col-md-6 mb-2">
+                            <label class="sr-only" for="rate">rate</label>
+                            <input type="hidden" class="form-control border-secondary" placeholder="rate du gym"
+                                   id="rate" formControlName="rate" value="{{currentRate}}">
+
+                            <star-rating id="rate_" value="5" totalstars="5" checkedcolor="#7a5dcf"
+                                         uncheckedcolor="#fabafb" size="24px"
+                                         readonly="false" (rate)="onRate($event)"></star-rating>
+
+                        </div>
 
 
+                        <div class="form-gym col-md-6 mb-2">
+                            <label class="sr-only" for="class_id">class_id</label>
+                            <select id="class_id" class="form-control border-secondary"
+                                    name="class_id" formControlName="class_id">
+                                <option [value]="null" disabled>-- Class --</option>
+                                <option *ngFor="let class of classes" value="{{class.id}}">{{class.name}}</option>
+                            </select>
+                        </div>
 
-				<div id="div_view_current_facilities_choices">
-					<div *ngFor="let facilities_choices_id of facilities_choices_id_facilitie; let j = index" [attr.data-index]="j"   class="facilitie" >
-							{{ facilities_choices_name_facilitie[j]}} 
-							<input type="button" class="remove_facilitie" (click)="remove_facilitie(j)" value="X"/>
-						</div>
+                        <div class="form-gym col-md-6 mb-2">
+                            <label class="sr-only" for="group_id">group_id</label>
+                            <select id="group_id" class="form-control border-secondary"
+                                    name="group_id" value="-1" formControlName="group_id">
+                                <option [value]="null" disabled>-- Group --</option>
+                                <option *ngFor="let group of groups" value="{{group.id}}">{{group.name}}</option>
+                            </select>
+                        </div>
 
-				</div>
-
-
-
-				
-			</div>
-		</div>
-	</div>    
-
- 
-	
-	<div class="form-gym col-md-6 mb-2"> 
-			<label class="sr-only" for="planning">planning</label> 
-			<input type="text" id="planning" class="form-control border-secondary" placeholder="planning du gym" name="planning" formControlName="planning"  value="{{events_}}"  readonly> 
-			<img id="imgPlanningCalendar" [src]="imagePath" (click)="show_calendar_form()">
-		</div>    
-
-	<!--
- <div class="form-gym col-md-6 mb-2"> 
-     <label class="sr-only" for="planning">planning</label> 
-     <input type="text" id="planning" class="form-control border-secondary" placeholder="planning du gym" name="planning" formControlName="planning" (click)="show_calendar_form()" [value]="planning" readonly> 
-		 <img id="imgPlanningCalendar" [src]="imagePath">
-		-->
-	<!--
-		 <pdf-viewer [src]="pdfSrc" 
-		 [render-text]="true"
-		 style="display: block;"
-		 >
-     </pdf-viewer>
-		-->
-	<!--
-		</div>    
-	-->
-
- 
-
-            </div>
+                        <div class="form-gym col-md-12 mb-2">
+                            <label for="type_id">type_id</label>
+                            <select (change)="onTypeChange($event.target.value)" id="type_id"
+                                    class="form-control border-secondary"
+                                    name="type_id">
+                                <option [value]="null" disabled>-- types --</option>
+                                <option *ngFor="let type of types" value="{{type.id}}">{{type.name}}</option>
+                            </select>
+                        </div>
 
 
-          </div>
+                        <div class="cardib col-md-12">
+                       <div [class.col-md-4]="!condition"
+                            [class.col-md-12]="condition"
+                            class="form-group mb-2"
+                             formArrayName="passes"
+                                 *ngFor="let pass of gymForm.get('passes').controls; let i = index;">
+                                <!--      *ngFor="let pass of filterdPasses; let i = index;">-->
+
+                                <div class="block_in" [formGroupName]="i">
+                                    <h1 *ngIf="!condition"> pass {{passes[i].name}}</h1>
+                                    <h1 *ngIf="condition"> pass {{passes[2].name}}</h1>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <label class="sr-only">Prix</label>
+                                            <input type="number" formControlName="prix"
+                                                   class="form-control border-secondary" placeholder="prix">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                Chosen name: {{ gymForm.controls.passes.controls[i].controls.passid.value }}
+                                prix : {{ gymForm.controls.passes.controls[i].controls.prix.value }}
+                            </div>
+
+                        </div>
 
 
+                        <div class="form-gym col-md-6 mb-2">
+                            <label class="sr-only" for="facilities">facilities</label>
+                            <input type="text" id="facilities" class="form-control border-secondary"
+                                   placeholder="facilities du gym" name="facilities" formControlName="facilities"
+                                   value="{{facilities_choices_name_facilitie}}" readonly>
+                            <div id="divFacilitiesForm">
+                                <div id="divFacilitiesForm_select">
+                                    <select id="facilities_" class="form-control border-secondary"
+                                            placeholder="facilities_ du gym" name="facilities_"
+                                            (change)="select_current_facilitie($event)">
+                                        <option [value]="null" disabled>-- Facilities --</option>
+                                        <option *ngFor="let facilitie of facilities_left; let i = index"
+                                                [attr.data-index]="i"
+                                                value="{{facilities_left[i].id}}">{{facilities_left[i].name}}</option>
+                                    </select>
 
 
-          <div class="form-actions right">
-            <button type="button" class="btn btn-raised btn-warning mr-1" (click)="onCancel()">
-              <i class="ft-x"></i> Annuler
-            </button>
-              <button type="submit" class="btn btn-raised btn-primary" *ngIf="type !== 'add'; else add" [disabled]="inProgress">
-                  <i class="fa fa-check-square-o"></i> Modifier
-              </button>
-              <ng-template #add>
-                  <button type="submit" class="btn btn-raised btn-primary" [disabled]="inProgress">
-                      <i class="fa fa-check-square-o"></i> Enregistrer
-                  </button>
-              </ng-template>
-          </div>
+                                    <div id="div_view_current_facilities_choices">
+                                        <div *ngFor="let facilities_choices_id of facilities_choices_id_facilitie; let j = index"
+                                             [attr.data-index]="j" class="facilitie">
+                                            {{ facilities_choices_name_facilitie[j]}}
+                                            <input type="button" class="remove_facilitie" (click)="remove_facilitie(j)"
+                                                   value="X"/>
+                                        </div>
 
-        </form>
+                                    </div>
 
-      </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-gym col-md-6 mb-2">
+                            <label class="sr-only" for="planning">planning</label>
+                            <input type="text" id="planning" class="form-control border-secondary"
+                                   placeholder="planning du gym" name="planning" formControlName="planning"
+                                   value="{{events_}}" readonly>
+                            <img id="imgPlanningCalendar" [src]="imagePath" (click)="show_calendar_form()">
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="form-actions right">
+                    <button type="button" class="btn btn-raised btn-warning mr-1" (click)="onCancel()">
+                        <i class="ft-x"></i> Annuler
+                    </button>
+                    <button type="submit" class="btn btn-raised btn-primary" *ngIf="type !== 'add'; else add"
+                            [disabled]="inProgress">
+                        <i class="fa fa-check-square-o"></i> Modifier
+                    </button>
+                    <ng-template #add>
+                        <button type="submit" class="btn btn-raised btn-primary" [disabled]="inProgress">
+                            <i class="fa fa-check-square-o"></i> Enregistrer
+                        </button>
+                    </ng-template>
+                </div>
+
+            </form>
+
+        </div>
     </div>
-  </div>
+</div>
 
 
+<section #section_calendar id="section_calendar" [@visibilityChanged]="show_calendar">
 
- 
-
-
-<section #section_calendar id="section_calendar"  [@visibilityChanged]="show_calendar" >
-    
     <input type="button" id="btn_close_calendar_planings" (click)="cancel_calendar_form()" value="X">
     <input type="button" id="btn_submit_calendar_planings" (click)="submit_calendar_form()" value="valider">
 
-  <!--Calendar Starts-->
-<section id="calendar">
-	<ng-template #modalContent let-close="close">
-		<div class="modal-header">
-			<h5 class="modal-title">{{ modalData?.action }}</h5>
-			<button type="button" class="close" (click)="close()">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
-		<div class="modal-body">
-			<form action="#" class="form form-horizontal">
-				<div class="form-body">
-					<div class="form-group">
-						<label>Event Title:</label>
-						<input type="text" name="event-title" class="form-control" [(ngModel)]="modalData?.event.title" (keyup)="refresh.next()">
-					</div>
-					<div class="row">
-						<div class="col-md-6 col-12">
-							<div class="form-group">
-								<label>Primary Color:</label>
-								<input type="color" name="primary-color" [(ngModel)]="modalData?.event.color.primary" (change)="refresh.next()">
-							</div>	
-						</div>
-						<div class="col-md-6 col-12">
-							<div class="form-group">
-								<label>Secondary Color:</label>
-								<input type="color" name="secondary-color" [(ngModel)]="modalData?.event.color.secondary" (change)="refresh.next()">
-							</div>	
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6 col-12">
-							<div class="form-group">
-								<label>Starts At:</label>
-								<mwl-demo-utils-date-time-picker name="starts-at" [(ngModel)]="modalData?.event.start" (ngModelChange)="refresh.next()" placeholder="Not set">
-								</mwl-demo-utils-date-time-picker>
-							</div>
-						</div>
-						<div class="col-md-6 col-12">
-							<div class="form-group">
-								<label>Ends At:</label>
-								<mwl-demo-utils-date-time-picker name="ends-at" [(ngModel)]="modalData?.event.end" (ngModelChange)="refresh.next()" placeholder="Not set">
-								</mwl-demo-utils-date-time-picker>
-							</div>
-						</div>
-					</div>
-				</div>
-			</form>			
-		</div>
-		<div class="modal-footer">
-			<button type="button" class="btn btn-outline-secondary" (click)="close()">OK</button>
-		</div>
-	</ng-template>
-	
-	<div class="card">
-		<div class="card-content">
-			<div class="card-body">
-				<div class="d-flex flex-wrap justify-content-md-between mb-3 no-gutters">
-					<div class="col">
-						<div class="btn-group d-none d-sm-none d-md-none d-lg-block">
-							<a class="btn btn-raised btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
-								Previous
-							</a>
-							<a class="btn btn-raised btn-danger" mwlCalendarToday [(viewDate)]="viewDate">
-								Today
-							</a>
-							<a class="btn btn-raised btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
-								Next
-							</a>
-						</div>
+    <!--Calendar Starts-->
+    <section id="calendar">
+        <ng-template #modalContent let-close="close">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ modalData?.action }}</h5>
+                <button type="button" class="close" (click)="close()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="#" class="form form-horizontal">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label>Event Title:</label>
+                            <input type="text" name="event-title" class="form-control"
+                                   [(ngModel)]="modalData?.event.title" (keyup)="refresh.next()">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label>Primary Color:</label>
+                                    <input type="color" name="primary-color"
+                                           [(ngModel)]="modalData?.event.color.primary" (change)="refresh.next()">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label>Secondary Color:</label>
+                                    <input type="color" name="secondary-color"
+                                           [(ngModel)]="modalData?.event.color.secondary" (change)="refresh.next()">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label>Starts At:</label>
+                                    <mwl-demo-utils-date-time-picker name="starts-at"
+                                                                     [(ngModel)]="modalData?.event.start"
+                                                                     (ngModelChange)="refresh.next()"
+                                                                     placeholder="Not set">
+                                    </mwl-demo-utils-date-time-picker>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label>Ends At:</label>
+                                    <mwl-demo-utils-date-time-picker name="ends-at" [(ngModel)]="modalData?.event.end"
+                                                                     (ngModelChange)="refresh.next()"
+                                                                     placeholder="Not set">
+                                    </mwl-demo-utils-date-time-picker>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" (click)="close()">OK</button>
+            </div>
+        </ng-template>
 
-						<div class="btn-group d-block d-sm-block d-md-block d-lg-none">
-							<a class="btn btn-raised btn-primary ft-chevron-left" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
-								<i class="icon icon-arrows-left"></i>
-							</a>
-							<a class="btn btn-raised btn-danger ft-bookmark" mwlCalendarToday [(viewDate)]="viewDate">
-								<i class="icon icon-arrows-sign-down"></i>
-							</a>
-							<a class="btn btn-raised btn-primary ft-chevron-right" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
-								<i class="icon icon-arrows-right"></i>
-							</a>
-						</div>
-					</div>
-					<div class="col text-center align-self-center">
-						<h6 class="text-uppercase mb-0">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h6>
-					</div>
-					<div class="col text-right">
-						<div class="btn-group d-none d-sm-none d-md-none d-lg-block">
-							<a class="btn btn-raised btn-primary" (click)="view = 'month'" [class.active]="view === 'month'">
-								Month
-							</a>
-							<a class="btn btn-raised btn-primary" (click)="view = 'week'" [class.active]="view === 'week'">
-								Week
-							</a>
-							<a class="btn btn-raised btn-primary" (click)="view = 'day'" [class.active]="view === 'day'">
-								Day
-							</a>
-						</div>
+        <div class="card">
+            <div class="card-content">
+                <div class="card-body">
+                    <div class="d-flex flex-wrap justify-content-md-between mb-3 no-gutters">
+                        <div class="col">
+                            <div class="btn-group d-none d-sm-none d-md-none d-lg-block">
+                                <a class="btn btn-raised btn-primary" mwlCalendarPreviousView [view]="view"
+                                   [(viewDate)]="viewDate">
+                                    Previous
+                                </a>
+                                <a class="btn btn-raised btn-danger" mwlCalendarToday [(viewDate)]="viewDate">
+                                    Today
+                                </a>
+                                <a class="btn btn-raised btn-primary" mwlCalendarNextView [view]="view"
+                                   [(viewDate)]="viewDate">
+                                    Next
+                                </a>
+                            </div>
 
-						<div class="btn-group d-block d-sm-block d-md-block d-lg-none">
-							<a class="btn btn-raised btn-primary btn-icon-icon" (click)="view = 'month'" [class.active]="view === 'month'">
-								<i class="fa fa-th"></i>
-							</a>
-							<a class="btn btn-raised btn-primary btn-icon-icon" (click)="view = 'week'" [class.active]="view === 'week'">
-								<i class="fa fa-columns"></i>
-							</a>
-							<a class="btn btn-raised btn-primary btn-icon-icon" (click)="view = 'day'" [class.active]="view === 'day'">
-								<i class="fa fa-th-list"></i>
-							</a>
-						</div>
+                            <div class="btn-group d-block d-sm-block d-md-block d-lg-none">
+                                <a class="btn btn-raised btn-primary ft-chevron-left" mwlCalendarPreviousView
+                                   [view]="view" [(viewDate)]="viewDate">
+                                    <i class="icon icon-arrows-left"></i>
+                                </a>
+                                <a class="btn btn-raised btn-danger ft-bookmark" mwlCalendarToday
+                                   [(viewDate)]="viewDate">
+                                    <i class="icon icon-arrows-sign-down"></i>
+                                </a>
+                                <a class="btn btn-raised btn-primary ft-chevron-right" mwlCalendarNextView [view]="view"
+                                   [(viewDate)]="viewDate">
+                                    <i class="icon icon-arrows-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col text-center align-self-center">
+                            <h6 class="text-uppercase mb-0">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h6>
+                        </div>
+                        <div class="col text-right">
+                            <div class="btn-group d-none d-sm-none d-md-none d-lg-block">
+                                <a class="btn btn-raised btn-primary" (click)="view = 'month'"
+                                   [class.active]="view === 'month'">
+                                    Month
+                                </a>
+                                <a class="btn btn-raised btn-primary" (click)="view = 'week'"
+                                   [class.active]="view === 'week'">
+                                    Week
+                                </a>
+                                <a class="btn btn-raised btn-primary" (click)="view = 'day'"
+                                   [class.active]="view === 'day'">
+                                    Day
+                                </a>
+                            </div>
 
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-12">
-						<button class="btn btn-raised btn-primary float-right" (click)="addEvent()">
-							Add Event
-						</button>
-					</div>
-				</div>
-				
-				<div [ngSwitch]="view">
-					<mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen"
-					 (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
-					</mwl-calendar-month-view>
-					<mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
-					 (eventTimesChanged)="eventTimesChanged($event)">
-					</mwl-calendar-week-view>
-					<mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
-					 (eventTimesChanged)="eventTimesChanged($event)">
-					</mwl-calendar-day-view>
-				</div>
-			</div>
-		</div>
-	</div>
+                            <div class="btn-group d-block d-sm-block d-md-block d-lg-none">
+                                <a class="btn btn-raised btn-primary btn-icon-icon" (click)="view = 'month'"
+                                   [class.active]="view === 'month'">
+                                    <i class="fa fa-th"></i>
+                                </a>
+                                <a class="btn btn-raised btn-primary btn-icon-icon" (click)="view = 'week'"
+                                   [class.active]="view === 'week'">
+                                    <i class="fa fa-columns"></i>
+                                </a>
+                                <a class="btn btn-raised btn-primary btn-icon-icon" (click)="view = 'day'"
+                                   [class.active]="view === 'day'">
+                                    <i class="fa fa-th-list"></i>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button class="btn btn-raised btn-primary float-right" (click)="addEvent()">
+                                Add Event
+                            </button>
+                        </div>
+                    </div>
+
+                    <div [ngSwitch]="view">
+                        <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events"
+                                                 [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen"
+                                                 (dayClicked)="dayClicked($event.day)"
+                                                 (eventClicked)="handleEvent('Clicked', $event.event)"
+                                                 (eventTimesChanged)="eventTimesChanged($event)">
+                        </mwl-calendar-month-view>
+                        <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events"
+                                                [refresh]="refresh"
+                                                (eventClicked)="handleEvent('Clicked', $event.event)"
+                                                (eventTimesChanged)="eventTimesChanged($event)">
+                        </mwl-calendar-week-view>
+                        <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events"
+                                               [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+                                               (eventTimesChanged)="eventTimesChanged($event)">
+                        </mwl-calendar-day-view>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
-  </section> <!-- END SESSION CALENDAR-->
+    </section> <!-- END SESSION CALENDAR-->

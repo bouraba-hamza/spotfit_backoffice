@@ -67,17 +67,6 @@ Route::group(['middleware' => ['jwt', /* 'jwt.refresh' */]], function(){
     Route::post('/home/{home_id}', 'HomeController@update');
     Route::get('/home/{home_id}', 'HomeController@show');
 
-
-    /**
-     * Classes
-     */
-    Route::get("/classe", "ClasseController@index");
-    Route::put('/classe/{classe_id}', 'ClasseController@destroy');
-    Route::post('/classe', 'ClasseController@store');
-    Route::post('/classe/{classe_id}', 'ClasseController@update');
-    Route::get('/classe/{classe_id}', 'ClasseController@show');
-
-
     /**
      * Activities
      */
@@ -103,6 +92,7 @@ Route::group(['middleware' => ['jwt', /* 'jwt.refresh' */]], function(){
      * Gyms
      */
     Route::get("/gym", "GymController@index");
+    Route::get("/subtype", "GymController@getType");
     Route::put('/gym/{gym_id}', 'GymController@destroy');
     Route::post('/gym', 'GymController@store');
     Route::post('/gym/{gym_id}', 'GymController@update');
@@ -200,7 +190,7 @@ Route::group(['middleware' => ['jwt', 'role:admin']], function () {
     /**
      * Class
      */
-    Route::resource('/class', 'ClassesController');
+    Route::resource('/class', 'ClasseController');
 
     /**
      * Subscription

@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { ApiService } from '@app/@core/services/api.service';
 import { tap } from 'rxjs/operators';
 import {Group} from '@app/@core/models/group';
+import {Partner} from "@app/@core/models/partner";
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,14 @@ export class GroupService {
 
   getGroup(): Group[] {
     return this.group$.getValue();
+   // return this.apiService.get('/group').pipe(
+
+  }
+
+  getPartner(): Observable<Partner[]> {
+    return this.apiService.get('/partners');
+
+   // return this.group$.getValue();
   }
 
   find(id: number) : Observable<Group> {
@@ -48,4 +57,3 @@ export class GroupService {
 }
 
 
- 

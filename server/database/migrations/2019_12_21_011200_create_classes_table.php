@@ -17,8 +17,6 @@ class CreateClassesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('image')->nullable();
-            $table->integer('prix_min')->nullable();
-            $table->integer('prix_max')->nullable();
             $table->timestamps();
         });
     }

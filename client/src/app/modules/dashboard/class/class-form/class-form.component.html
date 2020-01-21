@@ -1,0 +1,100 @@
+<div class="card">
+    <div class="card-header pb-2">
+      <h4 class="card-title" id="hidden-label-colored-controls">{{ heading }}</h4>
+    </div>
+    <div class="card-content">
+      <div class="px-3">
+        <form class="form" [formGroup]="classForm" (ngSubmit)="onSubmit()">
+          <div class="form-body">
+            <h4 class="form-section"><i class="ft-info">class information</i></h4>
+
+            <div class="row">
+                 <div class="form-group col-md-12 mb-2">
+                     <label class="sr-only" for="userinput1">name</label>
+                     <input type="text" id="userinput1" class="form-control border-secondary" placeholder="nom" name="name"  formControlName="name">
+                 </div>
+            </div>
+
+              <div class="cardib">
+                  <div class="form-group col-md-4 mb-2" formArrayName="passes"
+                           *ngFor="let pass of classForm.get('passes').controls; let i = index;">
+                      <!--      *ngFor="let pass of filterdPasses; let i = index;">-->
+
+                      <div class="block_in" [formGroupName]="i">
+                          <h1> pass {{passes[i].name}}</h1>
+
+                          <input formControlName="passid" type="hidden"  [value]="pass.id">
+
+                          <div class="row">
+                              <div class="form-group col-md-6 ">
+                                  <label class="sr-only" >Prix_min</label>
+                                  <input type="number" formControlName="prix_min" class="form-control border-secondary" placeholder="prix_min"   >
+                              </div>
+
+                              <div class="form-group col-md-6">
+                                  <label class="sr-only" >Prix_max</label>
+                                  <input type="number" formControlName="prix_max" class="form-control border-secondary" placeholder="prix_max" >
+                              </div>
+                          </div>
+
+
+
+                      </div>
+
+                      Chosen name: {{ classForm.controls.passes.controls[i].controls.passid.value }}
+                      prix min: {{ classForm.controls.passes.controls[i].controls.prix_min.value }}
+                      prix max: {{ classForm.controls.passes.controls[i].controls.prix_max.value }}
+                  </div>
+
+
+
+              </div>
+
+<!--                  <div class="form-group col-md-3 mb-2">-->
+<!--                      <label >Pass</label>" floatLabel="always" class="pr-4 w-50-p">-->
+<!--                      <select placeholder="Sélectionner le pass" formControlName="pass" >-->
+<!--                          <input class="myInput" #count matInput focused="'true'" type="text" />  autocomplete="off" placeholder="search" style="padding: 15px;position:relative">-->
+<!--                          <option *ngFor="let pass of filterdPasses" [value]="pass.id">{{pass.nom}}</option>-->
+<!--                      </select>-->
+<!--                  </div>-->
+
+
+
+<!--            <div class="row">-->
+<!--              <div class="form-group col-md-6 mb-2">-->
+<!--                <label class="sr-only" for="userinput2">Prix_min</label>-->
+<!--                <input type="number" id="userinput2" class="form-control border-secondary" placeholder="prix_min"  formControlName="prix_min">-->
+<!--              </div>-->
+<!--                <div class="form-group col-md-6 mb-2">-->
+<!--                <label class="sr-only" for="userinput3">Prix_max</label>-->
+<!--                <input type="number" id="userinput3" class="form-control border-secondary" placeholder="prix_max"  formControlName="prix_max">-->
+<!--              </div>-->
+<!--            </div>-->
+
+            <div class="row">
+              <div class="form-group col-md-12 mb-2">
+                  <label for="avatar">presentation iconique</label>
+                  <input type="file" id="avatar" style="min-height: 2.8rem;" class="form-control border-secondary" placeholder="carte de classe" >
+              </div>
+            </div>
+
+          </div>
+
+          <div class="form-actions right">
+            <button type="button" class="btn btn-raised btn-warning mr-1" (click)="onCancel()">
+              <i class="ft-x"></i> Annuler
+            </button>
+              <button type="submit" class="btn btn-raised btn-primary" *ngIf="type !== 'add'; else add" [disabled]="inProgress">
+                  <i class="fa fa-check-square-o"></i> Modifier
+              </button>
+              <ng-template #add>
+                  <button type="submit" class="btn btn-raised btn-primary" [disabled]="inProgress">
+                      <i class="fa fa-check-square-o"></i> Enregistrer
+                  </button>
+              </ng-template>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>

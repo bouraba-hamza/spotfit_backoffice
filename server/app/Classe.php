@@ -1,4 +1,5 @@
 <?php
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
@@ -7,18 +8,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Classe extends Model
 {
 
-    protected  $table = "classes";
+    protected $table = "classes";
 
     protected $fillable = [
-     "name",
-"image",
-"prix_min",
-"prix_max",
- 
+        "name",
+        "image",
+
     ];
 
-    public function classes() {
-        return $this->belongsToMany('App\Classe', "classes");
+    public function subscription()
+    {
+        return $this->belongsToMany(Subscription::class,'class_subscription',"class_id",'subscription_id')
+            ->withPivot('prix_min', 'prix_max')
+            ->withTimestamps();
+
     }
 }
 

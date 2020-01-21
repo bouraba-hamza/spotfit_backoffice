@@ -27,8 +27,8 @@ export const ROUTES: RouteInfo[] = [
             { path: '/dashboard/gym', title: 'Gyms', icon: 'ft-layout', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []},
             { path: '/dashboard/equipement', title: 'Equipements', icon: 'ft-layout', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []},
             {path: '/dashboard/group', title: 'Groups', icon: 'ft-layout', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []},
-          //  { path: '/dashboard/pass', title: 'Passes', icon: 'ft-layout', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []},
-            { path: '/dashboard/classe', title: 'Passes', icon: 'ft-layout', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []},        
+           { path: '/dashboard/pass', title: 'Pass', icon: 'ft-layout', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []},
+            { path: '/dashboard/class', title: 'class', icon: 'ft-layout', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []},
             { path: '/dashboard/activitie', title: 'Activities', icon: 'ft-layout', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []},        
             { path: '/dashboard/facilitie', title: 'Facilities', icon: 'ft-layout', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []},        
         ]

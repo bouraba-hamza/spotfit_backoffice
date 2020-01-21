@@ -13,7 +13,7 @@ class CreateClassSubscriptionTable extends Migration
      */
     public function up()
     {
-        Schema::create('class_sbuscription', function (Blueprint $table) {
+        Schema::create('class_subscription', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('subscription_id')->unsigned();
             $table->integer('class_id')->unsigned();
@@ -30,6 +30,6 @@ class CreateClassSubscriptionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('class_sbuscription');
+        Schema::dropIfExists('class_subscription');
     }
 }

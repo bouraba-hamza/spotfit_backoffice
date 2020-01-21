@@ -1,4 +1,4 @@
-
+$white: #ffffff;
 
 body{
 
@@ -132,4 +132,26 @@ body{
     opacity: 0.5 !important;
 }
 
- 
+
+.cardib {
+    //width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .block_in{
+        border-radius: 43px;
+        border: 1px solid #A6A9AE;
+        filter: drop-shadow(0px 8px 23px rgba(71, 71, 100, 0.06));
+        background-color: $white;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 15px;
+        line-height: 25px;
+        color: #a3a7c1;
+        font-family: "Open Sans";
+        font-weight: 400;
+    }
+}
